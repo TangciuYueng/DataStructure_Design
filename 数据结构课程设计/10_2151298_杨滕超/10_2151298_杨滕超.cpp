@@ -1,36 +1,36 @@
-#include "10_2151298_Ñîëø³¬.h"
+#include "10_2151298_æ¨æ»•è¶….h"
 
 int NUM;
 int* nums = NULL;
 
 /***************************************************************************
-  º¯ÊıÃû³Æ£ºshow
-  ¹¦    ÄÜ£ºÕ¹Ê¾ËùÑ¡ÔñµÄÅÅĞòËã·¨µÄÊ±¼ä¡¢½»»»´ÎÊıºÍÒÆ¶¯´ÎÊı
-  ÊäÈë²ÎÊı£ºconst char* sortName, void(*func)(int*, int, accord&)
-			ÅÅĞòÃû³Æ£¬ÅÅĞòËã·¨º¯ÊıÖ¸Õë
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º
+  å‡½æ•°åç§°ï¼šshow
+  åŠŸ    èƒ½ï¼šå±•ç¤ºæ‰€é€‰æ‹©çš„æ’åºç®—æ³•çš„æ—¶é—´ã€äº¤æ¢æ¬¡æ•°å’Œç§»åŠ¨æ¬¡æ•°
+  è¾“å…¥å‚æ•°ï¼šconst char* sortName, void(*func)(int*, int, accord&)
+			æ’åºåç§°ï¼Œæ’åºç®—æ³•å‡½æ•°æŒ‡é’ˆ
+  è¿” å› å€¼ï¼š
+  è¯´    æ˜ï¼š
 ***************************************************************************/
 void show(const char* sortName, void(*func)(int*, int, accord&))
 {
 	int* temp = new(nothrow) int[NUM];
 	if (temp == NULL)
 		return;
-	//¸³Öµ¸øtempÊı×é
+	//èµ‹å€¼ç»™tempæ•°ç»„
 	for (int i = 0; i < NUM; ++i)
 		temp[i] = nums[i];
 
 	accord data;
 
-	//¼ÇÂ¼¿ªÊ¼Ê±¼ä
+	//è®°å½•å¼€å§‹æ—¶é—´
 	auto begin = chrono::steady_clock::now();
 
 	func(temp, NUM, data);
-	//¼ÇÂ¼½áÊøÊ±¼ä
+	//è®°å½•ç»“æŸæ—¶é—´
 	auto end = chrono::steady_clock::now();
-	//¼ÆËãÊ±¼ä²î
+	//è®¡ç®—æ—¶é—´å·®
 	auto Duration = chrono::duration_cast<chrono::milliseconds>(end - begin).count();
-	//»¨·ÑÊ±¼äÌ«ÉÙ£¬msÎŞ·¨¼ÇÂ¼£¬ÓÃ¦Ìs¼ÇÂ¼
+	//èŠ±è´¹æ—¶é—´å¤ªå°‘ï¼Œmsæ— æ³•è®°å½•ï¼Œç”¨Î¼sè®°å½•
 	bool isMs = true;
 	if (Duration == 0)
 	{
@@ -38,13 +38,13 @@ void show(const char* sortName, void(*func)(int*, int, accord&))
 		Duration = chrono::duration_cast<chrono::microseconds>(end - begin).count();
 	}
 
-	cout << sortName << "ËùÓÃÊ±¼ä: " << "\t\t" << Duration;
+	cout << sortName << "æ‰€ç”¨æ—¶é—´: " << "\t\t" << Duration;
 	if (isMs)
-		cout << "ºÁÃë" << endl;
+		cout << "æ¯«ç§’" << endl;
 	else
-		cout << "Î¢Ãë" << endl;
-	cout << sortName << "½»»»´ÎÊı: " << "\t\t" << data.move << endl;
-	cout << sortName << "±È½Ï´ÎÊı: " << "\t\t" << data.cmp << endl;
+		cout << "å¾®ç§’" << endl;
+	cout << sortName << "äº¤æ¢æ¬¡æ•°: " << "\t\t" << data.move << endl;
+	cout << sortName << "æ¯”è¾ƒæ¬¡æ•°: " << "\t\t" << data.cmp << endl;
 
 
 	delete[] temp;
@@ -52,30 +52,30 @@ void show(const char* sortName, void(*func)(int*, int, accord&))
 
 
 int main() {
-	cout << "**\t\tÅÅĞòËã·¨±È½Ï    \t\t**" << endl;
+	cout << "**\t\tæ’åºç®—æ³•æ¯”è¾ƒ    \t\t**" << endl;
 	cout << "==================================================" << endl;
-	cout << "**\t\t1 --- Ã°ÅİÅÅĞò    \t\t**" << endl;
-	cout << "**\t\t2 --- Ñ¡ÔñÅÅĞò    \t\t**" << endl;
-	cout << "**\t\t3 --- Ö±½Ó²åÈëÅÅĞò\t\t**" << endl;
-	cout << "**\t\t4 --- Ï£¶ûÅÅĞò    \t\t**" << endl;
-	cout << "**\t\t5 --- ¿ìÅÅ(µü´ú)    \t\t**" << endl;
-	cout << "**\t\t6 --- ¿ìÅÅ(µİ¹é)    \t\t**" << endl;
-	cout << "**\t\t7 --- ¶ÑÅÅĞò(µü´ú)    \t\t**" << endl;
-	cout << "**\t\t8 --- ¶ÑÅÅĞò(µİ¹é)    \t\t**" << endl;
-	cout << "**\t\t9 --- ¹é²¢ÅÅĞò    \t\t**" << endl;
-	cout << "**\t\t10 --- ¼ÆÊıÅÅĞò    \t\t**" << endl;
-	cout << "**\t\t11 --- »ùÊıLSDÅÅĞò\t\t**" << endl;
-	cout << "**\t\t12 --- »ùÊıMSDÅÅĞò\t\t**" << endl;
-	cout << "**\t\t13 --- ÍË³ö³ÌĞò    \t\t**" << endl;
+	cout << "**\t\t1 --- å†’æ³¡æ’åº    \t\t**" << endl;
+	cout << "**\t\t2 --- é€‰æ‹©æ’åº    \t\t**" << endl;
+	cout << "**\t\t3 --- ç›´æ¥æ’å…¥æ’åº\t\t**" << endl;
+	cout << "**\t\t4 --- å¸Œå°”æ’åº    \t\t**" << endl;
+	cout << "**\t\t5 --- å¿«æ’(è¿­ä»£)    \t\t**" << endl;
+	cout << "**\t\t6 --- å¿«æ’(é€’å½’)    \t\t**" << endl;
+	cout << "**\t\t7 --- å †æ’åº(è¿­ä»£)    \t\t**" << endl;
+	cout << "**\t\t8 --- å †æ’åº(é€’å½’)    \t\t**" << endl;
+	cout << "**\t\t9 --- å½’å¹¶æ’åº    \t\t**" << endl;
+	cout << "**\t\t10 --- è®¡æ•°æ’åº    \t\t**" << endl;
+	cout << "**\t\t11 --- åŸºæ•°LSDæ’åº\t\t**" << endl;
+	cout << "**\t\t12 --- åŸºæ•°MSDæ’åº\t\t**" << endl;
+	cout << "**\t\t13 --- é€€å‡ºç¨‹åº    \t\t**" << endl;
 	cout << "==================================================" << endl;
 
-	cout << "Ëæ»úÊı¸öÊı³¬¹ı1e5Ê±²»ÒËÊ¹ÓÃÑ¡Ïî1¡¢2¡¢3" << endl;
-	cout << "ÇëÊäÈëÒª²úÉúµÄËæ»úÊıµÄ¸öÊı(²»³¬¹ı1e8): ";
+	cout << "éšæœºæ•°ä¸ªæ•°è¶…è¿‡1e5æ—¶ä¸å®œä½¿ç”¨é€‰é¡¹1ã€2ã€3" << endl;
+	cout << "è¯·è¾“å…¥è¦äº§ç”Ÿçš„éšæœºæ•°çš„ä¸ªæ•°(ä¸è¶…è¿‡1e8): ";
 	while (1) {
 		cin >> NUM;
 		if (cin.fail() || NUM <= 0 || NUM > 1e8)
 		{
-			cout << "ÊäÈëÓĞÎó£¬ÇëÊäÈëÕıÕûÊı£¡" << endl;
+			cout << "è¾“å…¥æœ‰è¯¯ï¼Œè¯·è¾“å…¥æ­£æ•´æ•°ï¼" << endl;
 			cin.clear();
 			cin.ignore(65536, '\n');
 		}
@@ -83,52 +83,52 @@ int main() {
 			break;
 	}
 
-	//ÉêÇë¿Õ¼ä
+	//ç”³è¯·ç©ºé—´
 	nums = new(nothrow) int[NUM];
 	if (nums == NULL)
 		return -1;
-	//Éú³ÉËæ»úÊı
+	//ç”Ÿæˆéšæœºæ•°
 	randomArray(nums, NUM);
 	bool loop = true;
 	String op;
 	while (loop)
 	{
-		cout << endl << "ÇëÑ¡ÔñÅÅĞòËã·¨:\t\t\t";
+		cout << endl << "è¯·é€‰æ‹©æ’åºç®—æ³•:\t\t\t";
 		cin >> op;
 		if (op == "1" && NUM < 1e5)
-			show("Ã°ÅİÅÅĞò", bubbleSort);
+			show("å†’æ³¡æ’åº", bubbleSort);
 		else if (op == "2" && NUM < 1e5)
-			show("Ñ¡ÔñÅÅĞò", selectSort);
+			show("é€‰æ‹©æ’åº", selectSort);
 		else if (op == "3" && NUM < 1e5)
-			show("Ö±½Ó²åÈëÅÅĞò", insertSort);
+			show("ç›´æ¥æ’å…¥æ’åº", insertSort);
 		else if (op == "4")
-			show("Ï£¶ûÅÅĞò", shellSort);
+			show("å¸Œå°”æ’åº", shellSort);
 		else if (op == "5")
-			show("¿ìÅÅ(µü´ú)", quickSort2);
+			show("å¿«æ’(è¿­ä»£)", quickSort2);
 		else if (op == "6")
-			show("¿ìÅÅ(µİ¹é)", quickSort1);
+			show("å¿«æ’(é€’å½’)", quickSort1);
 		else if (op == "7")
-			show("¶ÑÅÅĞò(µü´ú)", heapSort1);
+			show("å †æ’åº(è¿­ä»£)", heapSort1);
 		else if (op == "8")
-			show("¶ÑÅÅĞò(µİ¹é)", heapSort2);
+			show("å †æ’åº(é€’å½’)", heapSort2);
 		else if (op == "9")
-			show("¹é²¢ÅÅĞò", mergeSort);
+			show("å½’å¹¶æ’åº", mergeSort);
 		else if (op == "10")
-			show("¼ÆÊıÅÅĞò", countingSort);
+			show("è®¡æ•°æ’åº", countingSort);
 		else if (op == "11")
-			show("»ùÊıLSDÅÅĞò", radixSortLSD);
+			show("åŸºæ•°LSDæ’åº", radixSortLSD);
 		else if (op == "12")
-			show("»ùÊıMSDÅÅĞò", radixSortMSD);
+			show("åŸºæ•°MSDæ’åº", radixSortMSD);
 		else if (op == "13")
 			loop = 0;
 		else
 		{
-			cout << "ÊäÈëÓĞÎó£¬ÇëÖØĞÂÊäÈë" << endl;
+			cout << "è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << endl;
 			cin.clear();
 			cin.ignore(65536, '\n');
 		}
 	}
-	//ÊÍ·Å¿Õ¼ä
+	//é‡Šæ”¾ç©ºé—´
 	delete[] nums;
 	return 0;
-}
+} 
