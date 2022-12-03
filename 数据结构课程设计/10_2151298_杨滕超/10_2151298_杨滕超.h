@@ -7,7 +7,7 @@
 #include <chrono>
 using namespace std;
 
-//¼ÇÂ¼±È½Ï´ÎÊıºÍ½»»»´ÎÊı
+//è®°å½•æ¯”è¾ƒæ¬¡æ•°å’Œäº¤æ¢æ¬¡æ•°
 struct accord {
 	long long move;
 	long long cmp;
@@ -16,15 +16,15 @@ struct accord {
 };
 
 /***************************************************************************
-  º¯ÊıÃû³Æ£ºrandomArray
-  ¹¦    ÄÜ£ºÏòÊı×éÖĞÌî³äËæ»úÊı
-  ÊäÈë²ÎÊı£ºint* nums, int n, Êı×éÊ×µØÖ·£¬Êı×é´óĞ¡
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º
+  å‡½æ•°åç§°ï¼šrandomArray
+  åŠŸ    èƒ½ï¼šå‘æ•°ç»„ä¸­å¡«å……éšæœºæ•°
+  è¾“å…¥å‚æ•°ï¼šint* nums, int n, æ•°ç»„é¦–åœ°å€ï¼Œæ•°ç»„å¤§å°
+  è¿” å› å€¼ï¼š
+  è¯´    æ˜ï¼š
 ***************************************************************************/
 void randomArray(int* nums, int n)
 {
-	//Éú³É[0, n]¾ùÔÈ·Ö²¼µÄËæ»úÊı
+	//ç”Ÿæˆ[0, n]å‡åŒ€åˆ†å¸ƒçš„éšæœºæ•°
 	uniform_int_distribution<unsigned> u(0, n);
 	default_random_engine e;
 	for (int i = 0; i < n; ++i)
@@ -33,305 +33,305 @@ void randomArray(int* nums, int n)
 
 
 /***************************************************************************
-  º¯ÊıÃû³Æ£ºbubbleSort
-  ¹¦    ÄÜ£ºÃ°ÅİÅÅĞò
-  ÊäÈë²ÎÊı£ºint* nums, int n, accord& data
-			Êı×éÊ×µØÖ·£¬Êı×é´óĞ¡£¬¼ÇÂ¼±È½Ï´ÎÊıÓëÒÆ¶¯´ÎÊı
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º
+  å‡½æ•°åç§°ï¼šbubbleSort
+  åŠŸ    èƒ½ï¼šå†’æ³¡æ’åº
+  è¾“å…¥å‚æ•°ï¼šint* nums, int n, accord& data
+			æ•°ç»„é¦–åœ°å€ï¼Œæ•°ç»„å¤§å°ï¼Œè®°å½•æ¯”è¾ƒæ¬¡æ•°ä¸ç§»åŠ¨æ¬¡æ•°
+  è¿” å› å€¼ï¼š
+  è¯´    æ˜ï¼š
 ***************************************************************************/
 void bubbleSort(int* nums, int n, accord& data)
 {
-	//Ã¿Ò»ÂÖ½«Ô­À´µÄnums[i]»»µ½ÄÜÈ¥µÄ×îºóµÄÎ»ÖÃ
+	//æ¯ä¸€è½®å°†åŸæ¥çš„nums[i]æ¢åˆ°èƒ½å»çš„æœ€åçš„ä½ç½®
 	for (int i = 0; i < n - 1; ++i)
 	{
-		//ÓĞĞò±ê¼Ç£¬Èô¼ì²éÒ»±éÈÔÎªtrueËµÃ÷¿ÉÒÔ½áÊø
+		//æœ‰åºæ ‡è®°ï¼Œè‹¥æ£€æŸ¥ä¸€éä»ä¸ºtrueè¯´æ˜å¯ä»¥ç»“æŸ
 		bool isSorted = true;
 		for (int j = 0; j < n - i - 1; ++j)
 		{
 			if (++data.cmp, nums[j] > nums[j + 1])
 			{
-				//ÓĞÔªËØ½»»»£¬ºóÃæµÄ²»ÊÇÓĞĞò
+				//æœ‰å…ƒç´ äº¤æ¢ï¼Œåé¢çš„ä¸æ˜¯æœ‰åº
 				isSorted = false;
-				//½»»»
+				//äº¤æ¢
 				int t = nums[j];
 				nums[j] = nums[j + 1];
 				nums[j + 1] = t;
-				//ÒÆ¶¯²½ÊıÔö¼Ó
+				//ç§»åŠ¨æ­¥æ•°å¢åŠ 
 				data.move += 3;
 			}
 		}
-		//ºóÃæ¶¼ÓĞĞòÌáÇ°½áÊø
+		//åé¢éƒ½æœ‰åºæå‰ç»“æŸ
 		if (isSorted)
 			break;
 	}
 }
 
 /***************************************************************************
-  º¯ÊıÃû³Æ£ºselectSort
-  ¹¦    ÄÜ£ºÑ¡ÔñÅÅĞò
-  ÊäÈë²ÎÊı£ºint* nums, int n, accord& data
-			Êı×éÊ×µØÖ·£¬Êı×é´óĞ¡£¬¼ÇÂ¼±È½Ï´ÎÊıÓëÒÆ¶¯´ÎÊı
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º
+  å‡½æ•°åç§°ï¼šselectSort
+  åŠŸ    èƒ½ï¼šé€‰æ‹©æ’åº
+  è¾“å…¥å‚æ•°ï¼šint* nums, int n, accord& data
+			æ•°ç»„é¦–åœ°å€ï¼Œæ•°ç»„å¤§å°ï¼Œè®°å½•æ¯”è¾ƒæ¬¡æ•°ä¸ç§»åŠ¨æ¬¡æ•°
+  è¿” å› å€¼ï¼š
+  è¯´    æ˜ï¼š
 ***************************************************************************/
 void selectSort(int* nums, int n, accord& data)
 {
-	//ÔÚÃ»ÅÅĞòÔªËØÖĞÕÒµ½×îĞ¡·Åµ½×îÇ°Ãæ
+	//åœ¨æ²¡æ’åºå…ƒç´ ä¸­æ‰¾åˆ°æœ€å°æ”¾åˆ°æœ€å‰é¢
 	for (int i = 0; i < n - 1; ++i)
 	{
-		//ÕÒµ½×îĞ¡ÔªËØµÄÏÂ±ê£¬»»µ½×îÇ°Ãæ
+		//æ‰¾åˆ°æœ€å°å…ƒç´ çš„ä¸‹æ ‡ï¼Œæ¢åˆ°æœ€å‰é¢
 		int minIndex = i;
 		for (int j = i + 1; j < n; ++j)
 			if (++data.cmp, nums[minIndex] > nums[j])
 			{
 				minIndex = j;
 			}
-		//½»»»
+		//äº¤æ¢
 		int t = nums[minIndex];
 		nums[minIndex] = nums[i];
 		nums[i] = t;
-		//ÒÆ¶¯²½Êı
+		//ç§»åŠ¨æ­¥æ•°
 		data.move += 3;
 	}
 }
 
 /***************************************************************************
-  º¯ÊıÃû³Æ£ºinsertSort
-  ¹¦    ÄÜ£º²åÈëÅÅĞò
-  ÊäÈë²ÎÊı£ºint* nums, int n, accord& data
-			Êı×éÊ×µØÖ·£¬Êı×é´óĞ¡£¬¼ÇÂ¼±È½Ï´ÎÊıÓëÒÆ¶¯´ÎÊı
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º
+  å‡½æ•°åç§°ï¼šinsertSort
+  åŠŸ    èƒ½ï¼šæ’å…¥æ’åº
+  è¾“å…¥å‚æ•°ï¼šint* nums, int n, accord& data
+			æ•°ç»„é¦–åœ°å€ï¼Œæ•°ç»„å¤§å°ï¼Œè®°å½•æ¯”è¾ƒæ¬¡æ•°ä¸ç§»åŠ¨æ¬¡æ•°
+  è¿” å› å€¼ï¼š
+  è¯´    æ˜ï¼š
 ***************************************************************************/
 void insertSort(int* nums, int n, accord& data)
 {
-	//´Óµ±Ç°Î»ÖÃÍùÇ°É¨Ãè£¬²åÈëÕıÈ·Î»ÖÃ
+	//ä»å½“å‰ä½ç½®å¾€å‰æ‰«æï¼Œæ’å…¥æ­£ç¡®ä½ç½®
 	for (int i = 1; i < n; ++i)
 	{
 		int temp = nums[i];
 		++data.move;
 		int j = i - 1;
-		//ÔÚÅĞ¶ÏÓï¾äÖĞ¼ÇÂ¼´ÎÊı
+		//åœ¨åˆ¤æ–­è¯­å¥ä¸­è®°å½•æ¬¡æ•°
 		while (j >= 0 && (++data.cmp, temp < nums[j]))
 		{
-			nums[j + 1] = nums[j];//ÔªËØÍùºóÒÆ£¬¸øtempÌÚ³öÎ»ÖÃ
+			nums[j + 1] = nums[j];//å…ƒç´ å¾€åç§»ï¼Œç»™tempè…¾å‡ºä½ç½®
 			++data.move;
 			--j;
 		}
 		nums[j + 1] = temp;
-		//ÒÆ¶¯²½Êı
+		//ç§»åŠ¨æ­¥æ•°
 		++data.move;
 	}
 }
 
 /***************************************************************************
-  º¯ÊıÃû³Æ£ºshellSort
-  ¹¦    ÄÜ£ºÏ£¶ûÅÅĞò
-  ÊäÈë²ÎÊı£ºint* nums, int n, accord& data
-			Êı×éÊ×µØÖ·£¬Êı×é´óĞ¡£¬¼ÇÂ¼±È½Ï´ÎÊıÓëÒÆ¶¯´ÎÊı
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º
+  å‡½æ•°åç§°ï¼šshellSort
+  åŠŸ    èƒ½ï¼šå¸Œå°”æ’åº
+  è¾“å…¥å‚æ•°ï¼šint* nums, int n, accord& data
+			æ•°ç»„é¦–åœ°å€ï¼Œæ•°ç»„å¤§å°ï¼Œè®°å½•æ¯”è¾ƒæ¬¡æ•°ä¸ç§»åŠ¨æ¬¡æ•°
+  è¿” å› å€¼ï¼š
+  è¯´    æ˜ï¼š
 ***************************************************************************/
 void shellSort(int* nums, int n, accord& data)
 {
-	//ÓĞ¼ä¸ôµÄ²åÈëÅÅĞò£¬¼ä¸ôstep²»¶ÏËõĞ¡£¬´óÖÂÓĞĞò->ÓĞĞò
+	//æœ‰é—´éš”çš„æ’å…¥æ’åºï¼Œé—´éš”stepä¸æ–­ç¼©å°ï¼Œå¤§è‡´æœ‰åº->æœ‰åº
 	int i, temp;
 	for (int step = n >> 2; step > 0; step >>= 2)
 		for (int pos = step; pos < n; ++pos)
 		{
-			temp = nums[pos];//¼ÇÂ¼Òª±äÎ»ÖÃµÄÖµ
+			temp = nums[pos];//è®°å½•è¦å˜ä½ç½®çš„å€¼
 			++data.move;
-			//²åÈëÅÅĞò
+			//æ’å…¥æ’åº
 			for (i = pos - step; i >= 0 && (++data.cmp, nums[i] > temp); i -= step)
 			{
-				nums[i + step] = nums[i];//Ç°ÃæµÄÔªËØÍùºóÒÆ£¬¸øtempÌÚ³öÎ»ÖÃ
-				//¼ÇÂ¼²½Êı
+				nums[i + step] = nums[i];//å‰é¢çš„å…ƒç´ å¾€åç§»ï¼Œç»™tempè…¾å‡ºä½ç½®
+				//è®°å½•æ­¥æ•°
 				++data.move;
 			}
-			nums[i + step] = temp;//ÕÒµ½²åÈëÎ»ÖÃ
-			//¼ÇÂ¼²½Êı
+			nums[i + step] = temp;//æ‰¾åˆ°æ’å…¥ä½ç½®
+			//è®°å½•æ­¥æ•°
 			++data.move;
 		}
 }
 
 /***************************************************************************
-  º¯ÊıÃû³Æ£ºinsertSort
-  ¹¦    ÄÜ£º¿ìÅÅĞèÒªµÄ²åÈëº¯Êı
-  ÊäÈë²ÎÊı£ºint* nums, int beg, int end, accord& data
-			Êı×éÊ×µØÖ·£¬Êı×éÅÅĞòµÄ·¶Î§[beg, end]£¬¼ÇÂ¼±È½Ï´ÎÊıÓëÒÆ¶¯´ÎÊı
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º
+  å‡½æ•°åç§°ï¼šinsertSort
+  åŠŸ    èƒ½ï¼šå¿«æ’éœ€è¦çš„æ’å…¥å‡½æ•°
+  è¾“å…¥å‚æ•°ï¼šint* nums, int beg, int end, accord& data
+			æ•°ç»„é¦–åœ°å€ï¼Œæ•°ç»„æ’åºçš„èŒƒå›´[beg, end]ï¼Œè®°å½•æ¯”è¾ƒæ¬¡æ•°ä¸ç§»åŠ¨æ¬¡æ•°
+  è¿” å› å€¼ï¼š
+  è¯´    æ˜ï¼š
 ***************************************************************************/
 void insertSort(int* nums, int beg, int end, accord& data)
 {
-	//¼ÆËãÊı×é´óĞ¡
+	//è®¡ç®—æ•°ç»„å¤§å°
 	int n = end - beg + 1;
-	//´Óµ±Ç°Î»ÖÃÍùÇ°É¨Ãè£¬²åÈëÕıÈ·Î»ÖÃ
+	//ä»å½“å‰ä½ç½®å¾€å‰æ‰«æï¼Œæ’å…¥æ­£ç¡®ä½ç½®
 	for (int i = beg + 1; i <= end; ++i)
 	{
 		int temp = nums[i];
 		++data.move;
 		int j = i - 1;
-		//ÔÚÅĞ¶ÏÓï¾äÖĞ¼ÇÂ¼´ÎÊı
+		//åœ¨åˆ¤æ–­è¯­å¥ä¸­è®°å½•æ¬¡æ•°
 		while (j >= beg && (++data.cmp, temp < nums[j]))
 		{
-			nums[j + 1] = nums[j];//ÔªËØÍùºóÒÆ£¬¸øtempÌÚ³öÎ»ÖÃ
+			nums[j + 1] = nums[j];//å…ƒç´ å¾€åç§»ï¼Œç»™tempè…¾å‡ºä½ç½®
 			++data.move;
 			--j;
 		}
 		nums[j + 1] = temp;
-		//ÒÆ¶¯²½Êı
+		//ç§»åŠ¨æ­¥æ•°
 		++data.move;
 	}
 }
 
-//begÎªµÚÒ»¸öÏÂ±ê£¬endÎª×îºóÒ»¸öµÄÏÂ±ê£¬[beg, end]
+//begä¸ºç¬¬ä¸€ä¸ªä¸‹æ ‡ï¼Œendä¸ºæœ€åä¸€ä¸ªçš„ä¸‹æ ‡ï¼Œ[beg, end]
 /***************************************************************************
-  º¯ÊıÃû³Æ£º_quickSort
-  ¹¦    ÄÜ£º¿ìËÙÅÅĞòµÄ¸¨Öúº¯Êı
-  ÊäÈë²ÎÊı£ºint* nums, int beg, int end, int n, accord& data
-			Êı×éÊ×µØÖ·£¬ÅÅĞòµÄ·¶Î§£¬Êı×é´óĞ¡£¬¼ÇÂ¼±È½Ï´ÎÊıÓëÒÆ¶¯´ÎÊı
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£ºÊı¾İÁ¿½ÏĞ¡µÄÊ±ºò²ÉÓÃ²åÈëÅÅĞòÓÅ»¯
+  å‡½æ•°åç§°ï¼š_quickSort
+  åŠŸ    èƒ½ï¼šå¿«é€Ÿæ’åºçš„è¾…åŠ©å‡½æ•°
+  è¾“å…¥å‚æ•°ï¼šint* nums, int beg, int end, int n, accord& data
+			æ•°ç»„é¦–åœ°å€ï¼Œæ’åºçš„èŒƒå›´ï¼Œæ•°ç»„å¤§å°ï¼Œè®°å½•æ¯”è¾ƒæ¬¡æ•°ä¸ç§»åŠ¨æ¬¡æ•°
+  è¿” å› å€¼ï¼š
+  è¯´    æ˜ï¼šæ•°æ®é‡è¾ƒå°çš„æ—¶å€™é‡‡ç”¨æ’å…¥æ’åºä¼˜åŒ–
 ***************************************************************************/
 void _quickSort1(int* nums, int beg, int end, int n, accord& data)
 {
-	if (beg >= end)//µİ¹é½áÊøÌõ¼ş
+	if (beg >= end)//é€’å½’ç»“æŸæ¡ä»¶
 		return;
-	//Êı¾İÁ¿½ÏĞ¡Ê±²ÉÓÃ²åÈëÅÅĞò
+	//æ•°æ®é‡è¾ƒå°æ—¶é‡‡ç”¨æ’å…¥æ’åº
 	if (end - beg + 1 <= 20)
 	{
 		insertSort(nums, beg, end, data);
 		return;
 	}
-	//È¡×ó±ßµÚÒ»¸öÎª»ù×¼
+	//å–å·¦è¾¹ç¬¬ä¸€ä¸ªä¸ºåŸºå‡†
 	int pivot = nums[beg];
-	//Á½¸öÖ¸Õë×óÓÒ¼ì²é±ÈpivotĞ¡µÄ·Å×ó±ß£¬·ñÔòÓÒ±ß
+	//ä¸¤ä¸ªæŒ‡é’ˆå·¦å³æ£€æŸ¥æ¯”pivotå°çš„æ”¾å·¦è¾¹ï¼Œå¦åˆ™å³è¾¹
 	int left = beg, right = end;
 	while (left < right)
 	{
-		//²»³¬·¶Î§£¬²»±ÈpivotĞ¡µÄÒ»Ö±ÒÆ¶¯ÓÒ±ßÖ¸Õë
+		//ä¸è¶…èŒƒå›´ï¼Œä¸æ¯”pivotå°çš„ä¸€ç›´ç§»åŠ¨å³è¾¹æŒ‡é’ˆ
 		while (left < right && (++data.cmp, nums[right] >= pivot))
 			--right;
-		//Óë×ó±ßÖ¸Õë½»»»Î»ÖÃÖµ
+		//ä¸å·¦è¾¹æŒ‡é’ˆäº¤æ¢ä½ç½®å€¼
 		nums[left] = nums[right];
-		//ÒÆ¶¯²½Êı
+		//ç§»åŠ¨æ­¥æ•°
 		++data.move;
-		//²»³¬·¶Î§£¬²»±Øpivot´óµÄÒ»Ö±ÒÆ¶¯×ó±ßÖ¸Õë
+		//ä¸è¶…èŒƒå›´ï¼Œä¸å¿…pivotå¤§çš„ä¸€ç›´ç§»åŠ¨å·¦è¾¹æŒ‡é’ˆ
 		while (left < right && (++data.cmp, nums[left] <= pivot))
 			++left;
-		//½»»»Î»ÖÃ
+		//äº¤æ¢ä½ç½®
 		nums[right] = nums[left];
-		//ÒÆ¶¯²½Êı
+		//ç§»åŠ¨æ­¥æ•°
 		++data.move;
 	}
-	//³öÑ­»·left == right£¬ÕÒµ½×î¿ªÊ¼pivotµÄÎ»ÖÃ
+	//å‡ºå¾ªç¯left == rightï¼Œæ‰¾åˆ°æœ€å¼€å§‹pivotçš„ä½ç½®
 	nums[left] = pivot;
-	//ÒÆ¶¯²½Êı
+	//ç§»åŠ¨æ­¥æ•°
 	++data.move;
-	//·ÖÖÎÎª×óÓÒÁ½±ß
+	//åˆ†æ²»ä¸ºå·¦å³ä¸¤è¾¹
 	_quickSort1(nums, beg, left - 1, n, data);
 	_quickSort1(nums, left + 1, end, n, data);
 }
 /***************************************************************************
-  º¯ÊıÃû³Æ£ºquickSort1
-  ¹¦    ÄÜ£º¿ìËÙÅÅĞòµİ¹éËã·¨
-  ÊäÈë²ÎÊı£ºint* nums, int n, accord& data
-			Êı×éÊ×µØÖ·£¬Êı×é´óĞ¡£¬¼ÇÂ¼±È½Ï´ÎÊıÓëÒÆ¶¯´ÎÊı
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º
+  å‡½æ•°åç§°ï¼šquickSort1
+  åŠŸ    èƒ½ï¼šå¿«é€Ÿæ’åºé€’å½’ç®—æ³•
+  è¾“å…¥å‚æ•°ï¼šint* nums, int n, accord& data
+			æ•°ç»„é¦–åœ°å€ï¼Œæ•°ç»„å¤§å°ï¼Œè®°å½•æ¯”è¾ƒæ¬¡æ•°ä¸ç§»åŠ¨æ¬¡æ•°
+  è¿” å› å€¼ï¼š
+  è¯´    æ˜ï¼š
 ***************************************************************************/
 void quickSort1(int* nums, int n, accord& data)
 {
-	//½øÈë¿ìÅÅµİ¹éº¯Êı
+	//è¿›å…¥å¿«æ’é€’å½’å‡½æ•°
 	_quickSort1(nums, 0, n - 1, n, data);
 }
-//¶şÔª½á¹¹Ìå´æ´¢Êı×é·¶Î§ĞÅÏ¢
+//äºŒå…ƒç»“æ„ä½“å­˜å‚¨æ•°ç»„èŒƒå›´ä¿¡æ¯
 struct RANGE {
 	int beg, end;
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	RANGE(const int beg = 0, const int end = 0)
 		:beg(beg), end(end) {}
 };
 
 /***************************************************************************
-  º¯ÊıÃû³Æ£ºquickSort2
-  ¹¦    ÄÜ£º¿ìËÙÅÅĞò·Çµİ¹éËã·¨
-  ÊäÈë²ÎÊı£ºint* nums, int n, accord& data
-			Êı×éÊ×µØÖ·£¬Êı×é´óĞ¡£¬¼ÇÂ¼±È½Ï´ÎÊıÓëÒÆ¶¯´ÎÊı
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£ºÀûÓÃÕ»´æ´¢ÒªÅÅĞòµÄ·¶Î§£¬ÓÉ´Ë½øĞĞµİ¹éÕ¹¿ª
+  å‡½æ•°åç§°ï¼šquickSort2
+  åŠŸ    èƒ½ï¼šå¿«é€Ÿæ’åºéé€’å½’ç®—æ³•
+  è¾“å…¥å‚æ•°ï¼šint* nums, int n, accord& data
+			æ•°ç»„é¦–åœ°å€ï¼Œæ•°ç»„å¤§å°ï¼Œè®°å½•æ¯”è¾ƒæ¬¡æ•°ä¸ç§»åŠ¨æ¬¡æ•°
+  è¿” å› å€¼ï¼š
+  è¯´    æ˜ï¼šåˆ©ç”¨æ ˆå­˜å‚¨è¦æ’åºçš„èŒƒå›´ï¼Œç”±æ­¤è¿›è¡Œé€’å½’å±•å¼€
 ***************************************************************************/
 void quickSort2(int* nums, int n, accord& data)
 {
-	//ÅĞ¶ÏÊı×é³¤¶ÈÊÇ·ñºÏ·¨£¬ÉêÇë¿Õ¼äÊ±ºòĞèÒª
+	//åˆ¤æ–­æ•°ç»„é•¿åº¦æ˜¯å¦åˆæ³•ï¼Œç”³è¯·ç©ºé—´æ—¶å€™éœ€è¦
 	if (n <= 0)
 		return;
 	RANGE* stk = new(nothrow) RANGE[n];
-	//±£Ö¤ÉêÇëµ½¿Õ¼äÁË²ÅÄÜ¼ÌĞøÔËĞĞ
+	//ä¿è¯ç”³è¯·åˆ°ç©ºé—´äº†æ‰èƒ½ç»§ç»­è¿è¡Œ
 	assert(stk != NULL);
-	//Õ»¶¥Ö¸Õë
+	//æ ˆé¡¶æŒ‡é’ˆ
 	int top = 0;
-	//×î´ó·¶Î§ÈëÕ»
+	//æœ€å¤§èŒƒå›´å…¥æ ˆ
 	stk[top++] = RANGE(0, n - 1);
-	//¸¨Öú±äÁ¿
+	//è¾…åŠ©å˜é‡
 	int pivot = -1, left = -1, right = -1;
 	while (top)
 	{
 		RANGE range = stk[--top];
-		//ÎŞĞèÅÅĞò
+		//æ— éœ€æ’åº
 		if (range.beg >= range.end)
 			continue;
 
-		//È¡×ó±ßµÚÒ»¸öÎª»ù×¼
+		//å–å·¦è¾¹ç¬¬ä¸€ä¸ªä¸ºåŸºå‡†
 		pivot = nums[range.beg];
-		//Á½¸öÖ¸Õë×óÓÒ¼ì²é±ÈpivotĞ¡µÄ·Å×ó±ß£¬·ñÔòÓÒ±ß
+		//ä¸¤ä¸ªæŒ‡é’ˆå·¦å³æ£€æŸ¥æ¯”pivotå°çš„æ”¾å·¦è¾¹ï¼Œå¦åˆ™å³è¾¹
 		left = range.beg, right = range.end;
 
 		while (left < right)
 		{
-			//²»³¬·¶Î§£¬²»±ÈpivotĞ¡µÄÒ»Ö±ÒÆ¶¯ÓÒ±ßÖ¸Õë
+			//ä¸è¶…èŒƒå›´ï¼Œä¸æ¯”pivotå°çš„ä¸€ç›´ç§»åŠ¨å³è¾¹æŒ‡é’ˆ
 			while (left < right && (++data.cmp, nums[right] >= pivot))
 				--right;
-			//Óë×ó±ßÖ¸Õë½»»»Î»ÖÃÖµ
+			//ä¸å·¦è¾¹æŒ‡é’ˆäº¤æ¢ä½ç½®å€¼
 			nums[left] = nums[right];
-			//ÒÆ¶¯²½Êı
+			//ç§»åŠ¨æ­¥æ•°
 			++data.move;
-			//²»³¬·¶Î§£¬²»±Øpivot´óµÄÒ»Ö±ÒÆ¶¯×ó±ßÖ¸Õë
+			//ä¸è¶…èŒƒå›´ï¼Œä¸å¿…pivotå¤§çš„ä¸€ç›´ç§»åŠ¨å·¦è¾¹æŒ‡é’ˆ
 			while (left < right && (++data.cmp, nums[left] <= pivot))
 				++left;
-			//½»»»Î»ÖÃ
+			//äº¤æ¢ä½ç½®
 			nums[right] = nums[left];
-			//ÒÆ¶¯²½Êı
+			//ç§»åŠ¨æ­¥æ•°
 			++data.move;
 		}
-		//³öÑ­»·left == right£¬ÕÒµ½×î¿ªÊ¼pivotµÄÎ»ÖÃ
+		//å‡ºå¾ªç¯left == rightï¼Œæ‰¾åˆ°æœ€å¼€å§‹pivotçš„ä½ç½®
 		nums[left] = pivot;
-		//ÒÆ¶¯²½Êı
+		//ç§»åŠ¨æ­¥æ•°
 		++data.move;
 
-		//ÈëÕ»
+		//å…¥æ ˆ
 		stk[top++] = RANGE(range.beg, left - 1);
 		stk[top++] = RANGE(left + 1, range.end);
 
 	}
-	//ÊÍ·Å¿Õ¼ä
+	//é‡Šæ”¾ç©ºé—´
 	delete[] stk;
 }
 
 /***************************************************************************
-  º¯ÊıÃû³Æ£ºcountingSort
-  ¹¦    ÄÜ£º¼ÆÊıÅÅĞò
-  ÊäÈë²ÎÊı£ºint* nums, int n, accord& data
-			Êı×éÊ×µØÖ·£¬Êı×é´óĞ¡£¬¼ÇÂ¼±È½Ï´ÎÊıÓëÒÆ¶¯´ÎÊı
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º
+  å‡½æ•°åç§°ï¼šcountingSort
+  åŠŸ    èƒ½ï¼šè®¡æ•°æ’åº
+  è¾“å…¥å‚æ•°ï¼šint* nums, int n, accord& data
+			æ•°ç»„é¦–åœ°å€ï¼Œæ•°ç»„å¤§å°ï¼Œè®°å½•æ¯”è¾ƒæ¬¡æ•°ä¸ç§»åŠ¨æ¬¡æ•°
+  è¿” å› å€¼ï¼š
+  è¯´    æ˜ï¼š
 ***************************************************************************/
 void countingSort(int* nums, int n, accord& data)
 {
-	//¶îÍâ¿ª±ÙÊı×é¿Õ¼ä¼ÇÂ¼ÖµÎªiµÄÔªËØ³öÏÖµÄ´ÎÊı
-	//ÏÈÕÒµ½×îÖµÁ½¸ö±ß½ç
+	//é¢å¤–å¼€è¾Ÿæ•°ç»„ç©ºé—´è®°å½•å€¼ä¸ºiçš„å…ƒç´ å‡ºç°çš„æ¬¡æ•°
+	//å…ˆæ‰¾åˆ°æœ€å€¼ä¸¤ä¸ªè¾¹ç•Œ
 	int Max = INT_MIN, Min = INT_MAX;
 	for (int i = 0; i < n; ++i)
 	{
@@ -343,195 +343,195 @@ void countingSort(int* nums, int n, accord& data)
 	int* temp = new int[Max - Min + 1];
 	assert(temp != NULL);
 
-	//ÉêÇë¿Õ¼äÊ§°Ü
+	//ç”³è¯·ç©ºé—´å¤±è´¥
 	if (temp == NULL)
 		return;
-	//³õÊ¼»¯
+	//åˆå§‹åŒ–
 	for (int i = 0; i < Max - Min + 1; ++i)
 		temp[i] = 0;
-	//¼ÇÂ¼³öÏÖ´ÎÊı
+	//è®°å½•å‡ºç°æ¬¡æ•°
 	for (int i = 0; i < n; ++i)
 		++temp[nums[i] - Min];
 
 	for (int i = 0, j = 0; i < Max - Min + 1; )
 	{
-		if (temp[i])//ÀïÃæ»¹ÓĞÔªËØ
+		if (temp[i])//é‡Œé¢è¿˜æœ‰å…ƒç´ 
 		{
-			nums[j++] = i + Min;//ÔªËØµÄÖµ
+			nums[j++] = i + Min;//å…ƒç´ çš„å€¼
 			++data.move;
 			--temp[i];
 		}
-		else//Ã»ÓĞÔªËØÁË
+		else//æ²¡æœ‰å…ƒç´ äº†
 			++i;
 	}
 	delete[] temp;
 }
 
 /***************************************************************************
-  º¯ÊıÃû³Æ£ºmergeSort
-  ¹¦    ÄÜ£º¹é²¢ÅÅĞò
-  ÊäÈë²ÎÊı£ºint* nums, int n, accord& data
-			Êı×éÊ×µØÖ·£¬Êı×é´óĞ¡£¬¼ÇÂ¼±È½Ï´ÎÊıÓëÒÆ¶¯´ÎÊı
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º
+  å‡½æ•°åç§°ï¼šmergeSort
+  åŠŸ    èƒ½ï¼šå½’å¹¶æ’åº
+  è¾“å…¥å‚æ•°ï¼šint* nums, int n, accord& data
+			æ•°ç»„é¦–åœ°å€ï¼Œæ•°ç»„å¤§å°ï¼Œè®°å½•æ¯”è¾ƒæ¬¡æ•°ä¸ç§»åŠ¨æ¬¡æ•°
+  è¿” å› å€¼ï¼š
+  è¯´    æ˜ï¼š
 ***************************************************************************/
-void mergeSort(int* nums, int n, accord& data)//×ÔÏÂ¶øÉÏµü´ú·½Ê½ÊµÏÖ
+void mergeSort(int* nums, int n, accord& data)//è‡ªä¸‹è€Œä¸Šè¿­ä»£æ–¹å¼å®ç°
 {
-	//¸¨ÖúÊı×é£¬ÆäÖĞaÊÇ¸üĞÂÇ°µÄÊı×é£¬bÊÇ¸üĞÂºóµÄÊı×é
+	//è¾…åŠ©æ•°ç»„ï¼Œå…¶ä¸­aæ˜¯æ›´æ–°å‰çš„æ•°ç»„ï¼Œbæ˜¯æ›´æ–°åçš„æ•°ç»„
 	int* a = nums;
 	int* b = new int[n];
-	//ÉêÇë¿Õ¼ä²»³É¹¦
+	//ç”³è¯·ç©ºé—´ä¸æˆåŠŸ
 	assert(b != NULL);
-	//´ÓÏÂÖÁÉÏ£¬Çø¼ä²»¶ÏÀ©´ó
+	//ä»ä¸‹è‡³ä¸Šï¼ŒåŒºé—´ä¸æ–­æ‰©å¤§
 	for (int seg = 1; seg < n; seg <<= 1)
 	{
-		for (int start = 0; start < n; start += seg + seg)//Ò»´Î±È½ÏÁ½¸öseg
+		for (int start = 0; start < n; start += seg + seg)//ä¸€æ¬¡æ¯”è¾ƒä¸¤ä¸ªseg
 		{
 			int start1 = start, start2 = min(start + seg, n);
 			int end1 = start2, end2 = min(start + seg + seg, n);
 			int index = start1;
-			while (start1 < end1 && start2 < end2)//Ñ¡µ½Ë­Ë­¾ÍÖ¸ÕëÍùºóÒÆ
+			while (start1 < end1 && start2 < end2)//é€‰åˆ°è°è°å°±æŒ‡é’ˆå¾€åç§»
 			{
 				b[index++] = a[start1] < a[start2] ? a[start1++] : a[start2++];
 				++data.cmp;
 				++data.move;
 			}
-			//±ÈÍêÁËÊ£ÏÂµÄÖ±½Ó·Åµ½ºóÃæ
+			//æ¯”å®Œäº†å‰©ä¸‹çš„ç›´æ¥æ”¾åˆ°åé¢
 			while (start1 < end1)
 				b[index++] = a[start1++], ++data.move;
 			while (start2 < end2)
 				b[index++] = a[start2++], ++data.move;
 		}
-		//±£³ÖaÊÇ¸üĞÂÇ°µÄÊı×é£¬bÊÇ¸üĞÂºóµÄÊı×é
+		//ä¿æŒaæ˜¯æ›´æ–°å‰çš„æ•°ç»„ï¼Œbæ˜¯æ›´æ–°åçš„æ•°ç»„
 		int* t = a;
 		a = b;
 		b = t;
 	}
-	//Èç¹ûÃ»ÓĞ»»»ØÀ´£¨Ê×µØÖ·£©£¬´ËÊ±aÊÇÉêÇë¿Õ¼äµÄÄÇ¸ö£¬bÊÇnums
+	//å¦‚æœæ²¡æœ‰æ¢å›æ¥ï¼ˆé¦–åœ°å€ï¼‰ï¼Œæ­¤æ—¶aæ˜¯ç”³è¯·ç©ºé—´çš„é‚£ä¸ªï¼Œbæ˜¯nums
 	if (a != nums)
 	{
-		for (int i = 0; i < n; ++i)//×îÖÕµÄ´ğ°¸Êı×é¸³Öµ¸ønums
+		for (int i = 0; i < n; ++i)//æœ€ç»ˆçš„ç­”æ¡ˆæ•°ç»„èµ‹å€¼ç»™nums
 			b[i] = a[i];
-		b = a;//ÉêÇë¿Õ¼äµÄ¸øb
+		b = a;//ç”³è¯·ç©ºé—´çš„ç»™b
 	}
-	//Èç¹û»»»ØÀ´ÁË¾Í²»ÓÃ¸³ÖµÁË
-	//ÊÍ·ÅÉêÇëµÄ¿Õ¼ä
+	//å¦‚æœæ¢å›æ¥äº†å°±ä¸ç”¨èµ‹å€¼äº†
+	//é‡Šæ”¾ç”³è¯·çš„ç©ºé—´
 	delete[] b;
 }
 
 /***************************************************************************
-  º¯ÊıÃû³Æ£ºheapify1
-  ¹¦    ÄÜ£º¶ÑÅÅĞò¸¨Öúº¯Êı£¬·Çµİ¹éËã·¨
-  ÊäÈë²ÎÊı£ºint* nums, int start, int end, accord& data
-			Êı×éÊ×µØÖ·£¬Êı×é·¶Î§£¬¼ÇÂ¼±È½Ï´ÎÊıÓëÒÆ¶¯´ÎÊı
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º
+  å‡½æ•°åç§°ï¼šheapify1
+  åŠŸ    èƒ½ï¼šå †æ’åºè¾…åŠ©å‡½æ•°ï¼Œéé€’å½’ç®—æ³•
+  è¾“å…¥å‚æ•°ï¼šint* nums, int start, int end, accord& data
+			æ•°ç»„é¦–åœ°å€ï¼Œæ•°ç»„èŒƒå›´ï¼Œè®°å½•æ¯”è¾ƒæ¬¡æ•°ä¸ç§»åŠ¨æ¬¡æ•°
+  è¿” å› å€¼ï¼š
+  è¯´    æ˜ï¼š
 ***************************************************************************/
 void heapify1(int* nums, int start, int end, accord& data)//[beg, end]
 {
 	int dad = start, son = 2 * dad + 1;
 	while (son <= end)
 	{
-		//È¡´óµÄÄÇ¸ö¶ù×Ó
+		//å–å¤§çš„é‚£ä¸ªå„¿å­
 		if ((son + 1) <= end && (++data.cmp, nums[son] < nums[son + 1]))
 			++son;
-		if (++data.cmp, nums[dad] > nums[son])//dad±Èson´ó£¬Ö±½Ó½áÊø£¬ÒòÎªÒªµÄÊÇtop×î´ó
+		if (++data.cmp, nums[dad] > nums[son])//dadæ¯”sonå¤§ï¼Œç›´æ¥ç»“æŸï¼Œå› ä¸ºè¦çš„æ˜¯topæœ€å¤§
 			return;
-		//Ğ¡µÄnums[dad]ÏÂ³Áµ½½Ï´óµÄ×Ó½áµãµÄÎ»ÖÃ
+		//å°çš„nums[dad]ä¸‹æ²‰åˆ°è¾ƒå¤§çš„å­ç»“ç‚¹çš„ä½ç½®
 		int t = nums[dad];
 		nums[dad] = nums[son];
 		nums[son] = t;
-		//¼ÇÂ¼²½Êı
+		//è®°å½•æ­¥æ•°
 		data.move += 3;
 
-		dad = son;//µü´úµ½¸ü´óµÄ×Ó½áµã
+		dad = son;//è¿­ä»£åˆ°æ›´å¤§çš„å­ç»“ç‚¹
 		son = dad * 2 + 1;
 	}
 }
 /***************************************************************************
-  º¯ÊıÃû³Æ£ºheapify2
-  ¹¦    ÄÜ£º¶ÑÅÅĞò¸¨Öúº¯Êı£¬µİ¹éËã·¨
-  ÊäÈë²ÎÊı£ºint* nums, int start, int end, accord& data
-			Êı×éÊ×µØÖ·£¬Êı×é·¶Î§£¬¼ÇÂ¼±È½Ï´ÎÊıÓëÒÆ¶¯´ÎÊı
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º
+  å‡½æ•°åç§°ï¼šheapify2
+  åŠŸ    èƒ½ï¼šå †æ’åºè¾…åŠ©å‡½æ•°ï¼Œé€’å½’ç®—æ³•
+  è¾“å…¥å‚æ•°ï¼šint* nums, int start, int end, accord& data
+			æ•°ç»„é¦–åœ°å€ï¼Œæ•°ç»„èŒƒå›´ï¼Œè®°å½•æ¯”è¾ƒæ¬¡æ•°ä¸ç§»åŠ¨æ¬¡æ•°
+  è¿” å› å€¼ï¼š
+  è¯´    æ˜ï¼š
 ***************************************************************************/
 void heapify2(int* nums, int start, int end, accord& data)
 {
 	int dad = start, son = 2 * dad + 1;
-	if (son > end)//µİ¹é½áÊøÌõ¼ş
+	if (son > end)//é€’å½’ç»“æŸæ¡ä»¶
 		return;
-	//È¡½Ï´ó¶ù×Ó
+	//å–è¾ƒå¤§å„¿å­
 	if (son + 1 <= end && (++data.cmp, nums[son] < nums[son + 1]))
 		++son;
-	//dadÒÑ¾­±Èson´óÁË¾Í²»ÓÃÏÂ³ÁÁË
+	//dadå·²ç»æ¯”sonå¤§äº†å°±ä¸ç”¨ä¸‹æ²‰äº†
 	if (++data.cmp, nums[dad] > nums[son])
 		return;
 	int t = nums[dad];
 	nums[dad] = nums[son];
 	nums[son] = t;
-	//¼ÇÂ¼²½Êı
+	//è®°å½•æ­¥æ•°
 	data.move += 3;
-	//½øÈëµİ¹éº¯Êı£¬ÒÔson×÷ÎªÏÂÒ»¸öµÄstart
+	//è¿›å…¥é€’å½’å‡½æ•°ï¼Œä»¥sonä½œä¸ºä¸‹ä¸€ä¸ªçš„start
 	heapify2(nums, son, end, data);
 }
 /***************************************************************************
-  º¯ÊıÃû³Æ£ºheapSort1
-  ¹¦    ÄÜ£º¶ÑÅÅĞò£¬·Çµİ¹éËã·¨
-  ÊäÈë²ÎÊı£ºint* nums, int n, accord& data
-			Êı×éÊ×µØÖ·£¬Êı×é´óĞ¡£¬¼ÇÂ¼±È½Ï´ÎÊıÓëÒÆ¶¯´ÎÊı
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º
+  å‡½æ•°åç§°ï¼šheapSort1
+  åŠŸ    èƒ½ï¼šå †æ’åºï¼Œéé€’å½’ç®—æ³•
+  è¾“å…¥å‚æ•°ï¼šint* nums, int n, accord& data
+			æ•°ç»„é¦–åœ°å€ï¼Œæ•°ç»„å¤§å°ï¼Œè®°å½•æ¯”è¾ƒæ¬¡æ•°ä¸ç§»åŠ¨æ¬¡æ•°
+  è¿” å› å€¼ï¼š
+  è¯´    æ˜ï¼š
 ***************************************************************************/
 void heapSort1(int* nums, int n, accord& data)
 {
-	//³õÊ¼»¯¶Ñ£¬´Ó×îºóÒ»¸ö·ÇÒ¶×Ó½áµãÍùÇ°
+	//åˆå§‹åŒ–å †ï¼Œä»æœ€åä¸€ä¸ªéå¶å­ç»“ç‚¹å¾€å‰
 	for (int i = (n - 1) / 2; i >= 0; --i)
-		heapify1(nums, i, n - 1, data);//ÏÂ±ê´Ó[i, n - 1]
-	//¶ÑÅÅĞò£¬½«ÒÑ¾­ÅÅºÃµÄ¶Ñ top ·Åµ½×îºó£¨Ïàµ±ÓÚ³ö¶Ñ£©
-	for (int i = n - 1; i > 0; --i)//´ÓºóÍùÇ°·Åtop
+		heapify1(nums, i, n - 1, data);//ä¸‹æ ‡ä»[i, n - 1]
+	//å †æ’åºï¼Œå°†å·²ç»æ’å¥½çš„å † top æ”¾åˆ°æœ€åï¼ˆç›¸å½“äºå‡ºå †ï¼‰
+	for (int i = n - 1; i > 0; --i)//ä»åå¾€å‰æ”¾top
 	{
 		int t = nums[0];
 		nums[0] = nums[i];
 		nums[i] = t;
 		data.move += 3;
 
-		heapify1(nums, 0, i - 1, data);//·Åµ½×îºóÁË£¬ÖØĞÂ¶Ñ»¯
+		heapify1(nums, 0, i - 1, data);//æ”¾åˆ°æœ€åäº†ï¼Œé‡æ–°å †åŒ–
 	}
 }
 /***************************************************************************
-  º¯ÊıÃû³Æ£ºheapSort2
-  ¹¦    ÄÜ£º¶ÑÅÅĞò£¬µİ¹éËã·¨
-  ÊäÈë²ÎÊı£ºint* nums, int n, accord& data
-			Êı×éÊ×µØÖ·£¬Êı×é´óĞ¡£¬¼ÇÂ¼±È½Ï´ÎÊıÓëÒÆ¶¯´ÎÊı
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º
+  å‡½æ•°åç§°ï¼šheapSort2
+  åŠŸ    èƒ½ï¼šå †æ’åºï¼Œé€’å½’ç®—æ³•
+  è¾“å…¥å‚æ•°ï¼šint* nums, int n, accord& data
+			æ•°ç»„é¦–åœ°å€ï¼Œæ•°ç»„å¤§å°ï¼Œè®°å½•æ¯”è¾ƒæ¬¡æ•°ä¸ç§»åŠ¨æ¬¡æ•°
+  è¿” å› å€¼ï¼š
+  è¯´    æ˜ï¼š
 ***************************************************************************/
 void heapSort2(int* nums, int n, accord& data)
 {
-	//³õÊ¼»¯¶Ñ£¬´ÓÖĞ¼äÍùÇ°
+	//åˆå§‹åŒ–å †ï¼Œä»ä¸­é—´å¾€å‰
 	for (int i = (n - 1) / 2; i >= 0; --i)
-		heapify2(nums, i, n - 1, data);//ÏÂ±ê´Ó[i, n - 1]
-	//¶ÑÅÅĞò£¬½«ÒÑ¾­ÅÅºÃµÄ¶Ñ top ·Åµ½×îºó£¨Ïàµ±ÓÚ³ö¶Ñ£©
-	for (int i = n - 1; i > 0; --i)//´ÓºóÍùÇ°·Åtop
+		heapify2(nums, i, n - 1, data);//ä¸‹æ ‡ä»[i, n - 1]
+	//å †æ’åºï¼Œå°†å·²ç»æ’å¥½çš„å † top æ”¾åˆ°æœ€åï¼ˆç›¸å½“äºå‡ºå †ï¼‰
+	for (int i = n - 1; i > 0; --i)//ä»åå¾€å‰æ”¾top
 	{
 		int t = nums[0];
 		nums[0] = nums[i];
 		nums[i] = t;
-		//¼ÇÂ¼²½Êı
+		//è®°å½•æ­¥æ•°
 		data.move += 3;
 
-		heapify2(nums, 0, i - 1, data);//·Åµ½×îºóÁË£¬ÖØĞÂ¶Ñ»¯
+		heapify2(nums, 0, i - 1, data);//æ”¾åˆ°æœ€åäº†ï¼Œé‡æ–°å †åŒ–
 	}
 }
 
 /***************************************************************************
-  º¯ÊıÃû³Æ£ºbucket
-  ¹¦    ÄÜ£ºLSDËã·¨¸¨Öúº¯Êı
-  ÊäÈë²ÎÊı£ºint* nums, int n, int base, accord& data
-			Êı×éÊ×µØÖ·£¬Êı×é´óĞ¡£¬µ±Ç°Î»Êı£¬¼ÇÂ¼±È½Ï´ÎÊıÓëÒÆ¶¯´ÎÊı
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º
+  å‡½æ•°åç§°ï¼šbucket
+  åŠŸ    èƒ½ï¼šLSDç®—æ³•è¾…åŠ©å‡½æ•°
+  è¾“å…¥å‚æ•°ï¼šint* nums, int n, int base, accord& data
+			æ•°ç»„é¦–åœ°å€ï¼Œæ•°ç»„å¤§å°ï¼Œå½“å‰ä½æ•°ï¼Œè®°å½•æ¯”è¾ƒæ¬¡æ•°ä¸ç§»åŠ¨æ¬¡æ•°
+  è¿” å› å€¼ï¼š
+  è¯´    æ˜ï¼š
 ***************************************************************************/
 void bucket(int* nums, int n, int base, accord& data)
 {
@@ -540,90 +540,90 @@ void bucket(int* nums, int n, int base, accord& data)
 	assert(bucket != NULL);
 	int* temp = new int[n];
 	assert(temp != NULL);
-	//Í°µÄ³õÊ¼»¯
+	//æ¡¶çš„åˆå§‹åŒ–
 	for (int i = 0; i < BUCKETNUM; ++i)
 		bucket[i] = 0;
 
-	//¼ÇÂ¼Ã¿Î»Êı×Ö¶ÔÓ¦µÄÍ°
+	//è®°å½•æ¯ä½æ•°å­—å¯¹åº”çš„æ¡¶
 	for (int i = 0; i < n; ++i)
 		++bucket[(nums[i] / base) % 10];
 
-	//bucket[i]±íÊ¾iÇ°ÃæÔªËØ¸öÊı
+	//bucket[i]è¡¨ç¤ºiå‰é¢å…ƒç´ ä¸ªæ•°
 	for (int i = 1; i < BUCKETNUM; ++i)
 		bucket[i] += bucket[i - 1];
-	//´ÓºóÍùÇ°½«ÔªËØ·ÅÈëtemp£¬µÃµ½µÄ¾ÍÊÇ°´Ä³Î»Êı×ÖÅÅºÃµÄ
+	//ä»åå¾€å‰å°†å…ƒç´ æ”¾å…¥tempï¼Œå¾—åˆ°çš„å°±æ˜¯æŒ‰æŸä½æ•°å­—æ’å¥½çš„
 	for (int i = n - 1; i >= 0; --i)
 	{
 		int index = (nums[i] / base) % 10;
-		temp[bucket[index] - 1] = nums[i];//ÒòÎªÍ°ÀïÃæ¼ÇÂ¼µÄ¸öÊı£¬-1×ª»»ÎªÏÂ±ê
-		--bucket[index];//ÓÃµôÒ»¸öÔªËØ¼õÈ¥Ò»¸ö
+		temp[bucket[index] - 1] = nums[i];//å› ä¸ºæ¡¶é‡Œé¢è®°å½•çš„ä¸ªæ•°ï¼Œ-1è½¬æ¢ä¸ºä¸‹æ ‡
+		--bucket[index];//ç”¨æ‰ä¸€ä¸ªå…ƒç´ å‡å»ä¸€ä¸ª
 		++data.move;
 	}
-	//½«tempÖĞ°´Ä³Î»Êı×ÖÅÅºÃµÄÔªËØ·Å»Ønums
+	//å°†tempä¸­æŒ‰æŸä½æ•°å­—æ’å¥½çš„å…ƒç´ æ”¾å›nums
 	for (int i = 0; i < n; ++i)
 		nums[i] = temp[i];
 	data.move += n;
 
-	//ÊÍ·ÅÉêÇëµÄ¶¯Ì¬¿Õ¼ä
+	//é‡Šæ”¾ç”³è¯·çš„åŠ¨æ€ç©ºé—´
 	delete[] temp;
 	delete[] bucket;
 }
 /***************************************************************************
-  º¯ÊıÃû³Æ£ºradixSortLSD
-  ¹¦    ÄÜ£º»ùÊıÅÅĞòLSD
-  ÊäÈë²ÎÊı£ºint* nums, int n, accord& data
-			Êı×éÊ×µØÖ·£¬Êı×é´óĞ¡£¬¼ÇÂ¼±È½Ï´ÎÊıÓëÒÆ¶¯´ÎÊı
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£ºÊÊÓÃÓÚÎ»Êı½ÏÉÙµÄ
+  å‡½æ•°åç§°ï¼šradixSortLSD
+  åŠŸ    èƒ½ï¼šåŸºæ•°æ’åºLSD
+  è¾“å…¥å‚æ•°ï¼šint* nums, int n, accord& data
+			æ•°ç»„é¦–åœ°å€ï¼Œæ•°ç»„å¤§å°ï¼Œè®°å½•æ¯”è¾ƒæ¬¡æ•°ä¸ç§»åŠ¨æ¬¡æ•°
+  è¿” å› å€¼ï¼š
+  è¯´    æ˜ï¼šé€‚ç”¨äºä½æ•°è¾ƒå°‘çš„
 ***************************************************************************/
 void radixSortLSD(int* nums, int n, accord& data)
 {
 	int Max = INT_MIN;
-	//»ñµÃ×î´óÖµ
+	//è·å¾—æœ€å¤§å€¼
 	for (int i = 0; i < n; ++i)
 		if (++data.cmp && nums[i] > Max)
 			Max = nums[i];
-	//base´Ó¸öÎ»Ôö´óµ½ÔªËØÖĞµÄ×î´óÎ»Êı
+	//baseä»ä¸ªä½å¢å¤§åˆ°å…ƒç´ ä¸­çš„æœ€å¤§ä½æ•°
 	for (int base = 1; Max / base > 0; base *= 10)
 		bucket(nums, n, base, data);
 }
 
 /***************************************************************************
-  º¯ÊıÃû³Æ£ºMSDhelper
-  ¹¦    ÄÜ£º»ùÊıÅÅĞòMSDµÄ¸¨Öúº¯Êı
-  ÊäÈë²ÎÊı£ºint* nums, int beg, int end, int base, accord& data
-			Êı×éÊ×µØÖ·£¬Êı×é·¶Î§£¬µ±Ç°Î»Êı£¬¼ÇÂ¼±È½Ï´ÎÊıÓëÒÆ¶¯´ÎÊı
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£ºÊÊÓÃÓÚÎ»Êı½Ï¶àµÄ
+  å‡½æ•°åç§°ï¼šMSDhelper
+  åŠŸ    èƒ½ï¼šåŸºæ•°æ’åºMSDçš„è¾…åŠ©å‡½æ•°
+  è¾“å…¥å‚æ•°ï¼šint* nums, int beg, int end, int base, accord& data
+			æ•°ç»„é¦–åœ°å€ï¼Œæ•°ç»„èŒƒå›´ï¼Œå½“å‰ä½æ•°ï¼Œè®°å½•æ¯”è¾ƒæ¬¡æ•°ä¸ç§»åŠ¨æ¬¡æ•°
+  è¿” å› å€¼ï¼š
+  è¯´    æ˜ï¼šé€‚ç”¨äºä½æ•°è¾ƒå¤šçš„
 ***************************************************************************/
 void MSDhelper(int* nums, int beg, int end, int base, accord& data)
 {
-	//Í°ÖĞÔªËØ²»´óÓÚ1¸ö
+	//æ¡¶ä¸­å…ƒç´ ä¸å¤§äº1ä¸ª
 	if (beg + 1 >= end)
 		return;
-	//»ùÊı²»ºÏ·¨
+	//åŸºæ•°ä¸åˆæ³•
 	if (base <= 0)
 		return;
 	const int BUCKETNUM = 10;
 	int Size = end - beg + 1;
-	//ÉêÇë¿Õ¼ä
+	//ç”³è¯·ç©ºé—´
 	int* bucket = new int[BUCKETNUM];
 	int* temp = new int[Size];
 	assert(bucket != NULL && temp != NULL);
 
-	//bucketÊı×é³õÊ¼»¯
+	//bucketæ•°ç»„åˆå§‹åŒ–
 	for (int i = 0; i < BUCKETNUM; ++i)
 		bucket[i] = 0;
 
-	//¼ÇÂ¼baseÎ»µÄ¸öÊı
+	//è®°å½•baseä½çš„ä¸ªæ•°
 	for (int i = beg; i <= end; ++i)
 		++bucket[(nums[i] / base) % 10];
 
-	//ÇóbucketÇ°×ººÍÒÔµÃµ½Ä¿±êÏÂ±ê
+	//æ±‚bucketå‰ç¼€å’Œä»¥å¾—åˆ°ç›®æ ‡ä¸‹æ ‡
 	for (int i = 1; i < BUCKETNUM; ++i)
 		bucket[i] += bucket[i - 1];
 
-	//·ÅÈëtempÖĞµÄÄ¿±êÎ»ÖÃ
+	//æ”¾å…¥tempä¸­çš„ç›®æ ‡ä½ç½®
 	for (int i = beg; i <= end; ++i)
 	{
 		int index = (nums[i] / base) % 10;
@@ -632,39 +632,39 @@ void MSDhelper(int* nums, int beg, int end, int base, accord& data)
 		++data.move;
 	}
 
-	//tempÊı×éÖĞÅÅºÃµÄĞòÁĞ·Å»ØnumsÊı×é
+	//tempæ•°ç»„ä¸­æ’å¥½çš„åºåˆ—æ”¾å›numsæ•°ç»„
 	for (int i = beg; i <= end; ++i)
 		nums[i] = temp[i - beg];
 	data.move += Size;
 
-	//´ËÊ±bucket[i]´æ·ÅbaseÎ»ÎªiµÄ£¬ÔÚtempÊı×éÖĞµÄµÚÒ»¸öÎ»ÖÃ
-	//½øÈëµİ¹éº¯Êı
+	//æ­¤æ—¶bucket[i]å­˜æ”¾baseä½ä¸ºiçš„ï¼Œåœ¨tempæ•°ç»„ä¸­çš„ç¬¬ä¸€ä¸ªä½ç½®
+	//è¿›å…¥é€’å½’å‡½æ•°
 	for (int i = 0; i < BUCKETNUM - 1; ++i)
 		MSDhelper(nums, beg + bucket[i], beg + bucket[i + 1] - 1, base / 10, data);
-	//×îºóÒ»²¿·ÖµÄ·¶Î§ÉÏ½çÎªend
+	//æœ€åä¸€éƒ¨åˆ†çš„èŒƒå›´ä¸Šç•Œä¸ºend
 	MSDhelper(nums, beg + bucket[BUCKETNUM - 1], end, base / 10, data);
 
 
-	//ÊÍ·Å¿Õ¼ä
+	//é‡Šæ”¾ç©ºé—´
 	delete[] temp;
 	delete[] bucket;
 }
 /***************************************************************************
-  º¯ÊıÃû³Æ£ºradixSortMSD
-  ¹¦    ÄÜ£º»ùÊıÅÅĞòMSD
-  ÊäÈë²ÎÊı£ºint* nums, int n, accord& data
-			Êı×éÊ×µØÖ·£¬Êı×é´óĞ¡£¬¼ÇÂ¼±È½Ï´ÎÊıÓëÒÆ¶¯´ÎÊı
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£ºÊÊÓÃÓÚÎ»Êı½Ï¶àµÄ
+  å‡½æ•°åç§°ï¼šradixSortMSD
+  åŠŸ    èƒ½ï¼šåŸºæ•°æ’åºMSD
+  è¾“å…¥å‚æ•°ï¼šint* nums, int n, accord& data
+			æ•°ç»„é¦–åœ°å€ï¼Œæ•°ç»„å¤§å°ï¼Œè®°å½•æ¯”è¾ƒæ¬¡æ•°ä¸ç§»åŠ¨æ¬¡æ•°
+  è¿” å› å€¼ï¼š
+  è¯´    æ˜ï¼šé€‚ç”¨äºä½æ•°è¾ƒå¤šçš„
 ***************************************************************************/
 void radixSortMSD(int* nums, int n, accord& data)
 {
 	int Max = INT_MIN;
-	//»ñµÃ×î´óÖµ
+	//è·å¾—æœ€å¤§å€¼
 	for (int i = 0; i < n; ++i)
 		if (++data.cmp, nums[i] > Max)
 			Max = nums[i];
-	//»ñµÃ×î´óÎ»Êı
+	//è·å¾—æœ€å¤§ä½æ•°
 	int base = 1;
 	while (Max / base > 10)
 		base *= 10;
@@ -675,44 +675,44 @@ void radixSortMSD(int* nums, int n, accord& data)
 const int defaultSizeString = 50;
 class String {
 private:
-	int Size;//Ö¸ÏòÎ²ÁãµÄÎ»ÖÃ£¬³õÊ¼»¯Ê±ºò×¢ÒâSIze = 1
+	int Size;//æŒ‡å‘å°¾é›¶çš„ä½ç½®ï¼Œåˆå§‹åŒ–æ—¶å€™æ³¨æ„SIze = 1
 	int capacity;
 	char* data;
 	void expand();
 	void getNext(const char* str, int* next, int len);
 public:
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	String();
 	String(String& str);
 	String(const char* str);
 	String(const char* str, int size);
 
-	//Îö¹¹º¯Êı
+	//ææ„å‡½æ•°
 	~String();
-	//×Ö·û´®³¤¶È
+	//å­—ç¬¦ä¸²é•¿åº¦
 	int length()const {
 		return Size - 1;
 	}
 	int strLen(const char* str);
 
-	//ÖØÔØ=
+	//é‡è½½=
 	String& operator=(const String& str);
 	String& operator=(const char* str);
 	String& operator=(const char& ch);
 
-	//ÖØÔØ<<
+	//é‡è½½<<
 	friend ostream& operator<<(ostream& out, const String& str) {
 		out << str.data;
 		return out;
 	}
-	//ÖØÔØ>>
+	//é‡è½½>>
 	friend istream& operator>>(istream& in, String& str) {
-		//ÍòÒ»ÊäÈëÌ«¶àÁËÔõÃ´°ì
+		//ä¸‡ä¸€è¾“å…¥å¤ªå¤šäº†æ€ä¹ˆåŠ
 		in >> str.data;
 		str.Size = str.strLen(str.data) + 1;
 		return in;
 	}
-	//ÖØÔØ±È½Ï
+	//é‡è½½æ¯”è¾ƒ
 	friend int strCmp(const String& str1, const String& str2)
 	{
 		int i = 0;
@@ -741,49 +741,49 @@ public:
 	friend bool operator>=(const String& str1, const String& str2) {
 		return strCmp(str1, str2) >= 0;
 	}
-	//ÖØÔØ[]
+	//é‡è½½[]
 	inline char& operator[](const int index) {
 		return data[index];
 	}
 	inline char& operator[](const size_t index) {
 		return data[index];
 	}
-	//ÖØÔØ==
+	//é‡è½½==
 	bool operator==(const String& str);
 	bool operator==(const char* str);
-	//ÖØÔØ+
+	//é‡è½½+
 	String operator+(const String& str);
 	String operator+(const char* str);
-	//ÖØÔØ+=
+	//é‡è½½+=
 	String& operator+=(const String& str);
 	String& operator+=(const char* str);
 	String& operator+=(const char ch);
-	//·µ»Ø×Ö·û´®ÀàĞÍ
+	//è¿”å›å­—ç¬¦ä¸²ç±»å‹
 	char* c_str() {
 		return data;
 	}
 	char* c_str() const {
 		return data;
 	}
-	//Ä£Ê½Æ¥Åä
+	//æ¨¡å¼åŒ¹é…
 	int find(const char* str);
 	int find(String& str);
-	//É¾³ıËùÓĞµÄÄ³¸ö×Ö·û
+	//åˆ é™¤æ‰€æœ‰çš„æŸä¸ªå­—ç¬¦
 	void erase(char ch);
-	//·­×ª
+	//ç¿»è½¬
 	void reverse();
-	//Çå¿Õ
+	//æ¸…ç©º
 	void clear();
-	//É¾µô×îºóÒ»¸ö
+	//åˆ æ‰æœ€åä¸€ä¸ª
 	void pop_back() {
-		//¿ÕµÄ×Ö·û´®
+		//ç©ºçš„å­—ç¬¦ä¸²
 		if (Size == 1)
 			return;
 
 		--Size;
 		data[Size - 1] = '\0';
 	}
-	//×îºóÒ»¸ö×Ö·û
+	//æœ€åä¸€ä¸ªå­—ç¬¦
 	char back() const {
 		if (Size <= 1)
 			return '\0';
@@ -810,7 +810,7 @@ String::String(const char* str)
 	int size = 0;
 	while (str[size] != '\0')
 		++size;
-	++size;//×îºóÒ»¸öÎ²Áã
+	++size;//æœ€åä¸€ä¸ªå°¾é›¶
 
 	Size = size;
 
@@ -865,7 +865,7 @@ String& String::operator=(const char* str)
 	int size = 0;
 	while (str[size] != '\0')
 		++size;
-	++size;//Î²Áã
+	++size;//å°¾é›¶
 
 	Size = size;
 	capacity = (Size / defaultSizeString + 1) * defaultSizeString;
@@ -899,7 +899,7 @@ bool String::operator==(const char* str)
 	int size = 0;
 	while (str[size] != '\0')
 		++size;
-	++size;//Î²Áã
+	++size;//å°¾é›¶
 
 	if (Size != size)
 		return false;
@@ -914,8 +914,8 @@ String String::operator+(const String& str)
 {
 	String temp(str.data, str.Size + Size);
 
-	//°üÀ¨strµÄÎ²Áã
-	//×¢Òâdata[Size]ÊÇÎ²Áã
+	//åŒ…æ‹¬strçš„å°¾é›¶
+	//æ³¨æ„data[Size]æ˜¯å°¾é›¶
 	for (int i = 0; i <= str.Size; ++i)
 		temp.data[Size + i - 1] = str.data[i];
 
@@ -930,8 +930,8 @@ String String::operator+(const char* str)
 	String temp(str, Size + size);
 
 
-	//°üÀ¨strµÄÎ²Áã
-	//×¢Òâdata[Size]ÊÇÎ²Áã
+	//åŒ…æ‹¬strçš„å°¾é›¶
+	//æ³¨æ„data[Size]æ˜¯å°¾é›¶
 	for (int i = 0; i <= size; ++i)
 		temp.data[Size + i - 1] = str[i];
 
@@ -948,8 +948,8 @@ String& String::operator+=(const String& str)
 		delete[] data;
 		data = newData;
 	}
-	//°üÀ¨strµÄÎ²Áã
-	//×¢Òâdata[Size - 1]ÊÇÎ²Áã
+	//åŒ…æ‹¬strçš„å°¾é›¶
+	//æ³¨æ„data[Size - 1]æ˜¯å°¾é›¶
 	for (int i = 0; i < str.Size; ++i)
 		data[Size + i - 1] = str.data[i];
 
@@ -972,8 +972,8 @@ String& String::operator+=(const char* str)
 		delete[] data;
 		data = newData;
 	}
-	//°üÀ¨strµÄÎ²Áã
-	//×¢Òâdata[Size - 1]ÊÇÎ²Áã
+	//åŒ…æ‹¬strçš„å°¾é›¶
+	//æ³¨æ„data[Size - 1]æ˜¯å°¾é›¶
 	for (int i = 0; i < size; ++i)
 		data[Size + i - 1] = str[i];
 
@@ -991,8 +991,8 @@ String& String::operator+=(const char ch)
 		delete[] data;
 		data = newData;
 	}
-	//°üÀ¨strµÄÎ²Áã
-	//×¢Òâdata[Size - 1]ÊÇÎ²Áã
+	//åŒ…æ‹¬strçš„å°¾é›¶
+	//æ³¨æ„data[Size - 1]æ˜¯å°¾é›¶
 	data[Size - 1] = ch;
 	data[Size] = '\0';
 	++Size;
@@ -1003,14 +1003,14 @@ void String::getNext(const char* str, int* next, int len)
 {
 	next[0] = -1;
 	next[1] = 0;
-	int i = 2;//´Ó2¿ªÊ¼
-	int cn = 0;//cn±íÊ¾next[i - 1]µÄĞÅÏ¢
+	int i = 2;//ä»2å¼€å§‹
+	int cn = 0;//cnè¡¨ç¤ºnext[i - 1]çš„ä¿¡æ¯
 
 	while (i < len)
 	{
-		if (str[i - 1] == str[cn])//¿ÉÒÔ¼ÌĞøÏàµÈ
+		if (str[i - 1] == str[cn])//å¯ä»¥ç»§ç»­ç›¸ç­‰
 			next[i++] = ++cn;
-		else if (cn > 0)//²»¿ÉÒÔ¼ÌĞøÏàµÈ
+		else if (cn > 0)//ä¸å¯ä»¥ç»§ç»­ç›¸ç­‰
 			cn = next[cn];
 		else
 			next[i++] = 0;
@@ -1068,7 +1068,7 @@ void String::erase(char ch)
 	int i = 0, k = 0;
 	while (i < Size)
 	{
-		if (ch != data[i])//data[i]²»µÈÓÚÁË²Å¸³Öµ²¢ÇÒĞÂÊı×éµÄÖ¸Õëk++
+		if (ch != data[i])//data[i]ä¸ç­‰äºäº†æ‰èµ‹å€¼å¹¶ä¸”æ–°æ•°ç»„çš„æŒ‡é’ˆk++
 			data[k++] = data[i];
 		++i;
 	}
@@ -1087,9 +1087,9 @@ void String::reverse()
 }
 void String::clear()
 {
-	//É¾µôÔ­À´µÄ
+	//åˆ æ‰åŸæ¥çš„
 	delete[] data;
-	//ÖØĞÂÉèÖÃ
+	//é‡æ–°è®¾ç½®
 	Size = 1;
 	capacity = defaultSizeString;
 	data = new char[capacity];
@@ -1097,4 +1097,4 @@ void String::clear()
 }
 
 
-#endif // !_SORT_H
+#endif // !_SORT_H 
