@@ -1199,11 +1199,6 @@ public:
 	//构造函数
 	Priority_queue() :data(), cmp() {}
 	Priority_queue(const Compare& cmp) :data(), cmp(cmp) {}
-	//迭代器
-	template<class Iter, class T>
-	Priority_queue(Iter beg, Iter end, Compare cmp = Less<T>()) : data(beg, end) {
-		//makeHeap(beg, end, cmp);
-	}
 	//析构函数
 	~Priority_queue() {}
 	//判断是否为空
