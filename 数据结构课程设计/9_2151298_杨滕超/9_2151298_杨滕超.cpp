@@ -1,19 +1,19 @@
-#include "9_2151298_������.h"
+#include "9_2151298_杨滕超.h"
 
 /***************************************************************************
-  �������ƣ�~criticalActivity
-  ��    �ܣ��ؼ����������������ͷ������ڽӱ����Ŀռ�
-  ���������
-  �� �� ֵ��
-  ˵    ����
+  函数名称：~criticalActivity
+  功    能：关键活动类的析构函数，释放申请邻接表结点的空间
+  输入参数：
+  返 回 值：
+  说    明：
 ***************************************************************************/
 criticalActivity::~criticalActivity()
 {
 	edge* cur, * temp;
-	//�ͷ�����Ŀռ�
+	//释放申请的空间
 	for (int i = 0; i < N; ++i)
 	{
-		if (graph1[i])//����нڵ�
+		if (graph1[i])//如果有节点
 		{
 			cur = graph1[i];
 			while (cur)
@@ -26,7 +26,7 @@ criticalActivity::~criticalActivity()
 	}
 	for (int i = 0; i < N; ++i)
 	{
-		if (graph2[i])//����нڵ�
+		if (graph2[i])//如果有节点
 		{
 			cur = graph2[i];
 			while (cur)
@@ -40,28 +40,28 @@ criticalActivity::~criticalActivity()
 }
 
 /***************************************************************************
-  �������ƣ�checkValid
-  ��    �ܣ����ͼ�Ƿ���ͨ
-  ���������
-  �� �� ֵ��
-  ˵    ���������ڳ��Ⱥ���Ⱦ�Ϊ��ĵ㣬���ǹ����㣬����ͨ
+  函数名称：checkValid
+  功    能：检查图是否连通
+  输入参数：
+  返 回 值：
+  说    明：若存在出度和入度均为零的点，则是孤立点，不连通
 ***************************************************************************/
 bool criticalActivity::checkValid()
 {
-	//���񽻽ӵ�û������
+	//任务交接点没有连接
 	for (int i = 0; i < N; ++i)
-		if (in[i] == 0 && out[i] == 0)//����Ϊ��û�л����
+		if (in[i] == 0 && out[i] == 0)//度数为零没有活动连接
 			return false;
 
 	return true;
 }
 
 /***************************************************************************
-  �������ƣ�init
-  ��    �ܣ���ʼ���ڽӱ�����ͳ����������
-  ���������
-  �� �� ֵ��
-  ˵    ����
+  函数名称：init
+  功    能：初始化邻接表数组和出度入度数组
+  输入参数：
+  返 回 值：
+  说    明：
 ***************************************************************************/
 void criticalActivity::init()
 {
@@ -72,29 +72,29 @@ void criticalActivity::init()
 }
 
 /***************************************************************************
-  �������ƣ�AOE
-  ��    �ܣ���ؼ�·��
-  ���������
-  �� �� ֵ��
-  ˵    ����ͨ�����������������ÿ������翪ʼ��ʱ������������ʼʱ��
-			���п���ͨ����һ�������������Ƿ���ڻ�����������������ʾ
+  函数名称：AOE
+  功    能：求关键路径
+  输入参数：
+  返 回 值：
+  说    明：通过两次拓扑排序求得每个活动最早开始的时间和最迟允许开始时间
+			其中可以通过第一次拓扑排序检查是否存在环，存在则输出相关提示
 ***************************************************************************/
 void criticalActivity::AOE()
 {
 	Queue<int> q;
-	//�����������翪ʼ��������ʼʱ��
+	//各个顶点最早开始和最晚开始时间
 	Vector<int> Ve(N, 0), Vl(N, INT_MAX);
-	//��¼�Ѿ��ܱ����ģ����ж���û�л�
+	//记录已经能遍历的，来判断有没有环
 	Vector<bool> visited(N, false);
-	//���Ϊ����ӣ����翪ʼʱ���¼Ϊ��
+	//入度为零入队，最早开始时间记录为零
 	for (int i = 0; i < N; ++i)
 		if (in[i] == 0)
 			q.emplace(i);
 
 
-	if (q.empty())//����û��һ��������Ϊ�㣬����������
+	if (q.empty())//甚至没有一个顶点有为零，方案不可行
 	{
-		cout << "�˷���������" << endl;
+		cout << "此方案不可行" << endl;
 		cout << '0' << endl;
 		return;
 	}
@@ -105,25 +105,25 @@ void criticalActivity::AOE()
 	{
 		temp = q.front();
 		q.pop();
-		visited[temp] = true;//��Ǳ�������
+		visited[temp] = true;//标记遍历过了
 
 		tempEdge = graph1[temp];
-		while (tempEdge)//�����ܴ�tempָ��Ķ���
+		while (tempEdge)//遍历能从temp指向的顶点
 		{
-			//graph[temp]��¼����tempΪ���ı�
+			//graph[temp]记录了以temp为起点的边
 			int to = tempEdge->to;
 			int val = tempEdge->val;
-			//�������ֵ
+			//更新最大值
 			if (Ve[temp] + val > Ve[to])
 				Ve[to] = Ve[temp] + val;
-			//���Ϊ������
+			//入度为零就入队
 			if (--in[to] == 0)
 				q.emplace(to);
-			//�ƶ�����һ��ָ��Ķ���
+			//移动到下一个指向的顶点
 			tempEdge = tempEdge->next;
 		}
 	}
-	//����ѭ������Ϊ��
+	//跳出循环队列为空
 	for (int i = 0; i < N; ++i)
 	{
 		if (out[i] == 0)
@@ -131,14 +131,14 @@ void criticalActivity::AOE()
 			q.emplace(i);
 			Vl[i] = Ve[i];
 		}
-		if (visited[i] == false)//֮ǰ��Ȼû�б�����˵�����ڻ�
+		if (visited[i] == false)//之前居然没有遍历，说明存在环
 		{
-			cout << "�˷���������" << endl;
+			cout << "此方案不可行" << endl;
 			cout << '0' << endl;
 			return;
 		}
 	}
-	//��ʼ������������
+	//开始逆向拓扑排序
 	while (!q.empty())
 	{
 		temp = q.front();
@@ -147,22 +147,22 @@ void criticalActivity::AOE()
 		tempEdge = graph2[temp];
 		while (tempEdge)
 		{
-			//graph[temp]��¼����tempΪ���ı�
+			//graph[temp]记录了以temp为起点的边
 			int to = tempEdge->to;
 			int val = tempEdge->val;
-			//������С
+			//更新最小
 			if (Vl[temp] - val < Vl[to])
 				Vl[to] = Vl[temp] - val;
-			//����Ϊ������
+			//出度为零就入队
 			if (--out[to] == 0)
 				q.emplace(to);
 			tempEdge = tempEdge->next;
 		}
 	}
-	cout << "\n�����Ŀ����ʱ��: ";
+	cout << "\n完成项目最少时间: ";
 	cout << Ve[N - 1] << endl;
-	cout << "�ؼ��Ϊ: \n";
-	//����ͼ�еıߣ�����Ҫ��ͼ�¼����
+	cout << "关键活动为: \n";
+	//遍历图中的边，符合要求就记录下来
 	for (int i = 0; i < N; ++i)
 	{
 		if (graph1[i])
@@ -171,7 +171,7 @@ void criticalActivity::AOE()
 			while (cur)
 			{
 				int to = cur->to;
-				//���翪ʼ��������ʼ��ʱ����ͬ��Ϊ�ؼ��
+				//最早开始和最晚开始的时间相同即为关键活动
 				if (Ve[i] == Vl[i] && Ve[to] == Vl[to])
 					cout << i + 1 << "->" << to + 1 << endl;
 				cur = cur->next;
@@ -182,11 +182,11 @@ void criticalActivity::AOE()
 }
 
 /***************************************************************************
-  �������ƣ�getNM
-  ��    �ܣ��ؼ�·�����ö������ͱ����Ķ���ӿ�
-  ���������
-  �� �� ֵ��
-  ˵    ����
+  函数名称：getNM
+  功    能：关键路径类获得顶点数和边数的对外接口
+  输入参数：
+  返 回 值：
+  说    明：
 ***************************************************************************/
 void criticalActivity::getNM(const int& N, const int& M)
 {
@@ -195,34 +195,34 @@ void criticalActivity::getNM(const int& N, const int& M)
 }
 
 /***************************************************************************
-  �������ƣ�setEdge
-  ��    �ܣ���ͼ�����������
-  ���������
-  �� �� ֵ��
-  ˵    ������Ҫ�ж��Ƿ��ظ������ظ���ȡȨֵ��С�ı�
+  函数名称：setEdge
+  功    能：向图中添加有向边
+  输入参数：
+  返 回 值：
+  说    明：需要判断是否重复，若重复则取权值较小的边
 ***************************************************************************/
 void criticalActivity::setEdge(int from, int to, int val)
 {
 	/*
-	* Ҫ�ж��Ƿ����ظ��ı�
-	* �ظ��˱ߵ�Ȩֵȡ��Сֵ
-	* ���ظ���ֱ�Ӳ���ͷͷ
+	* 要判断是否是重复的边
+	* 重复了边的权值取最小值
+	* 不重复就直接插入头头
 	*/
 	edge* cur1 = graph1[from], * cur2 = graph2[to];
-	while (cur1)//����ж���
+	while (cur1)//如果有东西
 	{
-		if (cur1->to == to)//��������ͬ�ı߾�����
+		if (cur1->to == to)//发现是相同的边就跳出
 			break;
-		cur1 = cur1->next;//û������ͬ�ı߾ͼ���������
+		cur1 = cur1->next;//没发现相同的边就继续往后找
 	}
-	if (cur1)//�ҵ���ͬ�ıߣ��Ƚ�Ȩֵ��С
+	if (cur1)//找到相同的边，比较权值大小
 	{
-		if (cur1->val > val)//���¸�С
+		if (cur1->val > val)//更新更小
 		{
-			//��ʱ��Ҫ���£���ȥ���·�ͼ
+			//此时需要更新，再去更新反图
 			cur1->val = val;
 
-			//����ͼ����������ʱһ������
+			//反向图的搜索，此时一定存在
 			while (cur2)
 			{
 				if (cur2->to == from)
@@ -231,41 +231,41 @@ void criticalActivity::setEdge(int from, int to, int val)
 			}
 			if (cur2)
 				cur2->val = val;
-			//�����귴ͼֱ���˳�
+			//更新完反图直接退出
 			return;
 		}
-		//���ø���Ҳֱ���˳�
+		//不用更新也直接退出
 		return;
 	}
 
-	//û�ҵ���ͬ�ıߣ����뵽��һ��
+	//没找到相同的边，插入到第一个
 	edge* newNode = new edge(to, val);
-	//����
+	//插入
 	newNode->next = graph1[from];
 	graph1[from] = newNode;
 
 
-	//û�ҵ���ͬ�ıߣ����뵽��һ��
+	//没找到相同的边，插入到第一个
 	newNode = new edge(from, val);
-	//����
+	//插入
 	newNode->next = graph2[to];
 	graph2[to] = newNode;
 
-	//�����ӱߣ�û���ظ��ߣ��Ÿ��³��Ⱥ����
-	++out[from];//��¼����
-	++in[to];//��¼���
+	//新添加边，没有重复边，才更新出度和入度
+	++out[from];//记录出度
+	++in[to];//记录入度
 }
 
 /***************************************************************************
-  �������ƣ�to_be_continue
-  ��    �ܣ��ȴ��û�������������ٹر�cmd����
-  ���������
-  �� �� ֵ��
-  ˵    ����
+  函数名称：to_be_continue
+  功    能：等待用户输入任意键，再关闭cmd窗口
+  输入参数：
+  返 回 值：
+  说    明：
 ***************************************************************************/
 void to_be_continue()
 {
-	cout << endl << "�س�����������" << endl;
+	cout << endl << "回车键继续操作" << endl;
 	cin.clear();
 	cin.ignore(65536, '\n');
 	cin.get();
@@ -276,43 +276,43 @@ int main() {
 	criticalActivity ca;
 	int tempN, tempM;
 
-	cout << "���������񽻽ӵ����N(N <= 100), �������M: ";
+	cout << "请输入任务交接点个数N(N <= 100), 任务个数M: ";
 	while (1)
 	{
 		cin >> tempN >> tempM;
 		if (cin.fail() || tempN <= 0 || tempM <= 0)
 		{
-			cout << "��������������������" << endl;
+			cout << "输入有误，请输入正整数" << endl;
 			cin.clear();
 			cin.ignore(65536, '\n');
 		}
 		else if (tempN > 100)
 		{
-			cout << "���񽻽ӵ�������࣬ע��N<=100" << endl;
+			cout << "任务交接点个数过多，注意N<=100" << endl;
 			cin.clear();
 			cin.ignore(65536, '\n');
 		}
 		else if (tempN == 1)
 		{
-			cout << "����һ�����񽻽ӵ��޷����ڻ" << endl;
+			cout << "仅有一个任务交接点无法存在活动" << endl;
 			cin.clear();
 			cin.ignore(65536, '\n');
 		}
 		else if (tempM < tempN)
 		{
-			cout << "������٣��޷���ͨ" << endl;
+			cout << "活动数过少，无法连通" << endl;
 			cin.clear();
 			cin.ignore(65536, '\n');
 		}
 		else
 		{
-			ca.getNM(tempN, tempM);//������������߸�����������
+			ca.getNM(tempN, tempM);//将顶点个数，边个数传给对象
 			break;
 		}
 	}
-	//��ͼ��ʼ��
+	//存图初始化
 	ca.init();
-	cout << "�������������񽻽ӵ��Լ���������ʱ��: " << endl;
+	cout << "请依次输入任务交接点以及任务所需时间: " << endl;
 	for (int i = 0; i < tempM;)
 	{
 		int from, to, val;
@@ -321,33 +321,33 @@ int main() {
 		{
 			cin.clear();
 			cin.ignore(65536, '\n');
-			cout << "��������������������" << endl;
+			cout << "输入有误，请输入正整数" << endl;
 		}
 		else if (from > tempN || to > tempN)
 		{
 			cin.clear();
 			cin.ignore(65536, '\n');
-			cout << "�޴����񽻽ӵ㣬����������" << endl;
+			cout << "无此任务交接点，请重新输入" << endl;
 		}
 		else if (from == to)
 		{
 			cin.clear();
 			cin.ignore(65536, '\n');
-			cout << "���������������񽻽ӵ㲻Ӧ��ͬ" << endl;
+			cout << "输入有误，两个任务交接点不应相同" << endl;
 		}
 		else
 		{
 			ca.setEdge(from - 1, to - 1, val);
-			++i;//��ȷ�������һ��
+			++i;//正确输入才下一个
 		}
 	}
-	//����Ƿ�Ϸ�
+	//检查是否合法
 	if (ca.checkValid())
 		ca.AOE();
 	else
 	{
-		cout << "�˷���������" << endl;
+		cout << "此方案不可行" << endl;
 		cout << '0' << endl;
 	}
 	to_be_continue();
-}
+} 
