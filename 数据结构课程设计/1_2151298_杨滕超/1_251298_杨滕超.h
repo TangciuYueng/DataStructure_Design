@@ -8,7 +8,7 @@
 using namespace std;
 
 
-//Á´±í½Úµã
+//é“¾è¡¨èŠ‚ç‚¹
 template<class T>
 struct list_node {
 	T val;
@@ -17,7 +17,7 @@ struct list_node {
 		prev = NULL;
 		next = NULL;
 	}
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	list_node(const T& val, list_node* prev = NULL, list_node* next = NULL) :
 		val(val), prev(prev), next(next) {}
 };
@@ -30,7 +30,7 @@ class Stack;
 template<class T>
 class Queue;
 
-//Ë«ÏòÁ´±íÊµÏÖ
+//åŒå‘é“¾è¡¨å®ç°
 template<class T>
 class List {
 	typedef list_node<T>* _iterator;
@@ -39,125 +39,125 @@ class List {
 	//	template<class T>
 	friend class Queue<T>;
 private:
-	//Í·½áµã Î²½áµã
+	//å¤´ç»“ç‚¹ å°¾ç»“ç‚¹
 	list_node<T>* head, * tail;
 
-	//½áµã¸öÊı
+	//ç»“ç‚¹ä¸ªæ•°
 	int Size;
 
-	//¹é²¢µİ¹éº¯Êı
+	//å½’å¹¶é€’å½’å‡½æ•°
 	list_node<T>* _mergeSort(list_node<T>* head);
 
-	//´Ófrom¿ªÊ¼ÇĞ¶Ïstep½áµã£¬²¢·µ»Ø×îºóÒ»¸ö
+	//ä»fromå¼€å§‹åˆ‡æ–­stepç»“ç‚¹ï¼Œå¹¶è¿”å›æœ€åä¸€ä¸ª
 	list_node<T>* cut(list_node<T>* from, int step);
 
-	//¹é²¢ÅÅĞòµÄºÏ²¢
+	//å½’å¹¶æ’åºçš„åˆå¹¶
 	list_node<T>* merge(list_node<T>* l1, list_node<T>* l2);
 
 public:
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	List();
 
-	//Îö¹¹º¯Êı
+	//ææ„å‡½æ•°
 	~List();
 
-	//·µ»ØÁ´±í´óĞ¡
+	//è¿”å›é“¾è¡¨å¤§å°
 	inline int size() const {
 		return Size;
 	}
 
-	//ÅĞ¶ÏÁ´±íÊÇ·ñÎª¿Õ
+	//åˆ¤æ–­é“¾è¡¨æ˜¯å¦ä¸ºç©º
 	inline bool empty() const {
 		return head == tail;
 	}
 
-	//µÃµ½Í·½áµã
+	//å¾—åˆ°å¤´ç»“ç‚¹
 	inline list_node<T>* getHead() const {
 		return head;
 	}
 
-	//µÃµ½Î²½Úµã
+	//å¾—åˆ°å°¾èŠ‚ç‚¹
 	inline list_node<T>* getTail() const {
 		return tail;
 	}
 
-	//Çå¿ÕÁ´±í
+	//æ¸…ç©ºé“¾è¡¨
 	void clear();
 
-	//×îºóÌí¼ÓÔªËØ
+	//æœ€åæ·»åŠ å…ƒç´ 
 	void emplace_back(const T& x);
 
-	//×îºóÉ¾³ıÔªËØ
+	//æœ€ååˆ é™¤å…ƒç´ 
 	void pop_back();
 
-	//¿ªÍ·Ìí¼ÓÔªËØ
+	//å¼€å¤´æ·»åŠ å…ƒç´ 
 	void emplace_front(const T& x);
 
-	//¿ªÍ·É¾³ıÔªËØ
+	//å¼€å¤´åˆ é™¤å…ƒç´ 
 	void pop_front();
 
-	//ÖØÔØ=
+	//é‡è½½=
 	List<T>& operator=(const List<T>& L);
 
-	//Á´±íµü´úÆ÷
+	//é“¾è¡¨è¿­ä»£å™¨
 	class list_iterator {
 		friend class List<T>;
 	private:
-		//Ö¸Ïò½ÚµãµÄÖ¸Õë
+		//æŒ‡å‘èŠ‚ç‚¹çš„æŒ‡é’ˆ
 		_iterator data;
 	public:
-		//¹¹Ôìº¯Êı
+		//æ„é€ å‡½æ•°
 		list_iterator(_iterator data) {
 			this->data = data;
 		}
 		list_iterator(const T& x) {
 			data = new list_node<T>(x);
 		}
-		//ÖØÔØ*
+		//é‡è½½*
 		T& operator*() {
 			return data->val;
 		}
-		//ÖØÔØ->
+		//é‡è½½->
 		T* operator->() {
 			return &(data->val);
 		}
-		//ÖØÔØ==
+		//é‡è½½==
 		inline bool operator==(const list_iterator& it) const {
 			return this->data == it.data;
 		}
-		//ÖØÔØ!=
+		//é‡è½½!=
 		inline bool operator!=(const list_iterator& it) const {
 			return this->data != it.data;
 		}
-		//ÖØÔØ×Ô¼Ó
+		//é‡è½½è‡ªåŠ 
 		inline List<T>::list_iterator& operator++()
 		{
 			if (data != NULL)
 				data = data->next;
 			return *this;
 		}
-		//ÖØÔØ×Ô¼õ
+		//é‡è½½è‡ªå‡
 		inline List<T>::list_iterator& operator--()
 		{
 			if (data != NULL)
 				data = data->prev;
 			return *this;
 		}
-		//ºóÖÃ×Ô¼Ó
+		//åç½®è‡ªåŠ 
 		List<T>::list_iterator operator++(int)
 		{
 			List<T>::list_iterator temp = *this;
 			++(*this);
 			return temp;
 		}
-		//ºóÖÃ×Ô¼õ
+		//åç½®è‡ªå‡
 		List<T>::list_iterator operator--(int)
 		{
 			List<T>::list_iterator temp = *this;
 			--(*this);
 			return temp;
 		}
-		//ÓëÊı×ÖÏà¼Ó
+		//ä¸æ•°å­—ç›¸åŠ 
 		List<T>::list_iterator operator+(int num)
 		{
 			List<T>::list_iterator temp = *this;
@@ -165,7 +165,7 @@ public:
 				++temp;
 			return temp;
 		}
-		//ÓëÊı×ÖÏà¼õ
+		//ä¸æ•°å­—ç›¸å‡
 		List<T>::list_iterator operator-(int num)
 		{
 			List<T>::list_iterator temp = *this;
@@ -173,21 +173,21 @@ public:
 				--temp;
 			return temp;
 		}
-		//×Ô¼Ó
+		//è‡ªåŠ 
 		List<T>::list_iterator operator+=(int num)
 		{
 			for (int i = 0; i < num; ++i)
 				++(*this);
 			return *this;
 		}
-		//×Ô¼õ
+		//è‡ªå‡
 		List<T>::list_iterator operator-=(int num)
 		{
 			for (int i = 0; i < num; ++i)
 				--(*this);
 			return *this;
 		}
-		//Á½¸öÏà¼õ
+		//ä¸¤ä¸ªç›¸å‡
 		int operator-(const list_iterator& it)
 		{
 			int ans = 0;
@@ -201,47 +201,47 @@ public:
 		}
 	};
 
-	//¸´ÖÆ¹¹Ôìº¯Êı
+	//å¤åˆ¶æ„é€ å‡½æ•°
 	List(const List<T>& L);
 
-	//²åÈë
+	//æ’å…¥
 	void insert(const List<T>::list_iterator& it, const T& x);
 
-	//É¾³ı
+	//åˆ é™¤
 	void remove(const List<T>::list_iterator& it);
 
-	//µü´úÆ÷begin
+	//è¿­ä»£å™¨begin
 	inline List<T>::list_iterator begin() {
 		return List<T>::list_iterator(head->next);
 	}
 
-	//µü´úÆ÷end
+	//è¿­ä»£å™¨end
 	inline List<T>::list_iterator end() {
 		return List<T>::list_iterator(tail->next);
 	}
 
-	//·µ»Øµü´úÆ÷µÄ²éÕÒ
+	//è¿”å›è¿­ä»£å™¨çš„æŸ¥æ‰¾
 	typename List<T>::list_iterator find(const T& x);
 
-	//µİ¹éÅÅĞò
+	//é€’å½’æ’åº
 	void mergeSort1() {
-		if (head->next == NULL)//Ã»ÓĞÔªËØ
+		if (head->next == NULL)//æ²¡æœ‰å…ƒç´ 
 			return;
-		//ÅÅĞòÃ»ÓĞÍ·µÄ½øÈëÅÅĞòº¯Êı
+		//æ’åºæ²¡æœ‰å¤´çš„è¿›å…¥æ’åºå‡½æ•°
 		head->next = _mergeSort(head->next);
 		list_node<T>* cur = head->next;
-		//ÕÒ×îºóÒ»¸ö½áµã
+		//æ‰¾æœ€åä¸€ä¸ªç»“ç‚¹
 		while (cur->next)
 			cur = cur->next;
-		//³öÀ´ÊÇ×îºóÒ»¸ö½áµã
+		//å‡ºæ¥æ˜¯æœ€åä¸€ä¸ªç»“ç‚¹
 		tail = cur;
 	}
 
-	//µü´úÅÅĞò
+	//è¿­ä»£æ’åº
 	void mergeSort2();
 };
 
-//¹¹Ôìº¯Êı
+//æ„é€ å‡½æ•°
 template<class T>
 List<T>::List()
 {
@@ -250,7 +250,7 @@ List<T>::List()
 	Size = 0;
 }
 
-//¸³Öµ¹¹Ôìº¯Êı
+//èµ‹å€¼æ„é€ å‡½æ•°
 template<class T>
 List<T>::List(const List<T>& L)
 {
@@ -265,14 +265,14 @@ List<T>::List(const List<T>& L)
 	}
 }
 
-//Îö¹¹º¯Êı
+//ææ„å‡½æ•°
 template<class T>
 List<T>::~List() {
 	clear();
 	delete head;
 }
 
-//Çå¿ÕÁ´±í
+//æ¸…ç©ºé“¾è¡¨
 template<class T>
 void List<T>::clear()
 {
@@ -287,40 +287,40 @@ void List<T>::clear()
 	tail = head;
 }
 
-//×îºóÌí¼ÓÔªËØ
+//æœ€åæ·»åŠ å…ƒç´ 
 template<class T>
 void List<T>::emplace_back(const T& x)
 {
-	//ÉêÇëĞÂµÄ¿Õ¼ä
+	//ç”³è¯·æ–°çš„ç©ºé—´
 	list_node<T>* node = new list_node<T>(x);
-	++Size;//ÔªËØ¸öÊı¸üĞÂ
-	//Á¬½Ó×îºóÒ»¸ö
+	++Size;//å…ƒç´ ä¸ªæ•°æ›´æ–°
+	//è¿æ¥æœ€åä¸€ä¸ª
 	tail->next = node;
 	node->prev = tail;
-	//Î²½áµã¸üĞÂ
+	//å°¾ç»“ç‚¹æ›´æ–°
 	tail = node;
 }
 
-//×îºóÉ¾³ıÔªËØ
+//æœ€ååˆ é™¤å…ƒç´ 
 template<class T>
 void List<T>::pop_back()
 {
-	if (empty())//¿ÕÁË¾Í²»ÄÜÉ¾³ı
+	if (empty())//ç©ºäº†å°±ä¸èƒ½åˆ é™¤
 		return;
-	--Size;//ÔªËØ¸öÊı¼õÉÙ
+	--Size;//å…ƒç´ ä¸ªæ•°å‡å°‘
 	list_node<T>* temp = tail->prev;
 	delete tail;
 	tail = temp;
-	tail->next = NULL;//Î²½áµãµÄÊÕÎ²
+	tail->next = NULL;//å°¾ç»“ç‚¹çš„æ”¶å°¾
 }
 
-//¿ªÍ·Ìí¼ÓÔªËØ
+//å¼€å¤´æ·»åŠ å…ƒç´ 
 template<class T>
 void List<T>::emplace_front(const T& x)
 {
 	list_node<T>* node = new list_node<T>(x);
-	++Size;//ÔªËØ¸öÊıÔö¼Ó
-	if (empty())//Á´±íÎª¿Õ×¢Òâ¸üĞÂÎ²½áµã
+	++Size;//å…ƒç´ ä¸ªæ•°å¢åŠ 
+	if (empty())//é“¾è¡¨ä¸ºç©ºæ³¨æ„æ›´æ–°å°¾ç»“ç‚¹
 	{
 		head->next = node;
 		node->prev = head;
@@ -337,31 +337,31 @@ void List<T>::emplace_front(const T& x)
 	}
 }
 
-//É¾³ı¿ªÍ·ÔªËØ
+//åˆ é™¤å¼€å¤´å…ƒç´ 
 template<class T>
 void List<T>::pop_front()
 {
-	if (empty())//¿ÕÁË¾Í²»ÄÜÉ¾³ı
+	if (empty())//ç©ºäº†å°±ä¸èƒ½åˆ é™¤
 		return;
-	--Size;//ÔªËØ¸öÊı¼õÉÙ
-	//ÒªÉ¾³ıµÄ½ÚµãµÄÏÂÒ»¸ö
+	--Size;//å…ƒç´ ä¸ªæ•°å‡å°‘
+	//è¦åˆ é™¤çš„èŠ‚ç‚¹çš„ä¸‹ä¸€ä¸ª
 	list_node<T>* temp = head->next->next;
 	list_node<T>* del = head->next;
 	delete del;
 	head->next = temp;
-	if (temp)//Èç¹ûÏÂÒ»¸ö²»Îª¿Õ
+	if (temp)//å¦‚æœä¸‹ä¸€ä¸ªä¸ä¸ºç©º
 		temp->prev = head;
-	else//ÏÂÒ»¸öÎª¿Õ£¬¸üĞÂÎ²½áµãÖ¸ÏòÍ·½áµã
+	else//ä¸‹ä¸€ä¸ªä¸ºç©ºï¼Œæ›´æ–°å°¾ç»“ç‚¹æŒ‡å‘å¤´ç»“ç‚¹
 		tail = head;
 }
 
-//ÀûÓÃµü´úÆ÷²åÈë
+//åˆ©ç”¨è¿­ä»£å™¨æ’å…¥
 template<class T>
 void List<T>::insert(const List<T>::list_iterator& it, const T& x)
 {
 	if (it.data == NULL)
 		return;
-	//ÓĞµü´úÆ÷Ìá¹©¿É²åÈëÎ»ÖÃ£¬²»¿ÉÄÜ¸Ä±äÎ²½áµã
+	//æœ‰è¿­ä»£å™¨æä¾›å¯æ’å…¥ä½ç½®ï¼Œä¸å¯èƒ½æ”¹å˜å°¾ç»“ç‚¹
 	list_node<T>* temp = it.data;
 
 	temp->prev->next = new list_node<T>(x, temp->prev, temp);
@@ -370,15 +370,15 @@ void List<T>::insert(const List<T>::list_iterator& it, const T& x)
 	++Size;
 }
 
-//ÀûÓÃµü´úÆ÷É¾³ı
+//åˆ©ç”¨è¿­ä»£å™¨åˆ é™¤
 template<class T>
 void List<T>::remove(const List<T>::list_iterator& it)
 {
-	if (it.data == NULL)//µü´úÆ÷Îª¿Õ
+	if (it.data == NULL)//è¿­ä»£å™¨ä¸ºç©º
 		return;
 
 	list_node<T>* temp = it.data;
-	//Î²½áµãµÄÌØÅĞ
+	//å°¾ç»“ç‚¹çš„ç‰¹åˆ¤
 	if (temp == tail)
 	{
 		tail = temp->prev;
@@ -390,14 +390,14 @@ void List<T>::remove(const List<T>::list_iterator& it)
 		temp->prev->next = temp->next;
 	}
 	delete temp;
-	--Size;//ÔªËØ¸öÊı¼õÉÙ
+	--Size;//å…ƒç´ ä¸ªæ•°å‡å°‘
 }
 
-//ÖØÔØ¸³Öµ
+//é‡è½½èµ‹å€¼
 template<class T>
 List<T>& List<T>::operator=(const List<T>& L)
 {
-	clear();//ÏÈÇå¿ÕÔ­À´½áµã
+	clear();//å…ˆæ¸…ç©ºåŸæ¥ç»“ç‚¹
 	list_node<T>* cur = L.getHead()->next;
 	while (cur)
 	{
@@ -408,7 +408,7 @@ List<T>& List<T>::operator=(const List<T>& L)
 	return *this;
 }
 
-//²éÑ¯ÊÇ·ñÓĞÖµ
+//æŸ¥è¯¢æ˜¯å¦æœ‰å€¼
 template<class T>
 typename List<T>::list_iterator List<T>::find(const T& x)
 {
@@ -418,16 +418,16 @@ typename List<T>::list_iterator List<T>::find(const T& x)
 	return NULL;
 }
 
-//µİ¹é¹é²¢ÅÅĞò
+//é€’å½’å½’å¹¶æ’åº
 template<class T>
 list_node<T>* List<T>::_mergeSort(list_node<T>* head)
 {
-	//Ã»ÓĞ½áµã»òÖ»ÓĞ¿Õ½áµã£¬Ö±½Ó·µ»Ø
+	//æ²¡æœ‰ç»“ç‚¹æˆ–åªæœ‰ç©ºç»“ç‚¹ï¼Œç›´æ¥è¿”å›
 	if (head == NULL || head->next == NULL)
 		return head;
 
 	list_node<T>* slow = head, * fast = head, * prev = NULL;
-	//¿ìÂıÖ¸ÕëÕÒÖĞ¼ä
+	//å¿«æ…¢æŒ‡é’ˆæ‰¾ä¸­é—´
 	while (fast && fast->next)
 	{
 		prev = slow;
@@ -435,13 +435,13 @@ list_node<T>* List<T>::_mergeSort(list_node<T>* head)
 		fast = fast->next->next;
 	}
 
-	//¶Ï¿ªÖĞ¼ä£¬·Ö³ÉÁ½¶Ë
+	//æ–­å¼€ä¸­é—´ï¼Œåˆ†æˆä¸¤ç«¯
 	prev->next = NULL;
 
 	list_node<T>* p1, * p2, * D = new list_node<T>(0), * p3 = D;
 	p1 = _mergeSort(head);
 	p2 = _mergeSort(slow);
-	//ºÏ²¢
+	//åˆå¹¶
 	while (p1 && p2)
 	{
 		if (p1->val < p2->val)
@@ -461,7 +461,7 @@ list_node<T>* List<T>::_mergeSort(list_node<T>* head)
 			p3 = p3->next;
 		}
 	}
-	//Ê£ÏÂµÄÒ»ÌõÁ´
+	//å‰©ä¸‹çš„ä¸€æ¡é“¾
 	while (p1)
 	{
 		p3->next = p1;
@@ -478,25 +478,25 @@ list_node<T>* List<T>::_mergeSort(list_node<T>* head)
 		p2 = p2->next;
 		p3 = p3->next;
 	}
-	p3->next = NULL;//ÊÕÎ²¹¤×÷
+	p3->next = NULL;//æ”¶å°¾å·¥ä½œ
 
 	list_node<T>* ans = D->next;
-	//ÊÍ·Å¿Õ¼ä
+	//é‡Šæ”¾ç©ºé—´
 	delete D;
 	return ans;
 }
 
-//µü´ú¹é²¢ÅÅĞò
+//è¿­ä»£å½’å¹¶æ’åº
 template<class T>
 void List<T>::mergeSort2()
 {
-	//Ö»ÓĞÒ»¸ö»òÃ»ÓĞ½áµã
+	//åªæœ‰ä¸€ä¸ªæˆ–æ²¡æœ‰ç»“ç‚¹
 	if (head->next == NULL || head->next->next == NULL)
 		return;
 
 	list_node<T>* cur;
 
-	for (int step = 1; step < Size; step *= 2)//¼ä¸ô²»¶Ï³Ë2
+	for (int step = 1; step < Size; step *= 2)//é—´éš”ä¸æ–­ä¹˜2
 	{
 		list_node<T>* tempTail = head;
 		cur = head->next;
@@ -510,11 +510,11 @@ void List<T>::mergeSort2()
 			while (tempTail->next)
 				tempTail = tempTail->next;
 		}
-		tail = tempTail;//¸üĞÂÎ²½áµã
+		tail = tempTail;//æ›´æ–°å°¾ç»“ç‚¹
 	}
 }
 
-//´Ófrom¿ªÊ¼ÇĞµôÇ°step¸öÔªËØ£¬·µ»Ø×îºóÒ»¸öÔªËØ
+//ä»fromå¼€å§‹åˆ‡æ‰å‰stepä¸ªå…ƒç´ ï¼Œè¿”å›æœ€åä¸€ä¸ªå…ƒç´ 
 template<class T>
 list_node<T>* List<T>::cut(list_node<T>* from, int step)
 {
@@ -524,16 +524,16 @@ list_node<T>* List<T>::cut(list_node<T>* from, int step)
 		from = from->next;
 		--step;
 	}
-	//²»¹»step¸öÔªËØ
+	//ä¸å¤Ÿstepä¸ªå…ƒç´ 
 	if (from == NULL)
 		return NULL;
 	list_node<T>* next = from->next;
-	//ÇĞ¶Ï
+	//åˆ‡æ–­
 	from->next = NULL;
 	return next;
 }
 
-//ºÏ²¢º¯Êı£¬Á½ÌõÓĞĞòÁ´ºÏ²¢ÎªÒ»ÌõÓĞĞòÁ´
+//åˆå¹¶å‡½æ•°ï¼Œä¸¤æ¡æœ‰åºé“¾åˆå¹¶ä¸ºä¸€æ¡æœ‰åºé“¾
 template<class T>
 list_node<T>* List<T>::merge(list_node<T>* l1, list_node<T>* l2)
 {
@@ -572,87 +572,87 @@ list_node<T>* List<T>::merge(list_node<T>* l1, list_node<T>* l2)
 		l2 = l2->next;
 		cur = cur->next;
 	}
-	cur->next = NULL;//ÊÕÎ²¹¤×÷
+	cur->next = NULL;//æ”¶å°¾å·¥ä½œ
 	list_node<T>* ans = D->next;
 	delete D;
 	return ans;
 }
 
 
-//Ä¬ÈÏÉêÇë¿Õ¼ä´óĞ¡50¸öchar
+//é»˜è®¤ç”³è¯·ç©ºé—´å¤§å°50ä¸ªchar
 const int defaultSizeString = 50;
 
 class String {
 private:
-	//Ö¸ÏòÎ²ÁãµÄÎ»ÖÃ£¬³õÊ¼»¯Ê±ºò×¢ÒâSize = 1
+	//æŒ‡å‘å°¾é›¶çš„ä½ç½®ï¼Œåˆå§‹åŒ–æ—¶å€™æ³¨æ„Size = 1
 	int Size;
 
-	//Êµ¼ÊÈİÁ¿
+	//å®é™…å®¹é‡
 	int capacity;
 
-	//Êı¾İÊı×é
+	//æ•°æ®æ•°ç»„
 	char* data;
 
-	//ÈİÁ¿À©ÕÅdefaultSizeString
+	//å®¹é‡æ‰©å¼ defaultSizeString
 	void expand();
 
-	//Ä£Ê½´®Æ¥ÅäµÃµ½nextÊı×éº¯Êı
+	//æ¨¡å¼ä¸²åŒ¹é…å¾—åˆ°nextæ•°ç»„å‡½æ•°
 	void getNext(const char* str, int* next, int len);
 public:
-	//¿Õ¹¹Ôìº¯Êı
+	//ç©ºæ„é€ å‡½æ•°
 	String();
 
-	//¸³Öµ¹¹Ôìº¯Êı
+	//èµ‹å€¼æ„é€ å‡½æ•°
 	String(const String& str);
 
-	//×Ö·û´®¹¹Ôìº¯Êı
+	//å­—ç¬¦ä¸²æ„é€ å‡½æ•°
 	String(const char* str);
 
-	//´óĞ¡ÎªsizeµÄ×Ö·û´®¹¹Ôìº¯Êı
+	//å¤§å°ä¸ºsizeçš„å­—ç¬¦ä¸²æ„é€ å‡½æ•°
 	String(const char* str, int size);
 
-	//Îö¹¹º¯Êı
+	//ææ„å‡½æ•°
 	~String();
 
-	//×Ö·û´®³¤¶È
+	//å­—ç¬¦ä¸²é•¿åº¦
 	int length()const {
-		//¼õÈ¥µÄÊÇÎ²Áã
+		//å‡å»çš„æ˜¯å°¾é›¶
 		return Size - 1;
 	}
 
-	//¼ÆËã×Ö·û´®³¤¶È£¬ÓëÊµÀı»¯¶ÔÏóÎŞ¹Ø£¬ÉùÃ÷Îª¾²Ì¬³ÉÔ±º¯Êı
+	//è®¡ç®—å­—ç¬¦ä¸²é•¿åº¦ï¼Œä¸å®ä¾‹åŒ–å¯¹è±¡æ— å…³ï¼Œå£°æ˜ä¸ºé™æ€æˆå‘˜å‡½æ•°
 	static int strLen(const char* str);
 
-	//ÖØÔØ=£¬Stirng
+	//é‡è½½=ï¼ŒStirng
 	String& operator=(const String& str);
 
-	//ÖØÔØ=£¬×Ö·û´®
+	//é‡è½½=ï¼Œå­—ç¬¦ä¸²
 	String& operator=(const char* str);
 
-	//ÖØÔØ=£¬Ò»¸ö×Ö·û
+	//é‡è½½=ï¼Œä¸€ä¸ªå­—ç¬¦
 	String& operator=(const char& ch);
 
-	//ÖØÔØ<<
+	//é‡è½½<<
 	friend ostream& operator<<(ostream& out, const String& str) {
 		out << str.data;
 		return out;
 	}
 
-	//ÖØÔØ>>
+	//é‡è½½>>
 	friend istream& operator>>(istream& in, String& str) {
-		//ÕâÀï´æÔÚÎÊÌâ£¬ÊäÈëÌ«¶à×Ö·û¸ÃÈçºÎÊÇºÃ
+		//è¿™é‡Œå­˜åœ¨é—®é¢˜ï¼Œè¾“å…¥å¤ªå¤šå­—ç¬¦è¯¥å¦‚ä½•æ˜¯å¥½
 		in >> str.data;
 		str.Size = str.strLen(str.data) + 1;
 		return in;
 	}
 
-	//ÖØÔØ±È½Ïº¯Êı
+	//é‡è½½æ¯”è¾ƒå‡½æ•°
 	friend int strCmp(const String& str1, const String& str2)
 	{
 		int i = 0;
 		while (str1.data[i] && str2.data[i])
 		{
-			//³öÏÖÁË²»Í¬µÄ£¬·µ»ØÏàÍ¬Î»ÖÃµÚÒ»¸ö¼õµÚ¶ş¸ö
+			//å‡ºç°äº†ä¸åŒçš„ï¼Œè¿”å›ç›¸åŒä½ç½®ç¬¬ä¸€ä¸ªå‡ç¬¬äºŒä¸ª
 			if (str1.data[i] != str2.data[i])
 				return str1.data[i] - str2.data[i];
 			else
@@ -664,7 +664,7 @@ public:
 		else
 			return 0 - str2.data[i];
 	}
-	//ÖØÔØ< > <= >=
+	//é‡è½½< > <= >=
 	friend bool operator<(const String& str1, const String& str2) {
 		return strCmp(str1, str2) < 0;
 	}
@@ -678,7 +678,7 @@ public:
 		return strCmp(str1, str2) >= 0;
 	}
 
-	//ÖØÔØ[]
+	//é‡è½½[]
 	inline char& operator[](const int index) {
 		return data[index];
 	}
@@ -686,20 +686,20 @@ public:
 		return data[index];
 	}
 
-	//ÖØÔØ==
+	//é‡è½½==
 	bool operator==(const String& str);
 	bool operator==(const char* str);
 
-	//ÖØÔØ+
+	//é‡è½½+
 	String operator+(const String& str);
 	String operator+(const char* str);
 
-	//ÖØÔØ+=
+	//é‡è½½+=
 	String& operator+=(const String& str);
 	String& operator+=(const char* str);
 	String& operator+=(const char ch);
 
-	//·µ»Ø×Ö·û´®ÀàĞÍ
+	//è¿”å›å­—ç¬¦ä¸²ç±»å‹
 	char* c_str() {
 		return data;
 	}
@@ -707,29 +707,29 @@ public:
 		return data;
 	}
 
-	//Ä£Ê½Æ¥Åä
+	//æ¨¡å¼åŒ¹é…
 	int find(const char* str);
 	int find(String& str);
 
-	//É¾³ıËùÓĞµÄÄ³¸ö×Ö·û
+	//åˆ é™¤æ‰€æœ‰çš„æŸä¸ªå­—ç¬¦
 	void erase(char ch);
 
-	//·­×ª
+	//ç¿»è½¬
 	void reverse();
 
-	//Çå¿Õ
+	//æ¸…ç©º
 	void clear();
 
-	//É¾µô×îºóÒ»¸ö
+	//åˆ æ‰æœ€åä¸€ä¸ª
 	void pop_back() {
-		//¿ÕµÄ×Ö·û´®
+		//ç©ºçš„å­—ç¬¦ä¸²
 		if (Size == 1)
 			return;
 		--Size;
-		data[Size - 1] = '\0';//Ö®Ç°Î²ÁãÇ°µÄ×Ö·û·ÅÉÏÎ²Áã
+		data[Size - 1] = '\0';//ä¹‹å‰å°¾é›¶å‰çš„å­—ç¬¦æ”¾ä¸Šå°¾é›¶
 	}
 
-	//»ñµÃ×îºóÒ»¸ö×Ö·û
+	//è·å¾—æœ€åä¸€ä¸ªå­—ç¬¦
 	char back() const {
 		if (Size <= 1)
 			return '\0';
@@ -737,7 +737,7 @@ public:
 	}
 
 };
-//¹¹Ôìº¯Êı
+//æ„é€ å‡½æ•°
 String::String()
 {
 	Size = 1;
@@ -758,7 +758,7 @@ String::String(const char* str)
 	int size = 0;
 	while (str[size] != '\0')
 		++size;
-	++size;//×îºóÒ»¸öÎ²Áã
+	++size;//æœ€åä¸€ä¸ªå°¾é›¶
 
 	Size = size;
 
@@ -778,12 +778,12 @@ String::String(const char* str, int size)
 		data[i] = str[i];
 }
 
-//Îö¹¹º¯Êı
+//ææ„å‡½æ•°
 String::~String() {
 	delete[] data;
 }
 
-//×Ö·û´®³¤¶È
+//å­—ç¬¦ä¸²é•¿åº¦
 int String::strLen(const char* str)
 {
 	int size = 0;
@@ -792,7 +792,7 @@ int String::strLen(const char* str)
 	return size;
 }
 
-//ÈİÁ¿À©ÕÅdefaultSizeString
+//å®¹é‡æ‰©å¼ defaultSizeString
 void String::expand()
 {
 	capacity += defaultSizeString;
@@ -803,7 +803,7 @@ void String::expand()
 	data = newData;
 }
 
-//ÖØÔØ=
+//é‡è½½=
 String& String::operator=(const String& str)
 {
 	Size = str.Size;
@@ -819,7 +819,7 @@ String& String::operator=(const char* str)
 	int size = 0;
 	while (str[size] != '\0')
 		++size;
-	++size;//Î²Áã
+	++size;//å°¾é›¶
 
 	Size = size;
 	capacity = (Size / defaultSizeString + 1) * defaultSizeString;
@@ -840,7 +840,7 @@ String& String::operator=(const char& ch)
 	return *this;
 }
 
-//ÖØÔØ==
+//é‡è½½==
 bool String::operator==(const String& str)
 {
 	if (Size != str.Size)
@@ -855,7 +855,7 @@ bool String::operator==(const char* str)
 	int size = 0;
 	while (str[size] != '\0')
 		++size;
-	++size;//Î²Áã
+	++size;//å°¾é›¶
 
 	if (Size != size)
 		return false;
@@ -866,13 +866,13 @@ bool String::operator==(const char* str)
 	return true;
 }
 
-//ÖØÔØ+
+//é‡è½½+
 String String::operator+(const String& str)
 {
 	String temp(str.data, str.Size + Size);
 
-	//°üÀ¨strµÄÎ²Áã
-	//×¢Òâdata[Size]ÊÇÎ²Áã
+	//åŒ…æ‹¬strçš„å°¾é›¶
+	//æ³¨æ„data[Size]æ˜¯å°¾é›¶
 	for (int i = 0; i <= str.Size; ++i)
 		temp.data[Size + i - 1] = str.data[i];
 
@@ -887,15 +887,15 @@ String String::operator+(const char* str)
 	String temp(str, Size + size);
 
 
-	//°üÀ¨strµÄÎ²Áã
-	//×¢Òâdata[Size]ÊÇÎ²Áã
+	//åŒ…æ‹¬strçš„å°¾é›¶
+	//æ³¨æ„data[Size]æ˜¯å°¾é›¶
 	for (int i = 0; i <= size; ++i)
 		temp.data[Size + i - 1] = str[i];
 
 	return temp;
 }
 
-//ÖØÔØ+=
+//é‡è½½+=
 String& String::operator+=(const String& str)
 {
 	if (Size + str.Size > capacity)
@@ -907,8 +907,8 @@ String& String::operator+=(const String& str)
 		delete[] data;
 		data = newData;
 	}
-	//°üÀ¨strµÄÎ²Áã
-	//×¢Òâdata[Size - 1]ÊÇÎ²Áã
+	//åŒ…æ‹¬strçš„å°¾é›¶
+	//æ³¨æ„data[Size - 1]æ˜¯å°¾é›¶
 	for (int i = 0; i < str.Size; ++i)
 		data[Size + i - 1] = str.data[i];
 
@@ -931,8 +931,8 @@ String& String::operator+=(const char* str)
 		delete[] data;
 		data = newData;
 	}
-	//°üÀ¨strµÄÎ²Áã
-	//×¢Òâdata[Size - 1]ÊÇÎ²Áã
+	//åŒ…æ‹¬strçš„å°¾é›¶
+	//æ³¨æ„data[Size - 1]æ˜¯å°¾é›¶
 	for (int i = 0; i < size; ++i)
 		data[Size + i - 1] = str[i];
 
@@ -950,27 +950,27 @@ String& String::operator+=(const char ch)
 		delete[] data;
 		data = newData;
 	}
-	//°üÀ¨strµÄÎ²Áã
-	//×¢Òâdata[Size - 1]ÊÇÎ²Áã
+	//åŒ…æ‹¬strçš„å°¾é›¶
+	//æ³¨æ„data[Size - 1]æ˜¯å°¾é›¶
 	data[Size - 1] = ch;
 	data[Size] = '\0';
 	++Size;
 	return *this;
 }
 
-//Ä£Ê½´®Æ¥Åä
+//æ¨¡å¼ä¸²åŒ¹é…
 void String::getNext(const char* str, int* next, int len)
 {
 	next[0] = -1;
 	next[1] = 0;
-	int i = 2;//´Ó2¿ªÊ¼
-	int cn = 0;//cn±íÊ¾next[i - 1]µÄĞÅÏ¢
+	int i = 2;//ä»2å¼€å§‹
+	int cn = 0;//cnè¡¨ç¤ºnext[i - 1]çš„ä¿¡æ¯
 
 	while (i < len)
 	{
-		if (str[i - 1] == str[cn])//¿ÉÒÔ¼ÌĞøÏàµÈ
+		if (str[i - 1] == str[cn])//å¯ä»¥ç»§ç»­ç›¸ç­‰
 			next[i++] = ++cn;
-		else if (cn > 0)//²»¿ÉÒÔ¼ÌĞøÏàµÈ
+		else if (cn > 0)//ä¸å¯ä»¥ç»§ç»­ç›¸ç­‰
 			cn = next[cn];
 		else
 			next[i++] = 0;
@@ -1024,20 +1024,20 @@ int String::find(const char* str)
 	return i2 == len2 ? i1 - i2 : -1;
 }
 
-//É¾³ıËùÓĞÖµÎªchµÄ
+//åˆ é™¤æ‰€æœ‰å€¼ä¸ºchçš„
 void String::erase(char ch)
 {
 	int i = 0, k = 0;
 	while (i < Size)
 	{
-		if (ch != data[i])//data[i]²»µÈÓÚÁË²Å¸³Öµ²¢ÇÒĞÂÊı×éµÄÖ¸Õëk++
+		if (ch != data[i])//data[i]ä¸ç­‰äºäº†æ‰èµ‹å€¼å¹¶ä¸”æ–°æ•°ç»„çš„æŒ‡é’ˆk++
 			data[k++] = data[i];
 		++i;
 	}
 	Size -= i - k;
 }
 
-//·­×ª
+//ç¿»è½¬
 void String::reverse()
 {
 	int len = Size - 1;
@@ -1049,12 +1049,12 @@ void String::reverse()
 	}
 }
 
-//Çå¿Õ
+//æ¸…ç©º
 void String::clear()
 {
-	//É¾µôÔ­À´µÄ
+	//åˆ æ‰åŸæ¥çš„
 	delete[] data;
-	//ÖØĞÂÉèÖÃ
+	//é‡æ–°è®¾ç½®
 	Size = 1;
 	capacity = defaultSizeString;
 	data = new char[capacity];
@@ -1092,14 +1092,14 @@ void Random_shuffle(Iter begin, Iter end)
 }
 
 
-//Pair¶şÔª×éÀà
+//PairäºŒå…ƒç»„ç±»
 template<class T1, class T2>
 class Pair {
 public:
 	T1 first;
 	T2 second;
 public:
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	Pair() :first(T1()), second(T2()) {}
 	Pair(const T1& first, const T2& second) {
 		this->first = first;
@@ -1110,17 +1110,17 @@ public:
 		this->first = P.first;
 		this->second = P.second;
 	}
-	//¼æÈİĞÔµÄ¸´ÖÆ¹¹Ôìº¯Êı
+	//å…¼å®¹æ€§çš„å¤åˆ¶æ„é€ å‡½æ•°
 	template<class U1, class U2>
 	Pair(const Pair<U1, U2>& P) :first(P.first), second(P.second) {}
-	//ÖØÔØÔËËã·û
+	//é‡è½½è¿ç®—ç¬¦
 	Pair& operator=(const Pair<T1, T2>& P)
 	{
 		first = P.first;
 		second = P.second;
 		return *this;
 	}
-	//¶¼Ğ´³ÉÓÑÔªº¯Êı£¬½«Á½¸ö¶¼constÏŞ¶¨ 
+	//éƒ½å†™æˆå‹å…ƒå‡½æ•°ï¼Œå°†ä¸¤ä¸ªéƒ½consté™å®š 
 	inline friend bool operator==(const Pair<T1, T2>& p1, const Pair<T1, T2>& p2) {
 		return p1.first == p2.first && p1.second == p2.second;
 	}
@@ -1158,9 +1158,9 @@ enum COLOR {
 };
 
 /*
-	ºìºÚÊ÷½Úµã
-	¶¨ÒåÑÕÉ«´úÌæÁËavlÊ÷µÄÆ½ºâÒò×Ó
-	²åÈëĞÂ½ÚµãÄ¬ÈÏÎªºìÉ«£¬Èç¹ûÓë¸¸½ÚµãÁ¬ĞøºìÉ«ÆÆ»µ¾Íµ÷Õû
+	çº¢é»‘æ ‘èŠ‚ç‚¹
+	å®šä¹‰é¢œè‰²ä»£æ›¿äº†avlæ ‘çš„å¹³è¡¡å› å­
+	æ’å…¥æ–°èŠ‚ç‚¹é»˜è®¤ä¸ºçº¢è‰²ï¼Œå¦‚æœä¸çˆ¶èŠ‚ç‚¹è¿ç»­çº¢è‰²ç ´åå°±è°ƒæ•´
 */
 template<class K, class V>
 struct RBTreeNode {
@@ -1198,17 +1198,17 @@ public:
 	}
 	Self& operator++()
 	{
-		//¸ù¾İÖĞĞò±éÀúµÄºóÒ»¸ö, ±Èµ±Ç°dataµÄ_kv.first´óµÄµÚÒ»¸ö
-		if (data->_right)//ÓĞÓÒ½áµã
+		//æ ¹æ®ä¸­åºéå†çš„åä¸€ä¸ª, æ¯”å½“å‰dataçš„_kv.firstå¤§çš„ç¬¬ä¸€ä¸ª
+		if (data->_right)//æœ‰å³ç»“ç‚¹
 		{
 			data = data->_right;
 			while (data->_left)
 				data = data->_left;
 		}
-		else//Ã»ÓĞÓÒ½áµã£¬¾ÍÕÒ¸¸½Úµã
+		else//æ²¡æœ‰å³ç»“ç‚¹ï¼Œå°±æ‰¾çˆ¶èŠ‚ç‚¹
 		{
 			Node* fa = data->_parent;
-			while (data == fa->_right)//ÊÇ¸¸½ÚµãµÄÓÒ×ÓÊ÷
+			while (data == fa->_right)//æ˜¯çˆ¶èŠ‚ç‚¹çš„å³å­æ ‘
 			{
 				data = fa;
 				fa = fa->_parent;
@@ -1220,7 +1220,7 @@ public:
 	}
 	Self& operator--()
 	{
-		//ÖĞĞòØÒÀúµÄÉÏÒ»¸ö
+		//ä¸­åºåŒ¾å†çš„ä¸Šä¸€ä¸ª
 		if (data->_left)
 		{
 			data = data->_left;
@@ -1263,75 +1263,75 @@ inline bool operator!=(const tree_iterator<K, V>& it1,
 	return it1.data != it2.data;
 }
 
-//ºìºÚÊ÷
+//çº¢é»‘æ ‘
 template<class K, class V>
 class RBTree {
 	typedef RBTreeNode<K, V> Node;
 	typedef tree_iterator<K, V> Iterator;
 private:
-	//Í·½áµã£¬¸¸½áµãÎªroot£¬leftÎª×îĞ¡£¬rightÎª×î´ó
+	//å¤´ç»“ç‚¹ï¼Œçˆ¶ç»“ç‚¹ä¸ºrootï¼Œleftä¸ºæœ€å°ï¼Œrightä¸ºæœ€å¤§
 	Node* head;
-	//¼ÇÂ¼ºìºÚÊ÷ÖĞ²åÈëÁË¶àÉÙÔªËØ
+	//è®°å½•çº¢é»‘æ ‘ä¸­æ’å…¥äº†å¤šå°‘å…ƒç´ 
 	size_t Size;
 public:
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	RBTree();
-	//Îö¹¹º¯Êı
+	//ææ„å‡½æ•°
 	~RBTree() {
 		clear();
 		delete head;
 	}
-	//ÅĞ¶ÏÊÇ·ñÎª¿Õ
+	//åˆ¤æ–­æ˜¯å¦ä¸ºç©º
 	inline bool empty() const {
 		return Size == 0;
 	}
-	//·µ»ØºìºÚÊ÷µÄÔªËØ¸öÊı
+	//è¿”å›çº¢é»‘æ ‘çš„å…ƒç´ ä¸ªæ•°
 	inline size_t size() const {
 		return Size;
 	}
-	//·µ»ØµÚÒ»¸öÔªËØµÄµü´úÆ÷
+	//è¿”å›ç¬¬ä¸€ä¸ªå…ƒç´ çš„è¿­ä»£å™¨
 	inline Iterator begin() {
 		return Iterator(head->_left);
 	}
-	//·µ»Ø×îºóÒ»¸öºóÃæµÄ
+	//è¿”å›æœ€åä¸€ä¸ªåé¢çš„
 	inline Iterator end() {
 		return head;
 	}
-	//·µ»Ø¸ù½áµã
+	//è¿”å›æ ¹ç»“ç‚¹
 	inline Node* getRoot() {
 		return head->_parent;
 	}
-	//·µ»ØÍ·½áµã
+	//è¿”å›å¤´ç»“ç‚¹
 	inline Node* getHead() const {
 		return head;
 	}
-	//²åÈëº¯Êı£¬²ÎÊıÎªPair¼üÖµ¶Ô
+	//æ’å…¥å‡½æ•°ï¼Œå‚æ•°ä¸ºPairé”®å€¼å¯¹
 	Pair<Iterator, bool> insert(const Pair<K, V>& p);
-	//ÀûÓÃµü´úÆ÷É¾³ı
+	//åˆ©ç”¨è¿­ä»£å™¨åˆ é™¤
 	void erase(Iterator it);
-	//ÀûÓÃkeyÉ¾³ı
+	//åˆ©ç”¨keyåˆ é™¤
 	void erase(const K& key);
-	//²éÕÒ£¬ÀûÓÃkey£¬·µ»Øµü´úÆ÷
+	//æŸ¥æ‰¾ï¼Œåˆ©ç”¨keyï¼Œè¿”å›è¿­ä»£å™¨
 	Iterator find(const K& key);
-	//ÕÒ¹Ø¼üÂë×îĞ¡µÄ½áµã
+	//æ‰¾å…³é”®ç æœ€å°çš„ç»“ç‚¹
 	static Node* mostLeft(Node* cur)
 	{
 		while (cur->_left)
 			cur = cur->_left;
 		return cur;
 	}
-	//ÕÒ¹Ø¼üÂë×î´óµÄ½áµã
+	//æ‰¾å…³é”®ç æœ€å¤§çš„ç»“ç‚¹
 	static Node* mostRight(Node* cur)
 	{
 		while (cur->_right)
 			cur = cur->_right;
 		return cur;
 	}
-	//ÖĞĞò±éÀú
+	//ä¸­åºéå†
 	void inOrder() {
 		inOrder(getRoot());
 	}
-	//Çå¿ÕºìºÚÊ÷
+	//æ¸…ç©ºçº¢é»‘æ ‘
 	void clear();
 private:
 	void inOrder(Node* root);
@@ -1342,17 +1342,17 @@ private:
 	Pair<Node*, bool> findToPair(const K& key);
 };
 
-//¹¹Ôìº¯Êı
+//æ„é€ å‡½æ•°
 template<class K, class V>
 RBTree<K, V>::RBTree()
 {
-	//ÎªÍ·½áµãÉêÇë¿Õ¼ä
+	//ä¸ºå¤´ç»“ç‚¹ç”³è¯·ç©ºé—´
 	head = new Node();
-	//³õÊ¼»¯Í·½áµãµÄÖ¸Ïò
+	//åˆå§‹åŒ–å¤´ç»“ç‚¹çš„æŒ‡å‘
 	head->_left = head;
 	head->_right = head;
 	head->_parent = head;
-	//³õÊ¼»¯ÔªËØ¸öÊı
+	//åˆå§‹åŒ–å…ƒç´ ä¸ªæ•°
 	Size = 0;
 }
 
@@ -1360,58 +1360,58 @@ RBTree<K, V>::RBTree()
 template<class K, class V>
 void RBTree<K, V>::clear()
 {
-	//É¾³ı³ıÁËÍ·½áµãµÄËùÓĞ½áµã
+	//åˆ é™¤é™¤äº†å¤´ç»“ç‚¹çš„æ‰€æœ‰ç»“ç‚¹
 	clear(head->_parent->_left);
 	clear(head->_parent->_right);
-	//Í·½áµãÖ¸Ïò³õÊ¼»¯
+	//å¤´ç»“ç‚¹æŒ‡å‘åˆå§‹åŒ–
 	head->_left = head;
 	head->_right = head;
 	head->_parent = head;
-	Size = 0;//ÔªËØ¸öÊı³õÊ¼»¯
+	Size = 0;//å…ƒç´ ä¸ªæ•°åˆå§‹åŒ–
 }
 
 template<class K, class V>
 void RBTree<K, V>::clear(Node* cur)
 {
-	if (cur == NULL || cur == head)//µİ¹é½áÊø
+	if (cur == NULL || cur == head)//é€’å½’ç»“æŸ
 		return;
 
-	clear(cur->_left);//É¾³ı×ó×Ó½Úµã
-	clear(cur->_right);//É¾³ıÓÒ×Ó½áµã
+	clear(cur->_left);//åˆ é™¤å·¦å­èŠ‚ç‚¹
+	clear(cur->_right);//åˆ é™¤å³å­ç»“ç‚¹
 
-	delete cur;//É¾³ı×Ô¼º
-	cur = NULL;//ÖÃ¿Õ
+	delete cur;//åˆ é™¤è‡ªå·±
+	cur = NULL;//ç½®ç©º
 }
 
 template<class K, class V>
 Pair<RBTreeNode<K, V>*, bool> RBTree<K, V>::findToPair(const K& key)
 {
-	if (head->_parent == head)//¿ÕÊ÷
+	if (head->_parent == head)//ç©ºæ ‘
 		return Pair<RBTreeNode<K, V>*, bool>(NULL, false);
-	//´Ó¸ù½Úµã¿ªÊ¼Ñ°ÕÒ
+	//ä»æ ¹èŠ‚ç‚¹å¼€å§‹å¯»æ‰¾
 	Node* cur = head->_parent;
-	//¼ÇÂ¼½á¹û
+	//è®°å½•ç»“æœ
 	Pair<RBTreeNode<K, V>*, bool> res(NULL, false);
 
 	while (cur)
 	{
-		//¼ÇÂ¼¸¸½Úµã, »òÒªÕÒµÄ½Úµã
+		//è®°å½•çˆ¶èŠ‚ç‚¹, æˆ–è¦æ‰¾çš„èŠ‚ç‚¹
 		res.first = cur;
 		if (key < cur->_kv.first)
 			cur = cur->_left;
 		else if (key > cur->_kv.first)
 			cur = cur->_right;
-		else//ÕÒµ½keyÏàÍ¬µÄ, ·µ»Ø¸Ã½Úµã
+		else//æ‰¾åˆ°keyç›¸åŒçš„, è¿”å›è¯¥èŠ‚ç‚¹
 			return Pair<RBTreeNode<K, V>*, bool>(cur, true);
 	}
-	//ÕÒ²»µ½·µ»Ø×îºóÕÒµÄ¸¸½Úµã, ¼ÇÂ¼¿É²åÈëÎ»ÖÃ
+	//æ‰¾ä¸åˆ°è¿”å›æœ€åæ‰¾çš„çˆ¶èŠ‚ç‚¹, è®°å½•å¯æ’å…¥ä½ç½®
 	return res;
 }
 
 template<class K, class V>
 Pair<tree_iterator<K, V>, bool> RBTree<K, V>::insert(const Pair<K, V>& p)
 {
-	if (head->_parent == head)//¿ÕÊ÷, ²åÈë×÷Îª¸ù½áµã
+	if (head->_parent == head)//ç©ºæ ‘, æ’å…¥ä½œä¸ºæ ¹ç»“ç‚¹
 	{
 		head->_parent = new Node(p);
 		head->_left = head->_parent;
@@ -1424,26 +1424,26 @@ Pair<tree_iterator<K, V>, bool> RBTree<K, V>::insert(const Pair<K, V>& p)
 
 
 	Pair<Node*, bool> res = findToPair(p.first);
-	if (res.second)//ÕÒµ½ÏàÍ¬key
+	if (res.second)//æ‰¾åˆ°ç›¸åŒkey
 		return Pair<tree_iterator<K, V>, bool>(tree_iterator<K, V>(res.first), false);
 
-	Node* fa = res.first;//Òª²åÈë½ÚµãµÄ¸¸½Úµã
+	Node* fa = res.first;//è¦æ’å…¥èŠ‚ç‚¹çš„çˆ¶èŠ‚ç‚¹
 	Node* son = new Node(p);
-	//¸ù¾İkeyµÄ´óĞ¡²åÈëfaµÄ×Ó½áµã
+	//æ ¹æ®keyçš„å¤§å°æ’å…¥façš„å­ç»“ç‚¹
 	if (p.first < fa->_kv.first)
 		fa->_left = son;
 	else
 		fa->_right = son;
-	//headµÄ×óÓÒÖ¸Ïòmin£¬max
+	//headçš„å·¦å³æŒ‡å‘minï¼Œmax
 	if (p.first > head->_right->_kv.first)
 		head->_right = son;
 	else if (p.first < head->_left->_kv.first)
 		head->_left = son;
-	//²»ÒªÍüÁË¸¸½ÚµãµÄÖ¸Ïò
+	//ä¸è¦å¿˜äº†çˆ¶èŠ‚ç‚¹çš„æŒ‡å‘
 	son->_parent = fa;
 
-	++Size;//ÔªËØ¸öÊıÔö¼Ó
-	adjust(son);//µ÷Õû
+	++Size;//å…ƒç´ ä¸ªæ•°å¢åŠ 
+	adjust(son);//è°ƒæ•´
 
 	return Pair<tree_iterator<K, V>, bool>(tree_iterator<K, V>(son), true);
 }
@@ -1451,33 +1451,33 @@ Pair<tree_iterator<K, V>, bool> RBTree<K, V>::insert(const Pair<K, V>& p)
 template<class K, class V>
 tree_iterator<K, V> RBTree<K, V>::find(const K& key)
 {
-	Node* cur = head->_parent;//´Ó¸ù½áµã¿ªÊ¼ÕÒ
-	//Ã»ÓĞ½áµã
+	Node* cur = head->_parent;//ä»æ ¹ç»“ç‚¹å¼€å§‹æ‰¾
+	//æ²¡æœ‰ç»“ç‚¹
 	if (cur == head || cur == NULL)
-		return tree_iterator<K, V>(NULL);//ÕÒ²»µ½·µ»Ø¿Õ
+		return tree_iterator<K, V>(NULL);//æ‰¾ä¸åˆ°è¿”å›ç©º
 	while (cur)
 	{
 		if (key < cur->_kv.first)
 			cur = cur->_left;
 		else if (key > cur->_kv.first)
 			cur = cur->_right;
-		else//ÕÒµ½keyÏàµÈÖ±½Ó·µ»Ø
+		else//æ‰¾åˆ°keyç›¸ç­‰ç›´æ¥è¿”å›
 			return tree_iterator<K, V>(cur);
 	}
-	return tree_iterator<K, V>(NULL);//ÕÒ²»µ½·µ»Ø¿Õ
+	return tree_iterator<K, V>(NULL);//æ‰¾ä¸åˆ°è¿”å›ç©º
 }
 
 template<class K, class V>
 void RBTree<K, V>::adjust(Node* son)
 {
 	Node* fa = son->_parent;
-	//²åÈë½áµãÄ¬ÈÏºìÉ«, ¸¸½ÚµãÍ¬ÑùºìÉ«¾ÍÎ¥·´ºìºÚÊ÷ĞÔÖÊ
-	if (fa == head)//¸¸½ÚµãÎªÍ·½áµãµİ¹é½áÊø
+	//æ’å…¥ç»“ç‚¹é»˜è®¤çº¢è‰², çˆ¶èŠ‚ç‚¹åŒæ ·çº¢è‰²å°±è¿åçº¢é»‘æ ‘æ€§è´¨
+	if (fa == head)//çˆ¶èŠ‚ç‚¹ä¸ºå¤´ç»“ç‚¹é€’å½’ç»“æŸ
 		return;
 
-	if (fa->_color == BLACK)//¸¸½ÚµãºÚÉ«, ²»ÓÃµ÷Õû
+	if (fa->_color == BLACK)//çˆ¶èŠ‚ç‚¹é»‘è‰², ä¸ç”¨è°ƒæ•´
 		return;
-	//»ñµÃÒ¯Ò¯½ÚµãºÍÊåÊå½Úµã
+	//è·å¾—çˆ·çˆ·èŠ‚ç‚¹å’Œå”å”èŠ‚ç‚¹
 	Node* ffa = fa->_parent;
 	Node* uncle = (fa == ffa->_left ? ffa->_right : ffa->_left);
 
@@ -1488,14 +1488,14 @@ void RBTree<K, V>::adjust(Node* son)
 		  /					  /
 		son:R   			son:R
 	*/
-	if (uncle && uncle->_color == RED)//ÊåÊå½Úµã´æÔÚ²¢ÇÒºÍ¸¸½ÚµãÒ»Ñùºì
+	if (uncle && uncle->_color == RED)//å”å”èŠ‚ç‚¹å­˜åœ¨å¹¶ä¸”å’Œçˆ¶èŠ‚ç‚¹ä¸€æ ·çº¢
 	{
 		fa->_color = BLACK;
 		uncle->_color = BLACK;
 		ffa->_color = RED;
-		adjust(ffa);//ÏòÉÏ´¦ÀíÒ¯Ò¯½Úµã
+		adjust(ffa);//å‘ä¸Šå¤„ç†çˆ·çˆ·èŠ‚ç‚¹
 	}
-	else//uncleÎª¿Õ
+	else//uncleä¸ºç©º
 	{
 
 		if (fa == ffa->_left)
@@ -1507,18 +1507,18 @@ void RBTree<K, V>::adjust(Node* son)
 				  /
 				son:R
 			*/
-			if (son == fa->_left)//¶¼ÊÇ×ó×Ó½Úµã£¬ÓÒĞı
+			if (son == fa->_left)//éƒ½æ˜¯å·¦å­èŠ‚ç‚¹ï¼Œå³æ—‹
 			{
-				fa->_color = BLACK;//¸¸½Úµã±äºÚ
-				ffa->_color = RED;//Ò¯Ò¯½Úµã±äºì
-				//Á¬½ÓffaµÄparentºÍfa
+				fa->_color = BLACK;//çˆ¶èŠ‚ç‚¹å˜é»‘
+				ffa->_color = RED;//çˆ·çˆ·èŠ‚ç‚¹å˜çº¢
+				//è¿æ¥ffaçš„parentå’Œfa
 				if (ffa == ffa->_parent->_parent)
 					ffa->_parent->_parent = fa;
 				else if (ffa == ffa->_parent->_right)
 					ffa->_parent->_right = fa;
 				else
 					ffa->_parent->_left = fa;
-				//ÓÒĞı²Ù×÷
+				//å³æ—‹æ“ä½œ
 				ffa->_left = fa->_right;
 				if (fa->_right)
 					fa->_right->_parent = ffa;
@@ -1533,7 +1533,7 @@ void RBTree<K, V>::adjust(Node* son)
 					  \ 		  /
 					  son:R		fa:R
 			*/
-			else//¸¸×Óµ÷»»£¬±ä³ÉÉÏÒ»ÖÖÇé¿ö, ±ä³Éµ÷Õûfa
+			else//çˆ¶å­è°ƒæ¢ï¼Œå˜æˆä¸Šä¸€ç§æƒ…å†µ, å˜æˆè°ƒæ•´fa
 			{
 				ffa->_left = son;
 				son->_parent = ffa;
@@ -1554,7 +1554,7 @@ void RBTree<K, V>::adjust(Node* son)
 						\
 						son:R
 			*/
-			if (son == fa->_right)//¶¼ÊÇÓÒ×Ó½Úµã£¬×óĞı
+			if (son == fa->_right)//éƒ½æ˜¯å³å­èŠ‚ç‚¹ï¼Œå·¦æ—‹
 			{
 				fa->_color = BLACK;
 				ffa->_color = RED;
@@ -1564,7 +1564,7 @@ void RBTree<K, V>::adjust(Node* son)
 					ffa->_parent->_right = fa;
 				else
 					ffa->_parent->_left = fa;
-				//×óĞı²Ù×÷
+				//å·¦æ—‹æ“ä½œ
 				ffa->_right = fa->_left;
 				if (fa->_left)
 					fa->_left->_parent = ffa;
@@ -1579,7 +1579,7 @@ void RBTree<K, V>::adjust(Node* son)
 						/				 \
 					son:R				 fa:R
 			*/
-			else//¸¸×Óµ÷»»£¬±ä³ÉÉÏÒ»ÖÖÇé¿ö, ±ä³Éµ÷Õûfa
+			else//çˆ¶å­è°ƒæ¢ï¼Œå˜æˆä¸Šä¸€ç§æƒ…å†µ, å˜æˆè°ƒæ•´fa
 			{
 				ffa->_right = son;
 				son->_parent = ffa;
@@ -1597,7 +1597,7 @@ void RBTree<K, V>::adjust(Node* son)
 template<class K, class V>
 void RBTree<K, V>::inOrder(Node* root)
 {
-	if (root)//Èç¹û·Ç¿Õ£¬¼ÌĞøÖĞĞò±éÀú
+	if (root)//å¦‚æœéç©ºï¼Œç»§ç»­ä¸­åºéå†
 	{
 		inOrder(root->_left);
 		cout << root->_kv.first << ' ' << root->_kv.second << endl;
@@ -1621,7 +1621,7 @@ void RBTree<K, V>::rotateLeft(Node*& fa)
 	Node* subRL = subR->_left;
 	//exchange the childNode
 	fa->_right = subRL;
-	if (subRL)//·Ç¿Õ¾ÍÁ¬ÉÏ¸¸½Úµã
+	if (subRL)//éç©ºå°±è¿ä¸Šçˆ¶èŠ‚ç‚¹
 		subRL->_parent = fa;
 	subR->_left = fa;
 	//exchange the parentNode
@@ -1678,44 +1678,44 @@ void RBTree<K, V>::rotateRight(Node*& fa)
 template<class K, class V>
 void RBTree<K, V>::erase(const K& key)
 {
-	tree_iterator<K, V> del = find(key);//·µ»Øµü´úÆ÷
-	if (del.data == NULL)//ÕÒ²»µ½ÒªÉ¾³ıµÄ
+	tree_iterator<K, V> del = find(key);//è¿”å›è¿­ä»£å™¨
+	if (del.data == NULL)//æ‰¾ä¸åˆ°è¦åˆ é™¤çš„
 		return;
 	erase(del);
 }
 
 template<class K, class V>
 /*
-	ºìÉ«½ÚµãÖ±½Ó°´AVLÉ¾³ı
-	ºÚÉ«É¾³ı»áÓ°ÏìºÚ¸ßĞèÒªµ÷Õû
-	1.Ã»ÓĞ×Ó½Úµã
-	2.Ö»ÓĞÒ»¸ö×Ó½áµã
-		É¾³ı½ÚµãÖ»ÄÜÊÇºÚÉ«£¬Æä×Ó½ÚµãÎªºìÉ«£¬·ñÔòÎŞ·¨Âú×ãºìºÚÊ÷µÄĞÔÖÊÁË¡£ ´ËÊ±ÓÃÉ¾³ı½ÚµãµÄ×Ó½Úµã½Óµ½¸¸½Úµã£¬ÇÒ½«×Ó½ÚµãÑÕÉ«Í¿ºÚ£¬±£Ö¤ºÚÉ«ÊıÁ¿¡£
-	3.ÓĞÁ½¸ö×Ó½áµã, ÓÃºó¼Ì½Úµã×÷ÎªÌæ»»µÄÒªÉ¾³ıµÄ½Úµã, ×ªÎªÇé¿ö1 2
+	çº¢è‰²èŠ‚ç‚¹ç›´æ¥æŒ‰AVLåˆ é™¤
+	é»‘è‰²åˆ é™¤ä¼šå½±å“é»‘é«˜éœ€è¦è°ƒæ•´
+	1.æ²¡æœ‰å­èŠ‚ç‚¹
+	2.åªæœ‰ä¸€ä¸ªå­ç»“ç‚¹
+		åˆ é™¤èŠ‚ç‚¹åªèƒ½æ˜¯é»‘è‰²ï¼Œå…¶å­èŠ‚ç‚¹ä¸ºçº¢è‰²ï¼Œå¦åˆ™æ— æ³•æ»¡è¶³çº¢é»‘æ ‘çš„æ€§è´¨äº†ã€‚ æ­¤æ—¶ç”¨åˆ é™¤èŠ‚ç‚¹çš„å­èŠ‚ç‚¹æ¥åˆ°çˆ¶èŠ‚ç‚¹ï¼Œä¸”å°†å­èŠ‚ç‚¹é¢œè‰²æ¶‚é»‘ï¼Œä¿è¯é»‘è‰²æ•°é‡ã€‚
+	3.æœ‰ä¸¤ä¸ªå­ç»“ç‚¹, ç”¨åç»§èŠ‚ç‚¹ä½œä¸ºæ›¿æ¢çš„è¦åˆ é™¤çš„èŠ‚ç‚¹, è½¬ä¸ºæƒ…å†µ1 2
 */
 void RBTree<K, V>::erase(tree_iterator<K, V> it)
 {
-	Node* rm = it.data;//ÒªÉ¾³ıµÄ½Úµã
-	if (rm == head || rm == NULL)//Èç¹ûÊÇÍ·½áµãor¿ÕÖ±½ÓÍË³ö
+	Node* rm = it.data;//è¦åˆ é™¤çš„èŠ‚ç‚¹
+	if (rm == head || rm == NULL)//å¦‚æœæ˜¯å¤´ç»“ç‚¹orç©ºç›´æ¥é€€å‡º
 		return;
 
 	Node* succ = NULL;
 	Node* rrm = NULL;
 	Node* succ_p = rm->_parent;
 
-	//succ×÷ÎªÒªÉ¾³ı½ÚµãµÄÓĞµÄ×Ó½Úµã
+	//succä½œä¸ºè¦åˆ é™¤èŠ‚ç‚¹çš„æœ‰çš„å­èŠ‚ç‚¹
 	if (rm->_left == NULL)
 		succ = rm->_right;
 	else if (rm->_right == NULL)
 		succ = rm->_left;
-	else//ÓĞ×óÓÒ×ÓÊ÷
+	else//æœ‰å·¦å³å­æ ‘
 	{
-		++it;//È¥µ½ºó¼Ì½Úµã
-		rrm = it.data;//rrm¼ÇÂ¼ºó¼Ì½Úµã
+		++it;//å»åˆ°åç»§èŠ‚ç‚¹
+		rrm = it.data;//rrmè®°å½•åç»§èŠ‚ç‚¹
 		succ = rrm->_right;
 	}
 
-	if (rrm)//Èç¹ûÓĞºó¼Ì½Úµã
+	if (rrm)//å¦‚æœæœ‰åç»§èŠ‚ç‚¹
 	{
 		rm->_left->_parent = rrm;
 		rrm->_left = rm->_left;
@@ -1741,7 +1741,7 @@ void RBTree<K, V>::erase(tree_iterator<K, V> it)
 		rrm->_color = rm->_color;
 		rm->_color = temp;
 	}
-	else//Ã»ÓĞºó¼Ì½Úµã
+	else//æ²¡æœ‰åç»§èŠ‚ç‚¹
 	{
 		if (succ)
 			succ->_parent = rm->_parent;
@@ -1756,7 +1756,7 @@ void RBTree<K, V>::erase(tree_iterator<K, V> it)
 		if (rm == head->_right)
 			head->_right = (rm->_left == NULL ? rm->_parent : mostRight(succ));
 	}
-	if (rm->_color != RED)//ÒªÉ¾³ıµÄÊÇºÚÉ«£¬Òªµ÷Õû
+	if (rm->_color != RED)//è¦åˆ é™¤çš„æ˜¯é»‘è‰²ï¼Œè¦è°ƒæ•´
 	{
 		while (succ != head->_parent && (succ == NULL || succ->_color == BLACK))
 		{
@@ -1868,8 +1868,8 @@ public:
 	}
 
 	V& operator[](const K& key) {
-		//ÏÈ²åÈë£¬Èç¹ûÖ®Ç°ÓĞÁË¾Í²åÈëÊ§°ÜÕÒµ½ÒÑ´æÔÚµÄkey¶ÔÓ¦µÄµü´úÆ÷
-		//Èç¹ûÖ®Ç°Ã»ÓĞ¾Í²åÈëĞÂµÄ£¬µ«ÊÇVµÄÖµ²»ÖªµÀ
+		//å…ˆæ’å…¥ï¼Œå¦‚æœä¹‹å‰æœ‰äº†å°±æ’å…¥å¤±è´¥æ‰¾åˆ°å·²å­˜åœ¨çš„keyå¯¹åº”çš„è¿­ä»£å™¨
+		//å¦‚æœä¹‹å‰æ²¡æœ‰å°±æ’å…¥æ–°çš„ï¼Œä½†æ˜¯Vçš„å€¼ä¸çŸ¥é“
 		auto res = insert(Pair<K, V>(key, V(NULL)));
 		return (*res.first).second;
 	}
@@ -1889,35 +1889,35 @@ public:
 
 
 
-//¿¼ÉúÏµÍ³Àà
+//è€ƒç”Ÿç³»ç»Ÿç±»
 class StudentSystem;
 
-//¿¼ÉúÀà
+//è€ƒç”Ÿç±»
 class Stu {
 	friend class StudentSystem;
 private:
-	String name, type, gender;//×Ô¼ºĞ´µÄstringÀà
-	String num;//¿¼ºÅ
-	unsigned int age;//ÕıÕûÊı´¢´æÄêÁä
+	String name, type, gender;//è‡ªå·±å†™çš„stringç±»
+	String num;//è€ƒå·
+	unsigned int age;//æ­£æ•´æ•°å‚¨å­˜å¹´é¾„
 public:
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	Stu() :num(""), name(""), gender("male"), age(0), type("") {
 
 	}
-	//¸³Öµ¹¹Ôìº¯Êı
+	//èµ‹å€¼æ„é€ å‡½æ•°
 	Stu(const Stu& s)
 		:num(s.num), name(s.name), gender(s.gender), age(s.age), type(s.type) {
 
 	}
-	//ÖØÔØÊäÈëÊä³öÁ÷ÔËËã·û
+	//é‡è½½è¾“å…¥è¾“å‡ºæµè¿ç®—ç¬¦
 	friend istream& operator>>(istream& in, Stu& s) {
 		in >> s.num >> s.name >> s.gender >> s.age >> s.type;
 		return in;
 	}
 	friend ostream& operator<<(ostream& out, const Stu& s) {
 		const int WIDTH = 11;
-		out.width(WIDTH);//ÉèÖÃ¿í¶È
-		out.setf(ios::left);//ÉèÖÃ×ó¶ÔÆë
+		out.width(WIDTH);//è®¾ç½®å®½åº¦
+		out.setf(ios::left);//è®¾ç½®å·¦å¯¹é½
 		out << s.num;
 
 		out.width(WIDTH + 2);
@@ -1934,7 +1934,7 @@ public:
 
 		return out;
 	}
-	//ÖØÔØ==
+	//é‡è½½==
 	bool operator==(const Stu& s) {
 		return num == s.num;
 	}
@@ -1942,44 +1942,45 @@ public:
 };
 
 
-//¿¼ÉúÏµÍ³
+//è€ƒç”Ÿç³»ç»Ÿ
 class StudentSystem {
 private:
 	List<Stu> data;
 	void insertProperly(Stu& s);
-	//ÄÚ²¿²éÕÒº¯Êı£¬·µ»Øµü´úÆ÷
+	//å†…éƒ¨æŸ¥æ‰¾å‡½æ•°ï¼Œè¿”å›è¿­ä»£å™¨
 	List<Stu>::list_iterator mySearch(const Stu& s);
 	List<Stu>::list_iterator mySearch(const String& num);
 public:
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	StudentSystem() {
 		;
 	}
-	//Îö¹¹º¯Êı
+	//ææ„å‡½æ•°
 	~StudentSystem() {
 		;
 	}
-	//³õÊ¼»¯
+	//åˆå§‹åŒ–
 	bool ini();
-	//ÏµÍ³Êı¾İsize
+	//ç³»ç»Ÿæ•°æ®size
 	inline int size()const {
 		return data.size();
 	}
-	//²éÕÒ
+	//æŸ¥æ‰¾
 	void search();
-	//²åÈë
+	//æ’å…¥
 	void insert();
-	//ĞŞ¸Ä
+	//ä¿®æ”¹
 	void change();
-	//±£´æÈëÎÄ¼ş
+	//ä¿å­˜å…¥æ–‡ä»¶
 	void save();
-	//É¾³ı
+	//åˆ é™¤
 	void remove();
-	//Í³¼Æ
+	//ç»Ÿè®¡
 	void statistics();
-	//Õ¹Ê¾
+	//å±•ç¤º
 	void show();
-	//ÊäÈë»Ø³µ
+	//è¾“å…¥å›è½¦
 	void to_be_continue();
 };
 #endif // !_STUDENT_H
+ 
