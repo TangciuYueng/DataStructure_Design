@@ -1,17 +1,17 @@
-#include "2_2151298_Ñîëø³¬.h"
+#include "2_2151298_æ¨æ»•è¶….h"
 
 using namespace std;
 
 /*
-* ±£Ö¤ÁËList·Ç½µĞòÅÅÁĞ
+* ä¿è¯äº†Listéé™åºæ’åˆ—
 */
 
 /***************************************************************************
-  º¯ÊıÃû³Æ£ºintersection
-  ¹¦    ÄÜ£ºÇóÁ½Á´±íµÄ½»¼¯
-  ÊäÈë²ÎÊı£ºList<T>& l1, List<T>& l2£¬Á½¸öÁ´±íµÄÒıÓÃ
-  ·µ »Ø Öµ£ºList<T>ĞÂ¹¹ÔìµÄÒ»¸ö½»¼¯Á´±í
-  Ëµ    Ã÷£º
+  å‡½æ•°åç§°ï¼šintersection
+  åŠŸ    èƒ½ï¼šæ±‚ä¸¤é“¾è¡¨çš„äº¤é›†
+  è¾“å…¥å‚æ•°ï¼šList<T>& l1, List<T>& l2ï¼Œä¸¤ä¸ªé“¾è¡¨çš„å¼•ç”¨
+  è¿” å› å€¼ï¼šList<T>æ–°æ„é€ çš„ä¸€ä¸ªäº¤é›†é“¾è¡¨
+  è¯´    æ˜ï¼š
 ***************************************************************************/
 template<class T>
 List<T> intersection(List<T>& l1, List<T>& l2)
@@ -42,7 +42,7 @@ int main() {
 	int num = 0;
 	bool cinFail = false;
 	
-	cout << "ÇëÊäÈëµÚÒ»¸ö·Ç½µĞòÁ´±íĞòÁĞ: " << endl;
+	cout << "è¯·è¾“å…¥ç¬¬ä¸€ä¸ªéé™åºé“¾è¡¨åºåˆ—: " << endl;
 	while (1)
 	{
 		l1.clear();
@@ -51,7 +51,7 @@ int main() {
 			cin >> num;
 			if (cinFail = cin.fail())
 			{
-				cout << "ÊäÈë²»ÊÇÕûÊı£¬ÇëÖØĞÂÊäÈë" << endl;
+				cout << "è¾“å…¥ä¸æ˜¯æ•´æ•°ï¼Œè¯·é‡æ–°è¾“å…¥" << endl;
 				cin.clear();
 				cin.ignore(65536, '\n');
 				break;
@@ -65,7 +65,7 @@ int main() {
 			break;
 	}
 	
-	cout << "ÇëÊäÈëµÚ¶ş¸ö·Ç½µĞòÁ´±íĞòÁĞ: " << endl;
+	cout << "è¯·è¾“å…¥ç¬¬äºŒä¸ªéé™åºé“¾è¡¨åºåˆ—: " << endl;
 	while (1)
 	{
 		l2.clear();
@@ -74,7 +74,7 @@ int main() {
 			cin >> num;
 			if (cinFail = cin.fail())
 			{
-				cout << "ÊäÈë²»ÊÇÕûÊı£¬ÇëÖØĞÂÊäÈë" << endl;
+				cout << "è¾“å…¥ä¸æ˜¯æ•´æ•°ï¼Œè¯·é‡æ–°è¾“å…¥" << endl;
 				cin.clear();
 				cin.ignore(65536, '\n');
 				break;
@@ -87,7 +87,7 @@ int main() {
 		if (!cinFail)
 			break;
 	}
-	//ÅÅĞò
+	//æ’åº
 	l1.mergeSort2();
 	l2.mergeSort2();
 /*
@@ -100,7 +100,7 @@ int main() {
 		cout << *it << ' ';
 */
 
-	//Çó½»¼¯
+	//æ±‚äº¤é›†
 	l3 = intersection(l1, l2);
 	if (l3.empty())
 		cout << "NULL" << endl;
@@ -113,9 +113,9 @@ int main() {
 	cout << endl;
 
 
-	cout << "ÊäÈëÈÎÒâ¼ü¼ÌĞø";
+	cout << "è¾“å…¥ä»»æ„é”®ç»§ç»­";
 	cin.clear();
 	cin.ignore(65536, '\n');
 	cin.get();
 	return 0;
-}
+} 
