@@ -1,12 +1,12 @@
-#include "8_2151298_Ñîëø³¬.h"
+#include "8_2151298_æ¨æ»•è¶….h"
 
 
 /***************************************************************************
-  º¯ÊýÃû³Æ£ºclear
-  ¹¦    ÄÜ£ºÇå¿Õ
-  ÊäÈë²ÎÊý£º
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º¶ÔµçÍøÏµÍ³ÀàÖÐËùÓÐÊý¾Ý½á¹¹Çå¿Õ³õÊ¼»¯£¬ÒÔ±£Ö¤ÏÂÒ»´ÎÔËÐÐµÄÕýÈ·ÐÔ
+  å‡½æ•°åç§°ï¼šclear
+  åŠŸ    èƒ½ï¼šæ¸…ç©º
+  è¾“å…¥å‚æ•°ï¼š
+  è¿” å›ž å€¼ï¼š
+  è¯´    æ˜Žï¼šå¯¹ç”µç½‘ç³»ç»Ÿç±»ä¸­æ‰€æœ‰æ•°æ®ç»“æž„æ¸…ç©ºåˆå§‹åŒ–ï¼Œä»¥ä¿è¯ä¸‹ä¸€æ¬¡è¿è¡Œçš„æ­£ç¡®æ€§
 ***************************************************************************/
 void elecSys::clear()
 {
@@ -22,213 +22,213 @@ void elecSys::clear()
 }
 
 /***************************************************************************
-  º¯ÊýÃû³Æ£ºbuildNode
-  ¹¦    ÄÜ£º»ñµÃµçÍø½áµãÃû³Æ
-  ÊäÈë²ÎÊý£º
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£ºÐèÒªÅÐ¶ÏÊäÈë½áµã¸öÊýÊÇ·ñºÏ·¨
-            ÐèÒªÅÐ¶ÏËùÊäÈëµÄ½áµãÊÇ·ñÓëµçÍøÏµÍ³ÖÐÒÑÓÐ½áµãÖØÃû
-            ÈôÖØÃûÔòÊä³öÏà¹ØÌáÊ¾ÖØÐÂÊäÈë
+  å‡½æ•°åç§°ï¼šbuildNode
+  åŠŸ    èƒ½ï¼šèŽ·å¾—ç”µç½‘ç»“ç‚¹åç§°
+  è¾“å…¥å‚æ•°ï¼š
+  è¿” å›ž å€¼ï¼š
+  è¯´    æ˜Žï¼šéœ€è¦åˆ¤æ–­è¾“å…¥ç»“ç‚¹ä¸ªæ•°æ˜¯å¦åˆæ³•
+            éœ€è¦åˆ¤æ–­æ‰€è¾“å…¥çš„ç»“ç‚¹æ˜¯å¦ä¸Žç”µç½‘ç³»ç»Ÿä¸­å·²æœ‰ç»“ç‚¹é‡å
+            è‹¥é‡ååˆ™è¾“å‡ºç›¸å…³æç¤ºé‡æ–°è¾“å…¥
 ***************************************************************************/
 void elecSys::buildNode()
 {
-    //Çå³ýÉÏ´Î¼ÇÂ¼
+    //æ¸…é™¤ä¸Šæ¬¡è®°å½•
     clear();
-    cout << "ÇëÊäÈë½áµãµÄ¸öÊý: ";
+    cout << "è¯·è¾“å…¥ç»“ç‚¹çš„ä¸ªæ•°: ";
     while (1)
     {
         cin >> tot;
         if (cin.fail() || tot <= 0)
         {
-            cout << "ÇëÊäÈëÕýÕûÊý" << endl;
+            cout << "è¯·è¾“å…¥æ­£æ•´æ•°" << endl;
             cin.clear();
             cin.ignore(65536, '\n');
         }
         else
             break;
     }
-    cout << "ÇëÒÀ´ÎÊäÈë¸÷¶¥µãµÄÃû³Æ:" << endl;
+    cout << "è¯·ä¾æ¬¡è¾“å…¥å„é¡¶ç‚¹çš„åç§°:" << endl;
     String temp;
     for (int i = 0; i < tot; ++i)
     {
         cin >> temp;
-        //±£Ö¤Ã»ÓÐÏàÍ¬¶¥µã
+        //ä¿è¯æ²¡æœ‰ç›¸åŒé¡¶ç‚¹
         auto Nullptr = tree_iterator<String, int>(NULL);
         auto it = hash.find(temp);
         if (it == Nullptr)
         {
-            hash[temp] = i;//¶¥µãÃû³ÆÓëÏÂ±ê¶ÔÓ¦
+            hash[temp] = i;//é¡¶ç‚¹åç§°ä¸Žä¸‹æ ‡å¯¹åº”
             node.emplace_back(temp);
         }
         else
         {
-            cout << "²»ÄÜ³öÏÖÏàÍ¬¶¥µã£¬ÇëÖØÐÂÊäÈë¸Ã¶¥µãÃû³Æ" << endl;
+            cout << "ä¸èƒ½å‡ºçŽ°ç›¸åŒé¡¶ç‚¹ï¼Œè¯·é‡æ–°è¾“å…¥è¯¥é¡¶ç‚¹åç§°" << endl;
             --i;
         }
     }
-    //ÁÚ½Ó¾ØÕó³õÊ¼»¯
+    //é‚»æŽ¥çŸ©é˜µåˆå§‹åŒ–
     adj.resize(tot, Vector<int>(tot, INT_MAX));
-    //²¢²é¼¯³õÊ¼»¯
+    //å¹¶æŸ¥é›†åˆå§‹åŒ–
     uf.resize(tot);
 }
 
 /***************************************************************************
-  º¯ÊýÃû³Æ£ºaddEdges
-  ¹¦    ÄÜ£ºÌí¼ÓµçÍøÏµÍ³µÄ±ß
-  ÊäÈë²ÎÊý£º
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º½¨Á¢±ßÖ®Ç°Ê×ÏÈÐèÒªÅÐ¶ÏÊÇ·ñÒÑ¾­½¨Á¢¶¥µã
-            ÐèÒªÅÐ¶Ï½áµãÊýÁ¿£¬Ö»ÓÐÒ»¸ö½áµãÎÞÐè¹¹Ôì×îÐ¡Éú³ÉÊ÷
-            ÊäÈëµÄ±ß ½áµãÃû³Æ1 ½áµãÃû³Æ2 ±ßÈ¨Öµ
-            Èô²»´æÔÚÓëµçÍøÖÐÒÑÓÐÃû³Æ£¬ÔòÊä³öÏà¹ØÌáÊ¾
-            ±ßÈ¨ÖµÎª¸ºÊýÊ±ÍË³öÊäÈë
-            Í¬Ê±ÐèÒªÅÐ¶Ï¹¹³ÉµÄÍ¼ÊÇ·ñÁ¬Í¨
+  å‡½æ•°åç§°ï¼šaddEdges
+  åŠŸ    èƒ½ï¼šæ·»åŠ ç”µç½‘ç³»ç»Ÿçš„è¾¹
+  è¾“å…¥å‚æ•°ï¼š
+  è¿” å›ž å€¼ï¼š
+  è¯´    æ˜Žï¼šå»ºç«‹è¾¹ä¹‹å‰é¦–å…ˆéœ€è¦åˆ¤æ–­æ˜¯å¦å·²ç»å»ºç«‹é¡¶ç‚¹
+            éœ€è¦åˆ¤æ–­ç»“ç‚¹æ•°é‡ï¼Œåªæœ‰ä¸€ä¸ªç»“ç‚¹æ— éœ€æž„é€ æœ€å°ç”Ÿæˆæ ‘
+            è¾“å…¥çš„è¾¹ ç»“ç‚¹åç§°1 ç»“ç‚¹åç§°2 è¾¹æƒå€¼
+            è‹¥ä¸å­˜åœ¨ä¸Žç”µç½‘ä¸­å·²æœ‰åç§°ï¼Œåˆ™è¾“å‡ºç›¸å…³æç¤º
+            è¾¹æƒå€¼ä¸ºè´Ÿæ•°æ—¶é€€å‡ºè¾“å…¥
+            åŒæ—¶éœ€è¦åˆ¤æ–­æž„æˆçš„å›¾æ˜¯å¦è¿žé€š
 ***************************************************************************/
 void elecSys::addEdges()
 {
     if (tot == 0)
     {
-        cout << "ÇëÏÈ¹¹½¨µçÍø¶¥µã" << endl;
+        cout << "è¯·å…ˆæž„å»ºç”µç½‘é¡¶ç‚¹" << endl;
         return;
     }
     if (tot == 1)
     {
-        cout << "Ö»ÓÐÒ»¸ö¶¥µã£¬ÎÞÐè¹¹Ôì×îÐ¡Éú³ÉÊ÷" << endl;
+        cout << "åªæœ‰ä¸€ä¸ªé¡¶ç‚¹ï¼Œæ— éœ€æž„é€ æœ€å°ç”Ÿæˆæ ‘" << endl;
         return;
     }
     String nodeA, nodeB;
     int val;
-    cout << endl << "ÊäÈë±ßµÄÖµÎª¸ºÊýÊ±ºòÍË³öÊäÈë" << endl;
+    cout << endl << "è¾“å…¥è¾¹çš„å€¼ä¸ºè´Ÿæ•°æ—¶å€™é€€å‡ºè¾“å…¥" << endl;
     while (1)
     {
-        cout << "ÇëÊäÈëÁ½¸ö¶¥µã¼°±ß: ";
+        cout << "è¯·è¾“å…¥ä¸¤ä¸ªé¡¶ç‚¹åŠè¾¹: ";
         cin >> nodeA >> nodeB >> val;
-        //ÅÐ¶ÏÊäÈë¶¥µãÊÇ·ñÏàÍ¬
+        //åˆ¤æ–­è¾“å…¥é¡¶ç‚¹æ˜¯å¦ç›¸åŒ
         if (nodeA == nodeB)
         {
-            cout << "ÊäÈëµçÍø¶¥µã²»Ó¦ÏàÍ¬£¬ÇëÖØÐÂÊäÈë" << endl;
+            cout << "è¾“å…¥ç”µç½‘é¡¶ç‚¹ä¸åº”ç›¸åŒï¼Œè¯·é‡æ–°è¾“å…¥" << endl;
             cin.clear();
             cin.ignore(65536, '\n');
             continue;
         }
         if (cin.fail())
         {
-            cout << "ÊäÈëµçÍø±ßÖµÓÐÎó£¬ÇëÖØÐÂÊäÈë" << endl;
+            cout << "è¾“å…¥ç”µç½‘è¾¹å€¼æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << endl;
             cin.clear();
             cin.ignore(65536, '\n');
             continue;
         }
-        if (val <= 0)//²»³öÏÖ¸º±ß£¬ÍË³ö
+        if (val <= 0)//ä¸å‡ºçŽ°è´Ÿè¾¹ï¼Œé€€å‡º
             break;
-        //ÅÐ¶ÏÊäÈë¶¥µãÊÇ·ñÓÐÐ§
+        //åˆ¤æ–­è¾“å…¥é¡¶ç‚¹æ˜¯å¦æœ‰æ•ˆ
         auto itA = hash.find(nodeA);
         auto itB = hash.find(nodeB);
         if (itA == hash.end())
         {
-            cout << "¶¥µã" << nodeA << "²»´æÔÚ" << endl;
+            cout << "é¡¶ç‚¹" << nodeA << "ä¸å­˜åœ¨" << endl;
             continue;
         }
         if (itB == hash.end())
         {
-            cout << "¶¥µã" << nodeB << "²»´æÔÚ" << endl;
+            cout << "é¡¶ç‚¹" << nodeB << "ä¸å­˜åœ¨" << endl;
             continue;
         }
-        //¸üÐÂÁÚ½Ó±í
+        //æ›´æ–°é‚»æŽ¥è¡¨
         adj[itA->second][itB->second] = min(adj[itA->second][itB->second], val);
         adj[itB->second][itA->second] = adj[itA->second][itB->second];
         adj[itA->second][itA->second] = 0;
         adj[itB->second][itB->second] = 0;
-        //±ê¼ÇÁ¬½ÓÉÏ½áµã
+        //æ ‡è®°è¿žæŽ¥ä¸Šç»“ç‚¹
         uf.union_xy(itA->second, itB->second);
     }
-    //¶¼Á¬ÉÏÁËnumOfSet == 1
+    //éƒ½è¿žä¸Šäº†numOfSet == 1
     if (uf.getNumOfSet() == 1)
         edgeFinish = true;
 }
 
 /***************************************************************************
-  º¯ÊýÃû³Æ£ºbuildTree
-  ¹¦    ÄÜ£ºµ÷ÓÃÉú³É×îÐ¡Éú³ÉÊ÷ÌáÊ¾£¬¸ù¾ÝÓÃ»§ÊäÈëµÄÆðµã¹¹Ôì×îÐ¡Éú³ÉÊ÷
-  ÊäÈë²ÎÊý£º
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£ºÅÐ¶Ï½áµã¸öÊý£¬¸öÊýÎª0ÌáÊ¾ÏÈ¹¹½¨½áµã£¬Îª1ÌáÊ¾ÎÞÐè¹¹Ôì
-            ÅÐ¶ÏÊÇ·ñÁ¬Í¨£¬Î´Á¬Í¨ÌáÊ¾·µ»ØÉÏÒ»¸ö²½Öè
+  å‡½æ•°åç§°ï¼šbuildTree
+  åŠŸ    èƒ½ï¼šè°ƒç”¨ç”Ÿæˆæœ€å°ç”Ÿæˆæ ‘æç¤ºï¼Œæ ¹æ®ç”¨æˆ·è¾“å…¥çš„èµ·ç‚¹æž„é€ æœ€å°ç”Ÿæˆæ ‘
+  è¾“å…¥å‚æ•°ï¼š
+  è¿” å›ž å€¼ï¼š
+  è¯´    æ˜Žï¼šåˆ¤æ–­ç»“ç‚¹ä¸ªæ•°ï¼Œä¸ªæ•°ä¸º0æç¤ºå…ˆæž„å»ºç»“ç‚¹ï¼Œä¸º1æç¤ºæ— éœ€æž„é€ 
+            åˆ¤æ–­æ˜¯å¦è¿žé€šï¼Œæœªè¿žé€šæç¤ºè¿”å›žä¸Šä¸€ä¸ªæ­¥éª¤
 
 ***************************************************************************/
 void elecSys::buildTree()
 {
     if (tot == 0)
     {
-        cout << "ÇëÏÈ¹¹½¨µçÍø¶¥µã" << endl;
+        cout << "è¯·å…ˆæž„å»ºç”µç½‘é¡¶ç‚¹" << endl;
         return;
     }
     if (tot == 1)
     {
-        cout << "Ö»ÓÐÒ»¸ö¶¥µã£¬ÎÞÐè¹¹Ôì×îÐ¡Éú³ÉÊ÷" << endl;
+        cout << "åªæœ‰ä¸€ä¸ªé¡¶ç‚¹ï¼Œæ— éœ€æž„é€ æœ€å°ç”Ÿæˆæ ‘" << endl;
         return;
     }
     if (edgeFinish == false)
     {
-        cout << "ÈÔÓÐµçÍø¶¥µãÉÐÎ´Á¬½Ó£¬ÎÞ·¨¹¹Ôì×îÐ¡Éú³ÉÊ÷£¬Çë¼ÌÐøÌí¼ÓµçÍø±ß" << endl;
+        cout << "ä»æœ‰ç”µç½‘é¡¶ç‚¹å°šæœªè¿žæŽ¥ï¼Œæ— æ³•æž„é€ æœ€å°ç”Ÿæˆæ ‘ï¼Œè¯·ç»§ç»­æ·»åŠ ç”µç½‘è¾¹" << endl;
         return;
     }
     String startNode;
-    cout << "ÇëÊäÈëÆðµã: ";
+    cout << "è¯·è¾“å…¥èµ·ç‚¹: ";
     while (1)
     {
         cin >> startNode;
         if (hash.find(startNode) == hash.end())
         {
-            cout << "¶¥µã" << startNode << "²»´æÔÚ£¬ÇëÖØÐÂÊäÈë" << endl;
+            cout << "é¡¶ç‚¹" << startNode << "ä¸å­˜åœ¨ï¼Œè¯·é‡æ–°è¾“å…¥" << endl;
             cin.ignore(65536, '\n');
         }
         else
             break;
     }
     start = hash[startNode];
-    cout << "Éú³ÉPrim×îÐ¡Ê÷£¡" << endl;
-    //Ê¹ÓÃprimËã·¨Éú³É×îÐ¡Êý
+    cout << "ç”ŸæˆPrimæœ€å°æ ‘ï¼" << endl;
+    //ä½¿ç”¨primç®—æ³•ç”Ÿæˆæœ€å°æ•°
     //Prim();
     PrimPriorityQueue();
 }
 
 /***************************************************************************
-  º¯ÊýÃû³Æ£ºKruskal
-  ¹¦    ÄÜ£ºÀûÓÃkruskalËã·¨Éú³É×îÐ¡Éú³ÉÊ÷
-  ÊäÈë²ÎÊý£º
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º
+  å‡½æ•°åç§°ï¼šKruskal
+  åŠŸ    èƒ½ï¼šåˆ©ç”¨kruskalç®—æ³•ç”Ÿæˆæœ€å°ç”Ÿæˆæ ‘
+  è¾“å…¥å‚æ•°ï¼š
+  è¿” å›ž å€¼ï¼š
+  è¯´    æ˜Žï¼š
 ***************************************************************************/
 int elecSys::Kruskal()
 {
     if (tot == 1)
     {
-        cout << "Ö»ÓÐÒ»¸ö½áµã£¬ÎÞÐèÉú³É×îÐ¡Éú³ÉÊ÷" << endl;
+        cout << "åªæœ‰ä¸€ä¸ªç»“ç‚¹ï¼Œæ— éœ€ç”Ÿæˆæœ€å°ç”Ÿæˆæ ‘" << endl;
         return 0;
     }
     int edgeNum = 0;
-    //±ß¼¯Êý×é
+    //è¾¹é›†æ•°ç»„
     for (int i = 0; i < tot; ++i)
         for (int j = 0; i < tot - i; ++j)
             if (i != j)
                 edges.emplace_back(edge{ i, j, adj[i][j] });
 
-    //´ÓÐ¡µ½´ï´ú¼ÛÅÅÐò
+    //ä»Žå°åˆ°è¾¾ä»£ä»·æŽ’åº
     Sort(&edges[0], edges.size());
-    //¶¥µã¸öÊý³õÊ¼»¯²¢²é¼¯
+    //é¡¶ç‚¹ä¸ªæ•°åˆå§‹åŒ–å¹¶æŸ¥é›†
     unionFind uf(tot);
     for (int i = 0; i < edges.size(); ++i)
     {
-        //ÅÐ¶ÏÊÇ·ñ³É»·
+        //åˆ¤æ–­æ˜¯å¦æˆçŽ¯
         if (uf.is_connected(edges[i].first, edges[i].second))
             continue;
-        //×Ü´ú¼Û
+        //æ€»ä»£ä»·
         cost += edges[i].val;
-        //Á¬ÆðÀ´µÄ±ßÊý
+        //è¿žèµ·æ¥çš„è¾¹æ•°
         ++edgeNum;
-        //½«Á½¸ö¶¥µãÁ¬ÆðÀ´
+        //å°†ä¸¤ä¸ªé¡¶ç‚¹è¿žèµ·æ¥
         uf.union_xy(edges[i].first, edges[i].second);
-        //Á¬ÆðÀ´µÄ±ßÊýÎªtot-1£¬ÔòËµÃ÷Íê³É
+        //è¿žèµ·æ¥çš„è¾¹æ•°ä¸ºtot-1ï¼Œåˆ™è¯´æ˜Žå®Œæˆ
         if (edgeNum == tot - 1)
             break;
     }
@@ -236,56 +236,56 @@ int elecSys::Kruskal()
 }
 
 /***************************************************************************
-  º¯ÊýÃû³Æ£ºPrim
-  ¹¦    ÄÜ£ºÀûÓÃPrimËã·¨Éú³É×îÐ¡Éú³ÉÊ÷
-  ÊäÈë²ÎÊý£º
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º
+  å‡½æ•°åç§°ï¼šPrim
+  åŠŸ    èƒ½ï¼šåˆ©ç”¨Primç®—æ³•ç”Ÿæˆæœ€å°ç”Ÿæˆæ ‘
+  è¾“å…¥å‚æ•°ï¼š
+  è¿” å›ž å€¼ï¼š
+  è¯´    æ˜Žï¼š
 ***************************************************************************/
 void elecSys::Prim()
 {
     int index;
-    Vector<bool> vis(tot, false);//¼ÇÂ¼ÊÇ·ñ·ÃÎÊ¹ý
-    Vector<int> dis(tot, 0);//µ½Ã¿¸öµãµÄ´ú¼Û
+    Vector<bool> vis(tot, false);//è®°å½•æ˜¯å¦è®¿é—®è¿‡
+    Vector<int> dis(tot, 0);//åˆ°æ¯ä¸ªç‚¹çš„ä»£ä»·
 
     vis[start] = true;
     index = start;
-    //½«ÓëÆðµãÖ±½ÓÁ¬½ÓµÄ±ß·ÅÈëdisÊý×é
+    //å°†ä¸Žèµ·ç‚¹ç›´æŽ¥è¿žæŽ¥çš„è¾¹æ”¾å…¥disæ•°ç»„
     for (int i = 0; i < tot; ++i)
         dis[i] = adj[start][i];
 
-    //»¹Ê£ÏÂtot - 1¸ö¶¥µãÒªÕÒ 
+    //è¿˜å‰©ä¸‹tot - 1ä¸ªé¡¶ç‚¹è¦æ‰¾ 
     for (int i = 1; i < tot; ++i)
     {
         int Min = INT_MAX, temp = index;
-        //ÕÒµ±Ç°Ã»·ÃÎÊ¹ýµÄ×îÐ¡´ú¼Û±ß 
+        //æ‰¾å½“å‰æ²¡è®¿é—®è¿‡çš„æœ€å°ä»£ä»·è¾¹ 
         for (int j = 0; j < tot; ++j)
-            if (!vis[j] && dis[j] < Min)//Ã»ÓÐ·ÃÎÊ¹ý£¬²¢ÇÒÕÒÖÜÎ§Ò»È¦¾àÀë×îÐ¡µÄ£¬Ì°ÐÄ
+            if (!vis[j] && dis[j] < Min)//æ²¡æœ‰è®¿é—®è¿‡ï¼Œå¹¶ä¸”æ‰¾å‘¨å›´ä¸€åœˆè·ç¦»æœ€å°çš„ï¼Œè´ªå¿ƒ
             {
                 Min = dis[j];
                 index = j;
             }
-        //¼ÇÂ¼Á¬ÆðÀ´µÄ±ßºÍ´ú¼Û
+        //è®°å½•è¿žèµ·æ¥çš„è¾¹å’Œä»£ä»·
         ansEdge.emplace_back(edge{ temp, index, Min });
 
-        //Á¬ÆðÀ´£¬¼ÇÂ¼ÒÑ¾­·ÃÎÊ£¬´ú¼Û¼ÓÉÏ
+        //è¿žèµ·æ¥ï¼Œè®°å½•å·²ç»è®¿é—®ï¼Œä»£ä»·åŠ ä¸Š
         vis[index] = true;
         cost += Min;
-        //¿´indexµãÖÜÎ§ÓÐÎÞ¸üÐ¡µÄ±ßÓÐ¾Í¸üÐÂdisÁ¬ÆðÀ´£¬Ã»ÓÐ¾ÍÔÚÔ­À´µÄdisÀïÃæÕÒ£¬ÁªÏë !³¬¼¶½áµã£¡ 
+        //çœ‹indexç‚¹å‘¨å›´æœ‰æ— æ›´å°çš„è¾¹æœ‰å°±æ›´æ–°disè¿žèµ·æ¥ï¼Œæ²¡æœ‰å°±åœ¨åŽŸæ¥çš„disé‡Œé¢æ‰¾ï¼Œè”æƒ³ !è¶…çº§ç»“ç‚¹ï¼ 
         for (int j = 0; j < tot; ++j)
             if (!vis[j] && dis[j] > adj[index][j])
-                //ÕÒµ½¸üÐ¡µÄ£¬¸üÐÂdis[]
+                //æ‰¾åˆ°æ›´å°çš„ï¼Œæ›´æ–°dis[]
                 dis[j] = adj[index][j];
     }
-    cout << "Éú³É×îÐ¡Éú³ÉÊ÷´ú¼Û: " << cost << endl;
+    cout << "ç”Ÿæˆæœ€å°ç”Ÿæˆæ ‘ä»£ä»·: " << cost << endl;
 }
 
 /***************************************************************************
-  º¯ÊýÃû³Æ£ºPrimPriorityQueue
-  ¹¦    ÄÜ£ºÀûÓÃPrimËã·¨ºÍÓÅÏÈ¶ÓÁÐÉú³É×îÐ¡Éú³ÉÊ÷
-  ÊäÈë²ÎÊý£º
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º
+  å‡½æ•°åç§°ï¼šPrimPriorityQueue
+  åŠŸ    èƒ½ï¼šåˆ©ç”¨Primç®—æ³•å’Œä¼˜å…ˆé˜Ÿåˆ—ç”Ÿæˆæœ€å°ç”Ÿæˆæ ‘
+  è¾“å…¥å‚æ•°ï¼š
+  è¿” å›ž å€¼ï¼š
+  è¯´    æ˜Žï¼š
 ***************************************************************************/
 void elecSys::PrimPriorityQueue()
 {
@@ -297,24 +297,24 @@ void elecSys::PrimPriorityQueue()
     edge temp;
     while (!q.empty())
     {
-        //È¡³ö×îÐ¡¾àÀë
+        //å–å‡ºæœ€å°è·ç¦»
         temp = q.top();
         q.pop();
-        //±éÀú¹ýÁËÌø¹ý
+        //éåŽ†è¿‡äº†è·³è¿‡
         if (vis[temp.second])
             continue;
-        //Ã»±éÀú¹ý¼ÓÈë´ð°¸±ß¼¯
+        //æ²¡éåŽ†è¿‡åŠ å…¥ç­”æ¡ˆè¾¹é›†
         if (temp.first != temp.second)
             ansEdge.emplace_back(temp);
-        //±ê¼ÇÒÑ¾­±éÀú¹ý
+        //æ ‡è®°å·²ç»éåŽ†è¿‡
         vis[temp.second] = true;
-        //¸üÐÂ´ú¼Û
+        //æ›´æ–°ä»£ä»·
         cost += temp.val;
 
-        //´Ótemp.secondÖÜÎ§ÕÒ¸ü¶ÌµÄ±ß
+        //ä»Žtemp.secondå‘¨å›´æ‰¾æ›´çŸ­çš„è¾¹
         for (int j = 0; j < tot; ++j)
         {
-            //Ã»ÓÐ±éÀú¹ý£¬²¢ÇÒ´Óstartµ½j±Ètemp.secondµ½j³¤
+            //æ²¡æœ‰éåŽ†è¿‡ï¼Œå¹¶ä¸”ä»Žstartåˆ°jæ¯”temp.secondåˆ°jé•¿
             if (vis[j] == false && adj[temp.second][j] < dis[j])
             {
                 dis[j] = adj[temp.second][j];
@@ -324,24 +324,24 @@ void elecSys::PrimPriorityQueue()
 
     }
 
-    cout << "Éú³É×îÐ¡Éú³ÉÊ÷´ú¼Û: " << cost << endl;
+    cout << "ç”Ÿæˆæœ€å°ç”Ÿæˆæ ‘ä»£ä»·: " << cost << endl;
 }
 
 /***************************************************************************
-  º¯ÊýÃû³Æ£ºshow
-  ¹¦    ÄÜ£ºÕ¹Ê¾Éú³É×îÐ¡Ê÷Á¬½ÓµÄ±ß
-  ÊäÈë²ÎÊý£º
-  ·µ »Ø Öµ£º
-  Ëµ    Ã÷£º
+  å‡½æ•°åç§°ï¼šshow
+  åŠŸ    èƒ½ï¼šå±•ç¤ºç”Ÿæˆæœ€å°æ ‘è¿žæŽ¥çš„è¾¹
+  è¾“å…¥å‚æ•°ï¼š
+  è¿” å›ž å€¼ï¼š
+  è¯´    æ˜Žï¼š
 ***************************************************************************/
 void elecSys::show()
 {
     if (ansEdge.empty())
     {
-        cout << "ÇëÏÈÉú³É×îÐ¡Éú³ÉÊ÷£¡" << endl;
+        cout << "è¯·å…ˆç”Ÿæˆæœ€å°ç”Ÿæˆæ ‘ï¼" << endl;
         return;
     }
-    cout << "×îÐ¡Éú³ÉÊ÷µÄ¶¥µãºÍ±ßÎª: " << endl;
+    cout << "æœ€å°ç”Ÿæˆæ ‘çš„é¡¶ç‚¹å’Œè¾¹ä¸º: " << endl;
     for (int i = 0; i < ansEdge.size(); ++i)
     {
         cout << node[ansEdge[i].first] << "-<"
@@ -351,22 +351,22 @@ void elecSys::show()
     cout << endl;
 }
 
-//Ö÷º¯Êý
+//ä¸»å‡½æ•°
 int main() {
-    cout << "**\t\tµçÍøÔì¼ÛÄ£ÄâÏµÍ³\t\t**" << endl;
+    cout << "**\t\tç”µç½‘é€ ä»·æ¨¡æ‹Ÿç³»ç»Ÿ\t\t**" << endl;
     cout << "==================================================" << endl;
-    cout << "**\t\tA --- ´´½¨µçÍø¶¥µã\t\t**" << endl;
-    cout << "**\t\tB --- Ìí¼ÓµçÍøµÄ±ß\t\t**" << endl;
-    cout << "**\t\tC --- ¹¹½¨×îÐ¡Éú³ÉÊ÷\t\t**" << endl;
-    cout << "**\t\tD --- ÏÔÊ¾×îÐ¡Éú³ÉÊ÷\t\t**" << endl;
-    cout << "**\t\tE --- ÍË³ö   ³ÌÐò\t\t**" << endl;
+    cout << "**\t\tA --- åˆ›å»ºç”µç½‘é¡¶ç‚¹\t\t**" << endl;
+    cout << "**\t\tB --- æ·»åŠ ç”µç½‘çš„è¾¹\t\t**" << endl;
+    cout << "**\t\tC --- æž„å»ºæœ€å°ç”Ÿæˆæ ‘\t\t**" << endl;
+    cout << "**\t\tD --- æ˜¾ç¤ºæœ€å°ç”Ÿæˆæ ‘\t\t**" << endl;
+    cout << "**\t\tE --- é€€å‡º   ç¨‹åº\t\t**" << endl;
     cout << "==================================================" << endl;
     elecSys es;
     bool loop = true;
     char op;
     while (loop)
     {
-        cout << "\nÇëÑ¡Ôñ²Ù×÷: ";
+        cout << "\nè¯·é€‰æ‹©æ“ä½œ: ";
         cin >> op;
         switch (op)
         {
@@ -391,7 +391,7 @@ int main() {
                 loop = false;
                 break;
             default:
-                cout << "ÊäÈëÓÐÎó£¬ÇëÖØÐÂÊäÈë£¡" << endl;
+                cout << "è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥ï¼" << endl;
                 cin.clear();
                 cin.ignore(65536, '\n');
                 break;
@@ -399,8 +399,8 @@ int main() {
     }
 
 
-    cout << endl << "ÊäÈë»Ø³µ¼ÌÐø" << endl;
+    cout << endl << "è¾“å…¥å›žè½¦ç»§ç»­" << endl;
     cin.ignore(65536, '\n');
     cin.get();
     return 0;
-}
+} 
