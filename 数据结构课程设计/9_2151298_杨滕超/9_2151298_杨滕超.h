@@ -7,7 +7,7 @@
 using namespace std;
 
 
-//Á´±í½Úµã
+//é“¾è¡¨èŠ‚ç‚¹
 template<class T>
 struct list_node {
 	T val;
@@ -16,7 +16,7 @@ struct list_node {
 		prev = NULL;
 		next = NULL;
 	}
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	list_node(const T& val, list_node* prev = NULL, list_node* next = NULL) :
 		val(val), prev(prev), next(next) {}
 };
@@ -29,7 +29,7 @@ class Stack;
 template<class T>
 class Queue;
 
-//Ë«ÏòÁ´±íÊµÏÖ
+//åŒå‘é“¾è¡¨å®ç°
 template<class T>
 class List {
 	typedef list_node<T>* _iterator;
@@ -38,125 +38,125 @@ class List {
 	//	template<class T>
 	friend class Queue<T>;
 private:
-	//Í·½áµã Î²½áµã
+	//å¤´ç»“ç‚¹ å°¾ç»“ç‚¹
 	list_node<T>* head, * tail;
 
-	//½áµã¸öÊı
+	//ç»“ç‚¹ä¸ªæ•°
 	int Size;
 
-	//¹é²¢µİ¹éº¯Êı
+	//å½’å¹¶é€’å½’å‡½æ•°
 	list_node<T>* _mergeSort(list_node<T>* head);
 
-	//´Ófrom¿ªÊ¼ÇĞ¶Ïstep½áµã£¬²¢·µ»Ø×îºóÒ»¸ö
+	//ä»fromå¼€å§‹åˆ‡æ–­stepç»“ç‚¹ï¼Œå¹¶è¿”å›æœ€åä¸€ä¸ª
 	list_node<T>* cut(list_node<T>* from, int step);
 
-	//¹é²¢ÅÅĞòµÄºÏ²¢
+	//å½’å¹¶æ’åºçš„åˆå¹¶
 	list_node<T>* merge(list_node<T>* l1, list_node<T>* l2);
 
 public:
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	List();
 
-	//Îö¹¹º¯Êı
+	//ææ„å‡½æ•°
 	~List();
 
-	//·µ»ØÁ´±í´óĞ¡
+	//è¿”å›é“¾è¡¨å¤§å°
 	inline int size() const {
 		return Size;
 	}
 
-	//ÅĞ¶ÏÁ´±íÊÇ·ñÎª¿Õ
+	//åˆ¤æ–­é“¾è¡¨æ˜¯å¦ä¸ºç©º
 	inline bool empty() const {
 		return head == tail;
 	}
 
-	//µÃµ½Í·½áµã
+	//å¾—åˆ°å¤´ç»“ç‚¹
 	inline list_node<T>* getHead() const {
 		return head;
 	}
 
-	//µÃµ½Î²½Úµã
+	//å¾—åˆ°å°¾èŠ‚ç‚¹
 	inline list_node<T>* getTail() const {
 		return tail;
 	}
 
-	//Çå¿ÕÁ´±í
+	//æ¸…ç©ºé“¾è¡¨
 	void clear();
 
-	//×îºóÌí¼ÓÔªËØ
+	//æœ€åæ·»åŠ å…ƒç´ 
 	void emplace_back(const T& x);
 
-	//×îºóÉ¾³ıÔªËØ
+	//æœ€ååˆ é™¤å…ƒç´ 
 	void pop_back();
 
-	//¿ªÍ·Ìí¼ÓÔªËØ
+	//å¼€å¤´æ·»åŠ å…ƒç´ 
 	void emplace_front(const T& x);
 
-	//¿ªÍ·É¾³ıÔªËØ
+	//å¼€å¤´åˆ é™¤å…ƒç´ 
 	void pop_front();
 
-	//ÖØÔØ=
+	//é‡è½½=
 	List<T>& operator=(const List<T>& L);
 
-	//Á´±íµü´úÆ÷
+	//é“¾è¡¨è¿­ä»£å™¨
 	class list_iterator {
 		friend class List<T>;
 	private:
-		//Ö¸Ïò½ÚµãµÄÖ¸Õë
+		//æŒ‡å‘èŠ‚ç‚¹çš„æŒ‡é’ˆ
 		_iterator data;
 	public:
-		//¹¹Ôìº¯Êı
+		//æ„é€ å‡½æ•°
 		list_iterator(_iterator data) {
 			this->data = data;
 		}
 		list_iterator(const T& x) {
 			data = new list_node<T>(x);
 		}
-		//ÖØÔØ*
+		//é‡è½½*
 		T& operator*() {
 			return data->val;
 		}
-		//ÖØÔØ->
+		//é‡è½½->
 		T* operator->() {
 			return &(data->val);
 		}
-		//ÖØÔØ==
+		//é‡è½½==
 		inline bool operator==(const list_iterator& it) const {
 			return this->data == it.data;
 		}
-		//ÖØÔØ!=
+		//é‡è½½!=
 		inline bool operator!=(const list_iterator& it) const {
 			return this->data != it.data;
 		}
-		//ÖØÔØ×Ô¼Ó
+		//é‡è½½è‡ªåŠ 
 		inline List<T>::list_iterator& operator++()
 		{
 			if (data != NULL)
 				data = data->next;
 			return *this;
 		}
-		//ÖØÔØ×Ô¼õ
+		//é‡è½½è‡ªå‡
 		inline List<T>::list_iterator& operator--()
 		{
 			if (data != NULL)
 				data = data->prev;
 			return *this;
 		}
-		//ºóÖÃ×Ô¼Ó
+		//åç½®è‡ªåŠ 
 		List<T>::list_iterator operator++(int)
 		{
 			List<T>::list_iterator temp = *this;
 			++(*this);
 			return temp;
 		}
-		//ºóÖÃ×Ô¼õ
+		//åç½®è‡ªå‡
 		List<T>::list_iterator operator--(int)
 		{
 			List<T>::list_iterator temp = *this;
 			--(*this);
 			return temp;
 		}
-		//ÓëÊı×ÖÏà¼Ó
+		//ä¸æ•°å­—ç›¸åŠ 
 		List<T>::list_iterator operator+(int num)
 		{
 			List<T>::list_iterator temp = *this;
@@ -164,7 +164,7 @@ public:
 				++temp;
 			return temp;
 		}
-		//ÓëÊı×ÖÏà¼õ
+		//ä¸æ•°å­—ç›¸å‡
 		List<T>::list_iterator operator-(int num)
 		{
 			List<T>::list_iterator temp = *this;
@@ -172,21 +172,21 @@ public:
 				--temp;
 			return temp;
 		}
-		//×Ô¼Ó
+		//è‡ªåŠ 
 		List<T>::list_iterator operator+=(int num)
 		{
 			for (int i = 0; i < num; ++i)
 				++(*this);
 			return *this;
 		}
-		//×Ô¼õ
+		//è‡ªå‡
 		List<T>::list_iterator operator-=(int num)
 		{
 			for (int i = 0; i < num; ++i)
 				--(*this);
 			return *this;
 		}
-		//Á½¸öÏà¼õ
+		//ä¸¤ä¸ªç›¸å‡
 		int operator-(const list_iterator& it)
 		{
 			int ans = 0;
@@ -200,47 +200,47 @@ public:
 		}
 	};
 
-	//¸´ÖÆ¹¹Ôìº¯Êı
+	//å¤åˆ¶æ„é€ å‡½æ•°
 	List(const List<T>& L);
 
-	//²åÈë
+	//æ’å…¥
 	void insert(const List<T>::list_iterator& it, const T& x);
 
-	//É¾³ı
+	//åˆ é™¤
 	void remove(const List<T>::list_iterator& it);
 
-	//µü´úÆ÷begin
+	//è¿­ä»£å™¨begin
 	inline List<T>::list_iterator begin() {
 		return List<T>::list_iterator(head->next);
 	}
 
-	//µü´úÆ÷end
+	//è¿­ä»£å™¨end
 	inline List<T>::list_iterator end() {
 		return List<T>::list_iterator(tail->next);
 	}
 
-	//·µ»Øµü´úÆ÷µÄ²éÕÒ
+	//è¿”å›è¿­ä»£å™¨çš„æŸ¥æ‰¾
 	typename List<T>::list_iterator find(const T& x);
 
-	//µİ¹éÅÅĞò
+	//é€’å½’æ’åº
 	void mergeSort1() {
-		if (head->next == NULL)//Ã»ÓĞÔªËØ
+		if (head->next == NULL)//æ²¡æœ‰å…ƒç´ 
 			return;
-		//ÅÅĞòÃ»ÓĞÍ·µÄ½øÈëÅÅĞòº¯Êı
+		//æ’åºæ²¡æœ‰å¤´çš„è¿›å…¥æ’åºå‡½æ•°
 		head->next = _mergeSort(head->next);
 		list_node<T>* cur = head->next;
-		//ÕÒ×îºóÒ»¸ö½áµã
+		//æ‰¾æœ€åä¸€ä¸ªç»“ç‚¹
 		while (cur->next)
 			cur = cur->next;
-		//³öÀ´ÊÇ×îºóÒ»¸ö½áµã
+		//å‡ºæ¥æ˜¯æœ€åä¸€ä¸ªç»“ç‚¹
 		tail = cur;
 	}
 
-	//µü´úÅÅĞò
+	//è¿­ä»£æ’åº
 	void mergeSort2();
 };
 
-//¹¹Ôìº¯Êı
+//æ„é€ å‡½æ•°
 template<class T>
 List<T>::List()
 {
@@ -249,7 +249,7 @@ List<T>::List()
 	Size = 0;
 }
 
-//¸³Öµ¹¹Ôìº¯Êı
+//èµ‹å€¼æ„é€ å‡½æ•°
 template<class T>
 List<T>::List(const List<T>& L)
 {
@@ -264,14 +264,14 @@ List<T>::List(const List<T>& L)
 	}
 }
 
-//Îö¹¹º¯Êı
+//ææ„å‡½æ•°
 template<class T>
 List<T>::~List() {
 	clear();
 	delete head;
 }
 
-//Çå¿ÕÁ´±í
+//æ¸…ç©ºé“¾è¡¨
 template<class T>
 void List<T>::clear()
 {
@@ -286,40 +286,40 @@ void List<T>::clear()
 	tail = head;
 }
 
-//×îºóÌí¼ÓÔªËØ
+//æœ€åæ·»åŠ å…ƒç´ 
 template<class T>
 void List<T>::emplace_back(const T& x)
 {
-	//ÉêÇëĞÂµÄ¿Õ¼ä
+	//ç”³è¯·æ–°çš„ç©ºé—´
 	list_node<T>* node = new list_node<T>(x);
-	++Size;//ÔªËØ¸öÊı¸üĞÂ
-	//Á¬½Ó×îºóÒ»¸ö
+	++Size;//å…ƒç´ ä¸ªæ•°æ›´æ–°
+	//è¿æ¥æœ€åä¸€ä¸ª
 	tail->next = node;
 	node->prev = tail;
-	//Î²½áµã¸üĞÂ
+	//å°¾ç»“ç‚¹æ›´æ–°
 	tail = node;
 }
 
-//×îºóÉ¾³ıÔªËØ
+//æœ€ååˆ é™¤å…ƒç´ 
 template<class T>
 void List<T>::pop_back()
 {
-	if (empty())//¿ÕÁË¾Í²»ÄÜÉ¾³ı
+	if (empty())//ç©ºäº†å°±ä¸èƒ½åˆ é™¤
 		return;
-	--Size;//ÔªËØ¸öÊı¼õÉÙ
+	--Size;//å…ƒç´ ä¸ªæ•°å‡å°‘
 	list_node<T>* temp = tail->prev;
 	delete tail;
 	tail = temp;
-	tail->next = NULL;//Î²½áµãµÄÊÕÎ²
+	tail->next = NULL;//å°¾ç»“ç‚¹çš„æ”¶å°¾
 }
 
-//¿ªÍ·Ìí¼ÓÔªËØ
+//å¼€å¤´æ·»åŠ å…ƒç´ 
 template<class T>
 void List<T>::emplace_front(const T& x)
 {
 	list_node<T>* node = new list_node<T>(x);
-	++Size;//ÔªËØ¸öÊıÔö¼Ó
-	if (empty())//Á´±íÎª¿Õ×¢Òâ¸üĞÂÎ²½áµã
+	++Size;//å…ƒç´ ä¸ªæ•°å¢åŠ 
+	if (empty())//é“¾è¡¨ä¸ºç©ºæ³¨æ„æ›´æ–°å°¾ç»“ç‚¹
 	{
 		head->next = node;
 		node->prev = head;
@@ -336,31 +336,31 @@ void List<T>::emplace_front(const T& x)
 	}
 }
 
-//É¾³ı¿ªÍ·ÔªËØ
+//åˆ é™¤å¼€å¤´å…ƒç´ 
 template<class T>
 void List<T>::pop_front()
 {
-	if (empty())//¿ÕÁË¾Í²»ÄÜÉ¾³ı
+	if (empty())//ç©ºäº†å°±ä¸èƒ½åˆ é™¤
 		return;
-	--Size;//ÔªËØ¸öÊı¼õÉÙ
-	//ÒªÉ¾³ıµÄ½ÚµãµÄÏÂÒ»¸ö
+	--Size;//å…ƒç´ ä¸ªæ•°å‡å°‘
+	//è¦åˆ é™¤çš„èŠ‚ç‚¹çš„ä¸‹ä¸€ä¸ª
 	list_node<T>* temp = head->next->next;
 	list_node<T>* del = head->next;
 	delete del;
 	head->next = temp;
-	if (temp)//Èç¹ûÏÂÒ»¸ö²»Îª¿Õ
+	if (temp)//å¦‚æœä¸‹ä¸€ä¸ªä¸ä¸ºç©º
 		temp->prev = head;
-	else//ÏÂÒ»¸öÎª¿Õ£¬¸üĞÂÎ²½áµãÖ¸ÏòÍ·½áµã
+	else//ä¸‹ä¸€ä¸ªä¸ºç©ºï¼Œæ›´æ–°å°¾ç»“ç‚¹æŒ‡å‘å¤´ç»“ç‚¹
 		tail = head;
 }
 
-//ÀûÓÃµü´úÆ÷²åÈë
+//åˆ©ç”¨è¿­ä»£å™¨æ’å…¥
 template<class T>
 void List<T>::insert(const List<T>::list_iterator& it, const T& x)
 {
 	if (it.data == NULL)
 		return;
-	//ÓĞµü´úÆ÷Ìá¹©¿É²åÈëÎ»ÖÃ£¬²»¿ÉÄÜ¸Ä±äÎ²½áµã
+	//æœ‰è¿­ä»£å™¨æä¾›å¯æ’å…¥ä½ç½®ï¼Œä¸å¯èƒ½æ”¹å˜å°¾ç»“ç‚¹
 	list_node<T>* temp = it.data;
 
 	temp->prev->next = new list_node<T>(x, temp->prev, temp);
@@ -369,15 +369,15 @@ void List<T>::insert(const List<T>::list_iterator& it, const T& x)
 	++Size;
 }
 
-//ÀûÓÃµü´úÆ÷É¾³ı
+//åˆ©ç”¨è¿­ä»£å™¨åˆ é™¤
 template<class T>
 void List<T>::remove(const List<T>::list_iterator& it)
 {
-	if (it.data == NULL)//µü´úÆ÷Îª¿Õ
+	if (it.data == NULL)//è¿­ä»£å™¨ä¸ºç©º
 		return;
 
 	list_node<T>* temp = it.data;
-	//Î²½áµãµÄÌØÅĞ
+	//å°¾ç»“ç‚¹çš„ç‰¹åˆ¤
 	if (temp == tail)
 	{
 		tail = temp->prev;
@@ -389,14 +389,14 @@ void List<T>::remove(const List<T>::list_iterator& it)
 		temp->prev->next = temp->next;
 	}
 	delete temp;
-	--Size;//ÔªËØ¸öÊı¼õÉÙ
+	--Size;//å…ƒç´ ä¸ªæ•°å‡å°‘
 }
 
-//ÖØÔØ¸³Öµ
+//é‡è½½èµ‹å€¼
 template<class T>
 List<T>& List<T>::operator=(const List<T>& L)
 {
-	clear();//ÏÈÇå¿ÕÔ­À´½áµã
+	clear();//å…ˆæ¸…ç©ºåŸæ¥ç»“ç‚¹
 	list_node<T>* cur = L.getHead()->next;
 	while (cur)
 	{
@@ -407,7 +407,7 @@ List<T>& List<T>::operator=(const List<T>& L)
 	return *this;
 }
 
-//²éÑ¯ÊÇ·ñÓĞÖµ
+//æŸ¥è¯¢æ˜¯å¦æœ‰å€¼
 template<class T>
 typename List<T>::list_iterator List<T>::find(const T& x)
 {
@@ -417,16 +417,16 @@ typename List<T>::list_iterator List<T>::find(const T& x)
 	return NULL;
 }
 
-//µİ¹é¹é²¢ÅÅĞò
+//é€’å½’å½’å¹¶æ’åº
 template<class T>
 list_node<T>* List<T>::_mergeSort(list_node<T>* head)
 {
-	//Ã»ÓĞ½áµã»òÖ»ÓĞ¿Õ½áµã£¬Ö±½Ó·µ»Ø
+	//æ²¡æœ‰ç»“ç‚¹æˆ–åªæœ‰ç©ºç»“ç‚¹ï¼Œç›´æ¥è¿”å›
 	if (head == NULL || head->next == NULL)
 		return head;
 
 	list_node<T>* slow = head, * fast = head, * prev = NULL;
-	//¿ìÂıÖ¸ÕëÕÒÖĞ¼ä
+	//å¿«æ…¢æŒ‡é’ˆæ‰¾ä¸­é—´
 	while (fast && fast->next)
 	{
 		prev = slow;
@@ -434,13 +434,13 @@ list_node<T>* List<T>::_mergeSort(list_node<T>* head)
 		fast = fast->next->next;
 	}
 
-	//¶Ï¿ªÖĞ¼ä£¬·Ö³ÉÁ½¶Ë
+	//æ–­å¼€ä¸­é—´ï¼Œåˆ†æˆä¸¤ç«¯
 	prev->next = NULL;
 
 	list_node<T>* p1, * p2, * D = new list_node<T>(0), * p3 = D;
 	p1 = _mergeSort(head);
 	p2 = _mergeSort(slow);
-	//ºÏ²¢
+	//åˆå¹¶
 	while (p1 && p2)
 	{
 		if (p1->val < p2->val)
@@ -460,7 +460,7 @@ list_node<T>* List<T>::_mergeSort(list_node<T>* head)
 			p3 = p3->next;
 		}
 	}
-	//Ê£ÏÂµÄÒ»ÌõÁ´
+	//å‰©ä¸‹çš„ä¸€æ¡é“¾
 	while (p1)
 	{
 		p3->next = p1;
@@ -477,25 +477,25 @@ list_node<T>* List<T>::_mergeSort(list_node<T>* head)
 		p2 = p2->next;
 		p3 = p3->next;
 	}
-	p3->next = NULL;//ÊÕÎ²¹¤×÷
+	p3->next = NULL;//æ”¶å°¾å·¥ä½œ
 
 	list_node<T>* ans = D->next;
-	//ÊÍ·Å¿Õ¼ä
+	//é‡Šæ”¾ç©ºé—´
 	delete D;
 	return ans;
 }
 
-//µü´ú¹é²¢ÅÅĞò
+//è¿­ä»£å½’å¹¶æ’åº
 template<class T>
 void List<T>::mergeSort2()
 {
-	//Ö»ÓĞÒ»¸ö»òÃ»ÓĞ½áµã
+	//åªæœ‰ä¸€ä¸ªæˆ–æ²¡æœ‰ç»“ç‚¹
 	if (head->next == NULL || head->next->next == NULL)
 		return;
 
 	list_node<T>* cur;
 
-	for (int step = 1; step < Size; step *= 2)//¼ä¸ô²»¶Ï³Ë2
+	for (int step = 1; step < Size; step *= 2)//é—´éš”ä¸æ–­ä¹˜2
 	{
 		list_node<T>* tempTail = head;
 		cur = head->next;
@@ -509,11 +509,11 @@ void List<T>::mergeSort2()
 			while (tempTail->next)
 				tempTail = tempTail->next;
 		}
-		tail = tempTail;//¸üĞÂÎ²½áµã
+		tail = tempTail;//æ›´æ–°å°¾ç»“ç‚¹
 	}
 }
 
-//´Ófrom¿ªÊ¼ÇĞµôÇ°step¸öÔªËØ£¬·µ»Ø×îºóÒ»¸öÔªËØ
+//ä»fromå¼€å§‹åˆ‡æ‰å‰stepä¸ªå…ƒç´ ï¼Œè¿”å›æœ€åä¸€ä¸ªå…ƒç´ 
 template<class T>
 list_node<T>* List<T>::cut(list_node<T>* from, int step)
 {
@@ -523,16 +523,16 @@ list_node<T>* List<T>::cut(list_node<T>* from, int step)
 		from = from->next;
 		--step;
 	}
-	//²»¹»step¸öÔªËØ
+	//ä¸å¤Ÿstepä¸ªå…ƒç´ 
 	if (from == NULL)
 		return NULL;
 	list_node<T>* next = from->next;
-	//ÇĞ¶Ï
+	//åˆ‡æ–­
 	from->next = NULL;
 	return next;
 }
 
-//ºÏ²¢º¯Êı£¬Á½ÌõÓĞĞòÁ´ºÏ²¢ÎªÒ»ÌõÓĞĞòÁ´
+//åˆå¹¶å‡½æ•°ï¼Œä¸¤æ¡æœ‰åºé“¾åˆå¹¶ä¸ºä¸€æ¡æœ‰åºé“¾
 template<class T>
 list_node<T>* List<T>::merge(list_node<T>* l1, list_node<T>* l2)
 {
@@ -571,14 +571,14 @@ list_node<T>* List<T>::merge(list_node<T>* l1, list_node<T>* l2)
 		l2 = l2->next;
 		cur = cur->next;
 	}
-	cur->next = NULL;//ÊÕÎ²¹¤×÷
+	cur->next = NULL;//æ”¶å°¾å·¥ä½œ
 	list_node<T>* ans = D->next;
 	delete D;
 	return ans;
 }
 
 
-//Á´Ê½¶ÓÁĞÀà
+//é“¾å¼é˜Ÿåˆ—ç±»
 template<class T>
 class Queue {
 private:
@@ -609,41 +609,41 @@ const int defaultSize = 10;
 
 template<class T>
 class Vector {
-	//µü´úÆ÷ÀàĞÍ
+	//è¿­ä»£å™¨ç±»å‹
 	typedef T* iterator;
 private:
-	//ÔªËØ¸öÊı
+	//å…ƒç´ ä¸ªæ•°
 	int Size;
 
-	//Êµ¼ÊÈİÁ¿
+	//å®é™…å®¹é‡
 	int capacity;
 
-	//ÄÚ²¿Êı×é
+	//å†…éƒ¨æ•°ç»„
 	T* data;
 
-	//À©Èİº¯Êı
+	//æ‰©å®¹å‡½æ•°
 	void expand();
 public:
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	Vector();
 	Vector(int size);
 	Vector(const Vector<T>& V);
 	Vector(int size, const T& val);
 
-	//Îö¹¹º¯Êı
+	//ææ„å‡½æ•°
 	~Vector();
 
-	//·µ»ØÔªËØ¸öÊı
+	//è¿”å›å…ƒç´ ä¸ªæ•°
 	inline int size() const {
 		return Size;
 	}
 
-	//ÅĞ¶ÏÊı×éÊÇ·ñÎª¿Õ
+	//åˆ¤æ–­æ•°ç»„æ˜¯å¦ä¸ºç©º
 	inline bool empty() const {
 		return Size == 0;
 	}
 
-	//Vectorµü´úÆ÷
+	//Vectorè¿­ä»£å™¨
 	class vector_iterator {
 		friend class Vector<T>;
 	private:
@@ -651,22 +651,22 @@ public:
 	public:
 		typedef T value_type;
 		vector_iterator(iterator data) :data(data) {}
-		//ÖØÔØ*
+		//é‡è½½*
 		T& operator*() {
 			return *data;
 		}
 		T* operator->() {
 			return data;
 		}
-		//ÖØÔØ==
+		//é‡è½½==
 		inline bool operator==(const vector_iterator& it) const {
 			return this->data == it.data;
 		}
-		//ÖØÔØ!=
+		//é‡è½½!=
 		inline bool operator!=(const vector_iterator& it) const {
 			return this->data != it.data;
 		}
-		//ÖØÔØ²»µÈºÅ
+		//é‡è½½ä¸ç­‰å·
 		inline bool operator<(const vector_iterator& it) const {
 			return this->data < it.data;
 		}
@@ -679,35 +679,35 @@ public:
 		inline bool operator>=(const vector_iterator& it) const {
 			return this->data >= it.data;
 		}
-		//ÖØÔØ×Ô¼Ó
+		//é‡è½½è‡ªåŠ 
 		inline Vector<T>::vector_iterator& operator++()
 		{
 			if (data != NULL)
 				++data;
 			return *this;
 		}
-		//ÖØÔØ×Ô¼õ
+		//é‡è½½è‡ªå‡
 		inline Vector<T>::vector_iterator& operator--()
 		{
 			if (data != NULL)
 				--data;
 			return *this;
 		}
-		//ºóÖÃ×Ô¼Ó
+		//åç½®è‡ªåŠ 
 		Vector<T>::vector_iterator operator++(int)
 		{
 			Vector<T>::vector_iterator temp = *this;
 			++(*this);
 			return temp;
 		}
-		//ºóÖÃ×Ô¼õ
+		//åç½®è‡ªå‡
 		Vector<T>::vector_iterator operator--(int)
 		{
 			Vector<T>::vector_iterator temp = *this;
 			--(*this);
 			return temp;
 		}
-		//ÓëÊı×ÖÏà¼Ó
+		//ä¸æ•°å­—ç›¸åŠ 
 		friend Vector<T>::vector_iterator operator+(const vector_iterator& it, int num)
 		{
 			Vector<T>::vector_iterator temp = it;
@@ -715,7 +715,7 @@ public:
 				++temp;
 			return temp;
 		}
-		//ÓëÊı×ÖÏà¼õ
+		//ä¸æ•°å­—ç›¸å‡
 		friend Vector<T>::vector_iterator operator-(const vector_iterator& it, int num)
 		{
 			Vector<T>::vector_iterator temp = it;
@@ -723,21 +723,21 @@ public:
 				--temp;
 			return temp;
 		}
-		//×Ô¼Ó
+		//è‡ªåŠ 
 		Vector<T>::vector_iterator operator+=(int num)
 		{
 			for (int i = 0; i < num; ++i)
 				++(*this);
 			return *this;
 		}
-		//×Ô¼õ
+		//è‡ªå‡
 		Vector<T>::vector_iterator operator-=(int num)
 		{
 			for (int i = 0; i < num; ++i)
 				--(*this);
 			return *this;
 		}
-		//Á½¸öÏà¼õ
+		//ä¸¤ä¸ªç›¸å‡
 		friend int operator-(const vector_iterator& it1, const vector_iterator& it2)
 		{
 			int ans = 0;
@@ -751,16 +751,16 @@ public:
 		}
 	};
 
-	//Çå¿ÕVector
+	//æ¸…ç©ºVector
 	void clear();
 
-	//×îºóÌí¼ÓÔªËØ
+	//æœ€åæ·»åŠ å…ƒç´ 
 	void emplace_back(const T& x);
 
-	//×îºóÉ¾³ıÔªËØ
+	//æœ€ååˆ é™¤å…ƒç´ 
 	void pop_back();
 
-	//·µ»Ø×îºóÔªËØ
+	//è¿”å›æœ€åå…ƒç´ 
 	const T back() const {
 		return data[Size - 1];
 	}
@@ -768,7 +768,7 @@ public:
 		return data[Size - 1];
 	}
 
-	//·µ»Ø¿ªÍ·ÔªËØ
+	//è¿”å›å¼€å¤´å…ƒç´ 
 	const T front() const {
 		return data[0];
 	}
@@ -776,43 +776,43 @@ public:
 		return data[0];
 	}
 
-	//²åÈë
+	//æ’å…¥
 	void insert(const Vector<T>::vector_iterator& it, const T& x);
 
 
-	//É¾³ı
+	//åˆ é™¤
 	void remove(const Vector<T>::vector_iterator& it);
 
-	//µü´úÆ÷begin
+	//è¿­ä»£å™¨begin
 	inline Vector<T>::vector_iterator begin() {
 		if (Size == 0)
 			return NULL;
 		return vector_iterator(data);
 	}
-	//µü´úÆ÷end
+	//è¿­ä»£å™¨end
 	inline Vector<T>::vector_iterator end() {
 		if (Size == 0)
 			return NULL;
 		return vector_iterator(data + Size);
 	}
 
-	//·µ»Øµü´úÆ÷µÄ²éÕÒ
+	//è¿”å›è¿­ä»£å™¨çš„æŸ¥æ‰¾
 	typename Vector<T>::vector_iterator find(const T& x);
 
-	//ÖØÔØ[]
+	//é‡è½½[]
 	T& operator[](const int index) {
 		return data[index];
 	}
 
-	//ÖØÔØ=
+	//é‡è½½=
 	Vector<T>& operator=(const Vector<T>& V);
 
-	//ÖØĞÂÉèÖÃ´óĞ¡
+	//é‡æ–°è®¾ç½®å¤§å°
 	void resize(int size);
 	void resize(int size, const T& val);
 };
 
-//¹¹Ôìº¯Êı
+//æ„é€ å‡½æ•°
 template<class T>
 Vector<T>::Vector()
 {
@@ -821,17 +821,17 @@ Vector<T>::Vector()
 	data = new T[capacity];
 }
 
-//Ö¸¶¨´óĞ¡¹¹Ôìº¯Êı
+//æŒ‡å®šå¤§å°æ„é€ å‡½æ•°
 template<class T>
 Vector<T>::Vector(int size)
 {
 	Size = size;
 	capacity = (Size / defaultSize + 1) * defaultSize;
-	Size = 0;//Ö»ÊÇĞèÒªsize¸ö¿Õ¼ä£¬²¢Ã»ÓĞÌí¼ÓÔªËØ½øÀ´
+	Size = 0;//åªæ˜¯éœ€è¦sizeä¸ªç©ºé—´ï¼Œå¹¶æ²¡æœ‰æ·»åŠ å…ƒç´ è¿›æ¥
 	data = new T[capacity];
 }
 
-//¸´ÖÆ¹¹Ôìº¯Êı
+//å¤åˆ¶æ„é€ å‡½æ•°
 template<class T>
 Vector<T>::Vector(const Vector<T>& V)
 {
@@ -843,7 +843,7 @@ Vector<T>::Vector(const Vector<T>& V)
 		data[i] = V.data[i];
 }
 
-//Ö¸¶¨´óĞ¡ºÍÔªËØÖµ¹¹Ôìº¯Êı
+//æŒ‡å®šå¤§å°å’Œå…ƒç´ å€¼æ„é€ å‡½æ•°
 template<class T>
 Vector<T>::Vector(int size, const  T& val)
 {
@@ -854,14 +854,14 @@ Vector<T>::Vector(int size, const  T& val)
 		data[i] = val;
 }
 
-//Îö¹¹º¯Êı
+//ææ„å‡½æ•°
 template<class T>
 Vector<T>::~Vector()
 {
 	delete[] data;
 }
 
-//À©Èİº¯Êı
+//æ‰©å®¹å‡½æ•°
 template<class T>
 void Vector<T>::expand()
 {
@@ -875,7 +875,7 @@ void Vector<T>::expand()
 	data = newData;
 }
 
-//Çå¿ÕVector
+//æ¸…ç©ºVector
 template<class T>
 void Vector<T>::clear()
 {
@@ -886,43 +886,43 @@ void Vector<T>::clear()
 	data = new T[capacity];
 }
 
-//ÔÚ×îºóÌí¼Ó
+//åœ¨æœ€åæ·»åŠ 
 template<class T>
 void Vector<T>::emplace_back(const T& x)
 {
 	if (Size == capacity - 1)
 		expand();
-	data[Size++] = x;//ÔÚdata[Size]µÄÎ»ÖÃÌí¼Ó
+	data[Size++] = x;//åœ¨data[Size]çš„ä½ç½®æ·»åŠ 
 }
 
-//×îºóÉ¾³ı
+//æœ€ååˆ é™¤
 template<class T>
 void Vector<T>::pop_back()
 {
 	if (Size == 0)
 		return;
-	--Size;//Ö±½Ó²»Òª×îºóÄÇ¸ö¿Õ¼ä
+	--Size;//ç›´æ¥ä¸è¦æœ€åé‚£ä¸ªç©ºé—´
 }
 
-//ÀûÓÃµü´úÆ÷²åÈë
+//åˆ©ç”¨è¿­ä»£å™¨æ’å…¥
 template<class T>
 void Vector<T>::insert(const Vector<T>::vector_iterator& it, const T& x)
 {
-	int loc = it - begin();//»ñµÃÒª²åÈëµÄÏÂ±ê
+	int loc = it - begin();//è·å¾—è¦æ’å…¥çš„ä¸‹æ ‡
 	if (loc < 0 || loc > Size + 1)
 		return;
 
-	if (Size == capacity - 1)//¿Õ¼ä²»¹»¾ÍÀ©Èİ
+	if (Size == capacity - 1)//ç©ºé—´ä¸å¤Ÿå°±æ‰©å®¹
 		expand();
 
-	for (int i = Size - 1; i >= loc; --i)//locµ½Size-1µÄÔªËØÈ«²¿ºóÒÆ
+	for (int i = Size - 1; i >= loc; --i)//locåˆ°Size-1çš„å…ƒç´ å…¨éƒ¨åç§»
 		data[i + 1] = data[i];
 
 	data[loc] = x;
 	++Size;
 }
 
-//ÀûÓÃµü´úÆ÷É¾³ı
+//åˆ©ç”¨è¿­ä»£å™¨åˆ é™¤
 template<class T>
 void Vector<T>::remove(const Vector<T>::vector_iterator& it)
 {
@@ -933,14 +933,14 @@ void Vector<T>::remove(const Vector<T>::vector_iterator& it)
 	if (loc < 0 || loc >= Size)
 		return;
 
-	//ÍùÇ°ÒÆ£¬¸²¸ÇµôlocÎ»ÖÃ
+	//å¾€å‰ç§»ï¼Œè¦†ç›–æ‰locä½ç½®
 	for (int i = loc; i < Size - 1; ++i)
 		data[i] = data[i + 1];
 
 	--Size;
 }
 
-//ÖØÔØ=
+//é‡è½½=
 template<class T>
 Vector<T>& Vector<T>::operator=(const Vector<T>& V)
 {
@@ -953,7 +953,7 @@ Vector<T>& Vector<T>::operator=(const Vector<T>& V)
 	return *this;
 }
 
-//ÖØĞÂÉèÖÃ´óĞ¡
+//é‡æ–°è®¾ç½®å¤§å°
 template<class T>
 void Vector<T>::resize(int size)
 {
@@ -968,7 +968,7 @@ void Vector<T>::resize(int size)
 	}
 }
 
-//¸ø³öÔªËØÌî³ä£¬ÖØĞÂÉèÖÃ´óĞ¡
+//ç»™å‡ºå…ƒç´ å¡«å……ï¼Œé‡æ–°è®¾ç½®å¤§å°
 template<class T>
 void Vector<T>::resize(int size, const T& val)
 {
@@ -977,20 +977,20 @@ void Vector<T>::resize(int size, const T& val)
 		capacity = (size / defaultSize + 1) * defaultSize;
 		T* newData = new T[capacity];
 		for (int i = 0; i < Size; ++i)
-			newData[i] = val;//½«ÖµÈ«²¿ÉèÎªval
+			newData[i] = val;//å°†å€¼å…¨éƒ¨è®¾ä¸ºval
 		delete[] data;
 		data = newData;
 		Size = size;
 	}
-	else//¹»´ó¾ÍÖ±½ÓÌî³ä
+	else//å¤Ÿå¤§å°±ç›´æ¥å¡«å……
 	{
 		for (int i = 0; i < size; ++i)
-			data[i] = val;//½«ÖµÈ«²¿ÉèÎªval
+			data[i] = val;//å°†å€¼å…¨éƒ¨è®¾ä¸ºval
 		Size = size;
 	}
 }
 
-//Ñ°ÕÒÖµÎªxµÄ£¬·µ»Øµü´úÆ÷
+//å¯»æ‰¾å€¼ä¸ºxçš„ï¼Œè¿”å›è¿­ä»£å™¨
 template<class T>
 typename Vector<T>::vector_iterator Vector<T>::find(const T& x)
 {
@@ -1001,52 +1001,51 @@ typename Vector<T>::vector_iterator Vector<T>::find(const T& x)
 }
 
 
-//±ßµÄ½áµã
+//è¾¹çš„ç»“ç‚¹
 struct edge {
-	//Ö¸ÏòµÄÎ»ÖÃ£¬È¨Öµ´óĞ¡
+	//æŒ‡å‘çš„ä½ç½®ï¼Œæƒå€¼å¤§å°
 	int to, val;
 
-	//Ö¸ÏòÏÂÒ»¸ö½áµã
+	//æŒ‡å‘ä¸‹ä¸€ä¸ªç»“ç‚¹
 	edge* next;
 
-	//³õÊ¼»¯¹¹Ôìº¯Êı
+	//åˆå§‹åŒ–æ„é€ å‡½æ•°
 	edge(const int& to, const int& val, edge* next = NULL) :
 		to(to), val(val), next(next) {}
 };
 
 class criticalActivity {
 private:
-	//Í¬Ò»ÆğµãµÄ±ßÔÚÍ¬Ò»¸öÍ°£¬Ò»¸öÍ¼£¬Ò»¸ö·´Í¼
+	//åŒä¸€èµ·ç‚¹çš„è¾¹åœ¨åŒä¸€ä¸ªæ¡¶ï¼Œä¸€ä¸ªå›¾ï¼Œä¸€ä¸ªåå›¾
 	Vector<edge*> graph1, graph2;
 
-	//¼ÇÂ¼Èë¶È
+	//è®°å½•å…¥åº¦
 	Vector<int> in;
 
-	//¼ÇÂ¼³ö¶È
+	//è®°å½•å‡ºåº¦
 	Vector<int> out;
 
-	//NÎª¶¥µã¸öÊı£¬MÎª±ßµÄ¸öÊı
+	//Nä¸ºé¡¶ç‚¹ä¸ªæ•°ï¼ŒMä¸ºè¾¹çš„ä¸ªæ•°
 	int N = 0, M = 0;
 public:
-	//Ñ°ÕÒ¹Ø¼ü»î¶¯º¯Êı
+	//å¯»æ‰¾å…³é”®æ´»åŠ¨å‡½æ•°
 	void AOE();
 
-	//µÃµ½N, MÖµ
+	//å¾—åˆ°N, Må€¼
 	void getNM(const int& N, const int& M);
 
-	//³õÊ¼»¯
+	//åˆå§‹åŒ–
 	void init();
 
-	//¼ÇÂ¼±ß
+	//è®°å½•è¾¹
 	void setEdge(int from, int to, int val);
 
-	//¼ì²éÊÇ·ñÊäÈëµÄ±ßÊÇ·ñºÏ·¨
+	//æ£€æŸ¥æ˜¯å¦è¾“å…¥çš„è¾¹æ˜¯å¦åˆæ³•
 	bool checkValid();
 
-	//Îö¹¹º¯ÊıÊÍ·Å½áµã¿Õ¼ä
+	//ææ„å‡½æ•°é‡Šæ”¾ç»“ç‚¹ç©ºé—´
 	~criticalActivity();
 };
 
 
 #endif // !_KEYACTIVITY_H
-
