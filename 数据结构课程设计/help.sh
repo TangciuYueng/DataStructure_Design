@@ -11,7 +11,7 @@ $(TARGET):$(SRC)
 .PHONY: clean
 clean:
 	$(RM) $(TARGET)
-' > makefile
+' > Makefile
 for i in {1..10}
 do
 	cp M* $i'_'*
